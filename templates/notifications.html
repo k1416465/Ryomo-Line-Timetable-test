@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CKW0P57706"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-CKW0P57706');
+    </script>
+
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>お知らせ - 両毛線 時刻表</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+
+        body {
+            background: #080909;
+            color: #ffffff;
+
+            font-family:
+                Arial,
+                "Noto Sans JP",
+                "Yu Gothic",
+                sans-serif;
+
+            padding: 20px;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        /* ==========================================
+           メイン
+        ========================================== */
+
+        .notifications-page {
+
+            width: min(
+                760px,
+                100%
+            );
+
+            margin: 0 auto;
+
+            padding-bottom: 30px;
+        }
+
+
+        /* ==========================================
+           ヘッダー
+        ========================================== */
+
+        .notifications-header {
+
+            position: relative;
+
+            text-align: center;
+
+            padding:
+                10px
+                55px
+                24px;
+        }
+
+
+        .notifications-title {
+
+            margin: 0;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.03em;
+        }
+
+
+        .notifications-subtitle {
+
+            margin-top: 5px;
+
+            font-size: 14px;
+
+            color: #a8a8a8;
+
+            letter-spacing: 0.02em;
+        }
+
+
+        /* ==========================================
+           戻るボタン
+        ========================================== */
+
+        .back-button {
+
+            position: absolute;
+
+            left: 0;
+            top: 4px;
+
+            width: 46px;
+            height: 46px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #202223;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 30px;
+
+            font-weight: 300;
+
+            line-height: 42px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.15s ease;
+        }
+
+
+        .back-button:hover {
+
+            background: #303233;
+        }
+
+
+        .back-button:active {
+
+            transform: scale(0.94);
+        }
+
+
+        /* ==========================================
+           すべて既読
+        ========================================== */
+
+        .read-all-button {
+
+            position: absolute;
+
+            right: 0;
+            top: 10px;
+
+            border: none;
+
+            border-radius: 999px;
+
+            padding:
+                10px
+                15px;
+
+            background: #252727;
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.15s ease;
+        }
+
+
+        .read-all-button:hover {
+
+            background: #353737;
+        }
+
+
+        .read-all-button:active {
+
+            transform: scale(0.96);
+        }
+
+
+        /* ==========================================
+           お知らせ一覧
+        ========================================== */
+
+        .notification-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+
+        /* ==========================================
+           お知らせカード
+        ========================================== */
+
+        .notification-card {
+
+            position: relative;
+
+            width: 100%;
+
+            padding:
+                20px
+                22px
+                17px;
+
+            border-radius: 16px;
+
+            background: #151717;
+
+            border: 1px solid #252727;
+
+            box-shadow:
+                0 4px 14px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .notification-card.unread {
+
+            border-color: #3b3d3e;
+        }
+
+
+        /* ==========================================
+           タイトル
+        ========================================== */
+
+        .notification-title-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .notification-title {
+
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            line-height: 1.45;
+
+            word-break: break-word;
+        }
+
+
+        /* ==========================================
+           NEW
+        ========================================== */
+
+        .new-badge {
+
+            flex-shrink: 0;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 42px;
+
+            height: 22px;
+
+            padding:
+                0 8px;
+
+            border-radius: 999px;
+
+            background: #ff3b30;
+
+            color: #ffffff;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.04em;
+        }
+
+
+        /* ==========================================
+           本文
+        ========================================== */
+
+        .notification-message {
+
+            margin: 0;
+
+            color: #dddddd;
+
+            font-size: 15px;
+
+            line-height: 1.75;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+
+        /* ==========================================
+           日付
+        ========================================== */
+
+        .notification-date {
+
+            margin-top: 13px;
+
+            text-align: right;
+
+            color: #8f9394;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+        }
+
+
+        /* ==========================================
+           お知らせなし
+        ========================================== */
+
+        .empty-message {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 180px;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            background: #151717;
+
+            border: 1px solid #252727;
+
+            color: #929697;
+
+            font-size: 15px;
+
+            text-align: center;
+        }
+
+
+        /* ==========================================
+           読み込み中
+        ========================================== */
+
+        .loading-message {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 180px;
+
+            color: #929697;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           ライトモード
+        ========================================== */
+
+        body.light-mode {
+
+            background: #f4f5f7;
+
+            color: #17191a;
+        }
+
+
+        body.light-mode
+        .notifications-subtitle {
+
+            color: #707477;
+        }
+
+
+        body.light-mode
+        .back-button {
+
+            background: #ffffff;
+
+            color: #202223;
+
+            box-shadow:
+                0 2px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.10
+                );
+        }
+
+
+        body.light-mode
+        .back-button:hover {
+
+            background: #e9eaec;
+        }
+
+
+        body.light-mode
+        .read-all-button {
+
+            background: #ffffff;
+
+            color: #202223;
+
+            box-shadow:
+                0 2px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+        }
+
+
+        body.light-mode
+        .read-all-button:hover {
+
+            background: #e9eaec;
+        }
+
+
+        body.light-mode
+        .notification-card {
+
+            background: #ffffff;
+
+            border-color: #e1e3e5;
+
+            box-shadow:
+                0 3px 12px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+        }
+
+
+        body.light-mode
+        .notification-message {
+
+            color: #424649;
+        }
+
+
+        body.light-mode
+        .notification-date {
+
+            color: #777b7e;
+        }
+
+
+        body.light-mode
+        .empty-message {
+
+            background: #ffffff;
+
+            border-color: #e1e3e5;
+
+            color: #777b7e;
+        }
+
+
+        /* ==========================================
+           スマートフォン
+        ========================================== */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            body {
+
+                padding: 14px;
+
+            }
+
+
+            .notifications-header {
+
+                padding-top: 8px;
+
+                padding-left: 52px;
+
+                padding-right: 52px;
+
+                padding-bottom: 20px;
+            }
+
+
+            .notifications-title {
+
+                font-size: 25px;
+            }
+
+
+            .notifications-subtitle {
+
+                font-size: 12px;
+
+                margin-top: 4px;
+            }
+
+
+            .back-button {
+
+                width: 42px;
+                height: 42px;
+
+                line-height: 38px;
+
+                font-size: 28px;
+
+                top: 2px;
+            }
+
+
+            .read-all-button {
+
+                top: 7px;
+
+                padding:
+                    9px
+                    11px;
+
+                font-size: 11px;
+            }
+
+
+            .notification-list {
+
+                gap: 11px;
+            }
+
+
+            .notification-card {
+
+                padding:
+                    16px
+                    16px
+                    14px;
+
+                border-radius: 14px;
+            }
+
+
+            .notification-title {
+
+                font-size: 16px;
+            }
+
+
+            .notification-message {
+
+                font-size: 14px;
+
+                line-height: 1.7;
+            }
+
+
+            .notification-date {
+
+                font-size: 11px;
+
+                margin-top: 11px;
+            }
+
+
+            .new-badge {
+
+                min-width: 38px;
+
+                height: 20px;
+
+                padding:
+                    0 7px;
+
+                font-size: 10px;
+            }
+
+        }
+
+
+        /* ==========================================
+           小型スマートフォン
+        ========================================== */
+
+        @media (
+            max-width: 380px
+        ) {
+
+            .notifications-title {
+
+                font-size: 22px;
+            }
+
+
+            .notifications-subtitle {
+
+                font-size: 11px;
+            }
+
+
+            .read-all-button {
+
+                padding:
+                    8px
+                    9px;
+
+                font-size: 10px;
+            }
+
+
+            .notification-title {
+
+                font-size: 15px;
+            }
+
+
+            .notification-message {
+
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="notifications-page">
+
+
+<!-- ======================================
+     ヘッダー
+======================================= -->
+
+<header class="notifications-header">
+
+
+<button
+    class="back-button"
+    type="button"
+    onclick="goHome()"
+    aria-label="ホームに戻る"
+>
+    &lt;
+</button>
+
+
+<h1 class="notifications-title">
+    お知らせ
+</h1>
+
+
+<div class="notifications-subtitle">
+    Ryomo Line Notifications
+</div>
+
+
+<button
+    class="read-all-button"
+    type="button"
+    onclick="markAllAsRead()"
+>
+    すべて既読
+</button>
+
+
+</header>
+
+
+
+<!-- ======================================
+     お知らせ一覧
+======================================= -->
+
+<section
+    id="notification-list"
+    class="notification-list"
+>
+
+    <div class="loading-message">
+        お知らせを読み込んでいます……
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+
+/* ==========================================
+   設定
+========================================== */
+
+const READ_STORAGE_KEY =
+    "ryomoNotificationReadIds";
+
+
+
+/* ==========================================
+   表示モード
+========================================== */
+
+function applyDisplayMode() {
+
+    const mode =
+        localStorage.getItem(
+            "displayMode"
+        );
+
+
+    if (
+        mode === "light"
+    ) {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+    }
+
+    else if (
+        mode === "dark"
+    ) {
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+    }
+
+    else {
+
+        const useLightMode =
+            !window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+
+        document.body.classList.toggle(
+            "light-mode",
+            useLightMode
+        );
+
+    }
+
+}
+
+
+applyDisplayMode();
+
+
+
+/* ==========================================
+   システムテーマ変更監視
+========================================== */
+
+const systemThemeQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function handleSystemThemeChange() {
+
+    const currentMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    if (
+        currentMode === "system"
+    ) {
+
+        applyDisplayMode();
+
+    }
+
+}
+
+
+if (
+    systemThemeQuery.addEventListener
+) {
+
+    systemThemeQuery.addEventListener(
+        "change",
+        handleSystemThemeChange
+    );
+
+}
+
+else {
+
+    systemThemeQuery.addListener(
+        handleSystemThemeChange
+    );
+
+}
+
+
+
+/* ==========================================
+   既読ID取得
+========================================== */
+
+function getReadIds() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                READ_STORAGE_KEY
+            );
+
+
+        if (!saved) {
+
+            return [];
+
+        }
+
+
+        const ids =
+            JSON.parse(
+                saved
+            );
+
+
+        if (
+            Array.isArray(ids)
+        ) {
+
+            return ids.map(
+                String
+            );
+
+        }
+
+
+        return [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "既読情報の読み込みに失敗しました:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+
+/* ==========================================
+   既読ID保存
+========================================== */
+
+function saveReadIds(
+    ids
+) {
+
+    try {
+
+        localStorage.setItem(
+
+            READ_STORAGE_KEY,
+
+            JSON.stringify(
+                [
+                    ...new Set(
+                        ids.map(String)
+                    )
+                ]
+            )
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "既読情報の保存に失敗しました:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   お知らせ取得
+========================================== */
+
+async function loadNotifications() {
+
+    const container =
+        document.getElementById(
+            "notification-list"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "/api/notifications?"
+                +
+                Date.now(),
+
+                {
+                    cache: "no-store"
+                }
+
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const notifications =
+            Array.isArray(data)
+
+                ? data
+
+                : (
+                    Array.isArray(
+                        data.notifications
+                    )
+
+                        ? data.notifications
+
+                        : []
+                );
+
+
+        renderNotifications(
+            notifications
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "お知らせの取得に失敗しました:",
+            error
+        );
+
+
+        container.innerHTML = "";
+
+
+        const errorMessage =
+            document.createElement(
+                "div"
+            );
+
+
+        errorMessage.className =
+            "empty-message";
+
+
+        errorMessage.textContent =
+            "お知らせを取得できませんでした。";
+
+
+        container.appendChild(
+            errorMessage
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   お知らせ表示
+========================================== */
+
+function renderNotifications(
+    notifications
+) {
+
+    const container =
+        document.getElementById(
+            "notification-list"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (
+        !Array.isArray(
+            notifications
+        )
+        ||
+        notifications.length === 0
+    ) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "empty-message";
+
+
+        empty.textContent =
+            "現在、お知らせはありません。";
+
+
+        container.appendChild(
+            empty
+        );
+
+
+        return;
+
+    }
+
+
+    const readIds =
+        getReadIds();
+
+
+    notifications.forEach(
+        notification => {
+
+            if (
+                !notification
+                ||
+                typeof notification !==
+                    "object"
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                String(
+                    notification.id ?? ""
+                );
+
+
+            const isRead =
+                readIds.includes(
+                    id
+                );
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "notification-card";
+
+
+            if (
+                !isRead
+            ) {
+
+                card.classList.add(
+                    "unread"
+                );
+
+            }
+
+
+            /* ----------------------------------
+               タイトル
+            ---------------------------------- */
+
+            const titleRow =
+                document.createElement(
+                    "div"
+                );
+
+
+            titleRow.className =
+                "notification-title-row";
+
+
+            const title =
+                document.createElement(
+                    "h2"
+                );
+
+
+            title.className =
+                "notification-title";
+
+
+            title.textContent =
+                notification.title
+                ||
+                "お知らせ";
+
+
+            titleRow.appendChild(
+                title
+            );
+
+
+            /* ----------------------------------
+               NEW
+            ---------------------------------- */
+
+            if (
+                !isRead
+            ) {
+
+                const badge =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                badge.className =
+                    "new-badge";
+
+
+                badge.textContent =
+                    "NEW";
+
+
+                titleRow.appendChild(
+                    badge
+                );
+
+            }
+
+
+            card.appendChild(
+                titleRow
+            );
+
+
+            /* ----------------------------------
+               本文
+            ---------------------------------- */
+
+            const message =
+                document.createElement(
+                    "p"
+                );
+
+
+            message.className =
+                "notification-message";
+
+
+            message.textContent =
+                notification.message
+                ||
+                notification.body
+                ||
+                "";
+
+
+            card.appendChild(
+                message
+            );
+
+
+            /* ----------------------------------
+               日付
+            ---------------------------------- */
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+
+            date.className =
+                "notification-date";
+
+
+            const dateText =
+                notification.date
+                ||
+                "";
+
+
+            const timeText =
+                notification.time
+                ||
+                "";
+
+
+            if (
+                dateText
+                &&
+                timeText
+            ) {
+
+                date.textContent =
+                    dateText +
+                    " " +
+                    timeText;
+
+            }
+
+            else {
+
+                date.textContent =
+                    dateText
+                    ||
+                    timeText
+                    ||
+                    "";
+
+            }
+
+
+            card.appendChild(
+                date
+            );
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================
+   すべて既読
+========================================== */
+
+async function markAllAsRead() {
+
+    try {
+
+        const response =
+            await fetch(
+
+                "/api/notifications?"
+                +
+                Date.now(),
+
+                {
+                    cache: "no-store"
+                }
+
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                "お知らせ取得失敗"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const notifications =
+            Array.isArray(data)
+
+                ? data
+
+                : (
+                    Array.isArray(
+                        data.notifications
+                    )
+
+                        ? data.notifications
+
+                        : []
+                );
+
+
+        /*
+         * 現在のお知らせIDを
+         * すべて取得
+         */
+
+        const allIds =
+            notifications
+
+                .map(
+                    item =>
+                        String(
+                            item.id ?? ""
+                        )
+                )
+
+                .filter(
+                    id =>
+                        id !== ""
+                );
+
+
+        /*
+         * 既存の既読IDと統合
+         */
+
+        const currentIds =
+            getReadIds();
+
+
+        const merged =
+            Array.from(
+                new Set(
+                    [
+                        ...currentIds,
+                        ...allIds
+                    ]
+                )
+            );
+
+
+        /*
+         * localStorageへ保存
+         */
+
+        saveReadIds(
+            merged
+        );
+
+
+        /*
+         * 現在のお知らせ画面を
+         * 即座に更新
+         */
+
+        renderNotifications(
+            notifications
+        );
+
+
+        /*
+         * 同じページ内で
+         * 既読状態が変更されたことを通知
+         */
+
+        window.dispatchEvent(
+            new Event(
+                "notificationReadChanged"
+            )
+        );
+
+
+        /*
+         * 少し待ってからもう一度
+         * お知らせ一覧を取得して確認
+         */
+
+        setTimeout(
+            loadNotifications,
+            100
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "既読処理に失敗しました:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ホームへ戻る
+========================================== */
+
+function goHome() {
+
+    window.location.href =
+        "/?home=1";
+
+}
+
+
+
+/* ==========================================
+   初期読み込み
+========================================== */
+
+loadNotifications();
+
+
+</script>
+
+
+</body>
+
+</html>

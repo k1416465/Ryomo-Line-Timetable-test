@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>お知らせ管理 - 両毛線 時刻表</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    background: #080909;
+
+    color: #ffffff;
+
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        "Yu Gothic",
+        sans-serif;
+
+    padding: 20px;
+
+}
+
+
+body.light-mode {
+
+    background: #f5f5f5;
+
+    color: #111111;
+
+}
+
+
+.admin-page {
+
+    width: min(
+        760px,
+        100%
+    );
+
+    margin: 0 auto;
+
+    padding-bottom: 40px;
+
+}
+
+
+/* ==================================
+   ヘッダー
+================================== */
+
+.admin-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.admin-header h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+}
+
+
+.admin-header .english {
+
+    margin-top: 5px;
+
+    font-size: 14px;
+
+    opacity: 0.6;
+
+}
+
+
+/* ==================================
+   共通カード
+================================== */
+
+.admin-card {
+
+    background: #151717;
+
+    border: 1px solid #292c2c;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+}
+
+
+body.light-mode .admin-card {
+
+    background: #ffffff;
+
+    border-color: #dddddd;
+
+}
+
+
+/* ==================================
+   見出し
+================================== */
+
+.section-title {
+
+    margin: 0 0 18px;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+}
+
+
+.section-en {
+
+    margin-top: -12px;
+
+    margin-bottom: 18px;
+
+    font-size: 12px;
+
+    opacity: 0.55;
+
+}
+
+
+/* ==================================
+   フォーム
+================================== */
+
+.form-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+.form-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+input[type="password"],
+input[type="text"],
+textarea {
+
+    width: 100%;
+
+    border: 1px solid #3a3d3d;
+
+    border-radius: 10px;
+
+    background: #0d0f0f;
+
+    color: #ffffff;
+
+    padding: 12px 14px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+body.light-mode input[type="password"],
+body.light-mode input[type="text"],
+body.light-mode textarea {
+
+    background: #f8f8f8;
+
+    color: #111111;
+
+    border-color: #cccccc;
+
+}
+
+
+input[type="password"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+
+    border-color: #a552f8;
+
+}
+
+
+textarea {
+
+    min-height: 150px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+
+}
+
+
+/* ==================================
+   ボタン
+================================== */
+
+.primary-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 11px;
+
+    padding: 13px 18px;
+
+    background: #a552f8;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+}
+
+
+.primary-button:active {
+
+    transform: scale(0.98);
+
+}
+
+
+/* ==================================
+   エラー
+================================== */
+
+.error-message {
+
+    margin-bottom: 18px;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    background: rgba(
+        255,
+        23,
+        68,
+        0.12
+    );
+
+    color: #ff6b81;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==================================
+   管理画面上部
+================================== */
+
+.admin-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-bottom: 20px;
+
+}
+
+
+.logout-button {
+
+    display: inline-block;
+
+    padding: 9px 16px;
+
+    border-radius: 999px;
+
+    background: #282b2b;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+body.light-mode .logout-button {
+
+    background: #e1e1e1;
+
+    color: #111111;
+
+}
+
+
+/* ==================================
+   お知らせ一覧
+================================== */
+
+.notification-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.notification-item {
+
+    border: 1px solid #303333;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+}
+
+
+body.light-mode .notification-item {
+
+    border-color: #dddddd;
+
+}
+
+
+.notification-item-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+}
+
+
+.notification-title {
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    line-height: 1.5;
+
+}
+
+
+.notification-date {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    opacity: 0.5;
+
+}
+
+
+.notification-message {
+
+    margin-top: 12px;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    opacity: 0.9;
+
+}
+
+
+/* ==================================
+   削除ボタン
+================================== */
+
+.delete-button {
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 8px 12px;
+
+    background: #d9304f;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+}
+
+
+/* ==================================
+   お知らせなし
+================================== */
+
+.no-notifications {
+
+    padding: 35px 10px;
+
+    text-align: center;
+
+    opacity: 0.55;
+
+    font-size: 14px;
+
+}
+
+
+/* ==================================
+   パスワード説明
+================================== */
+
+.password-note {
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    opacity: 0.5;
+
+}
+
+
+/* ==================================
+   スマートフォン
+================================== */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 14px;
+
+    }
+
+
+    .admin-header h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .admin-card {
+
+        padding: 17px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .notification-item-header {
+
+        flex-direction: column;
+
+    }
+
+
+    .delete-button {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-page">
+
+
+<!-- ==================================
+     ヘッダー
+================================== -->
+
+<header class="admin-header">
+
+<h1>
+    お知らせ管理
+</h1>
+
+<div class="english">
+    Ryomo Line Notification Management
+</div>
+
+</header>
+
+
+
+{% if not logged_in %}
+
+<!-- ==================================
+     ログイン画面
+================================== -->
+
+<section class="admin-card">
+
+
+<h2 class="section-title">
+    管理者ログイン
+</h2>
+
+
+<div class="section-en">
+    Administrator Login
+</div>
+
+
+{% if error %}
+
+<div class="error-message">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<form
+    method="post"
+    action="{{ url_for('admin_notifications') }}"
+>
+
+
+<div class="form-group">
+
+<label
+    class="form-label"
+    for="password"
+>
+    パスワード
+</label>
+
+
+<input
+    id="password"
+    name="password"
+    type="password"
+    autocomplete="current-password"
+    required
+>
+
+
+</div>
+
+
+<button
+    type="submit"
+    class="primary-button"
+>
+    ログイン
+</button>
+
+
+</form>
+
+
+<div class="password-note">
+
+    管理者パスワードは環境変数
+    <strong>ADMIN_PASSWORD</strong>
+    で変更できます。
+
+</div>
+
+
+</section>
+
+
+{% else %}
+
+<!-- ==================================
+     ログイン後
+================================== -->
+
+
+<div class="admin-actions">
+
+<a
+    class="logout-button"
+    href="{{ url_for('admin_notifications_logout') }}"
+>
+    ログアウト
+</a>
+
+</div>
+
+
+
+<!-- ==================================
+     新規投稿
+================================== -->
+
+<section class="admin-card">
+
+
+<h2 class="section-title">
+    新しいお知らせ
+</h2>
+
+
+<div class="section-en">
+    New Notification
+</div>
+
+
+<form
+    method="post"
+    action="{{ url_for('admin_notifications') }}"
+>
+
+
+<input
+    type="hidden"
+    name="action"
+    value="create"
+>
+
+
+<div class="form-group">
+
+<label
+    class="form-label"
+    for="title"
+>
+    タイトル
+</label>
+
+
+<input
+    id="title"
+    name="title"
+    type="text"
+    maxlength="100"
+    placeholder="お知らせのタイトル"
+    required
+>
+
+
+</div>
+
+
+
+<div class="form-group">
+
+<label
+    class="form-label"
+    for="message"
+>
+    本文
+</label>
+
+
+<textarea
+    id="message"
+    name="message"
+    maxlength="5000"
+    placeholder="お知らせの本文を入力してください"
+    required
+></textarea>
+
+
+</div>
+
+
+<button
+    type="submit"
+    class="primary-button"
+>
+    お知らせを投稿
+</button>
+
+
+</form>
+
+
+</section>
+
+
+
+<!-- ==================================
+     投稿済み
+================================== -->
+
+<section class="admin-card">
+
+
+<h2 class="section-title">
+    投稿済みのお知らせ
+</h2>
+
+
+<div class="section-en">
+    Published Notifications
+</div>
+
+
+
+{% if notifications %}
+
+
+<div class="notification-list">
+
+
+{% for notification in notifications %}
+
+
+<article class="notification-item">
+
+
+<div class="notification-item-header">
+
+
+<div>
+
+<div class="notification-title">
+
+    {{ notification.title }}
+
+</div>
+
+
+<div class="notification-date">
+
+    {{ notification.date | replace("-", "/") }}
+
+    {% if notification.time %}
+        {{ notification.time }}
+    {% endif %}
+
+</div>
+
+</div>
+
+
+<form
+    method="post"
+    action="{{ url_for('admin_notifications') }}"
+    onsubmit="return confirm('このお知らせを削除しますか？');"
+>
+
+
+<input
+    type="hidden"
+    name="action"
+    value="delete"
+>
+
+
+<input
+    type="hidden"
+    name="notification_id"
+    value="{{ notification.id }}"
+>
+
+
+<button
+    type="submit"
+    class="delete-button"
+>
+    削除
+</button>
+
+
+</form>
+
+
+</div>
+
+
+<div class="notification-message">
+
+    {{ notification.message }}
+
+</div>
+
+
+</article>
+
+
+{% endfor %}
+
+
+</div>
+
+
+{% else %}
+
+
+<div class="no-notifications">
+
+    投稿されているお知らせはありません。
+
+</div>
+
+
+{% endif %}
+
+
+</section>
+
+
+{% endif %}
+
+
+</div>
+
+
+
+<script>
+
+/* ==================================
+   表示モード
+================================== */
+
+function applySavedDisplayMode() {
+
+    const displayMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    let useLightMode = false;
+
+
+    if (
+        displayMode === "light"
+    ) {
+
+        useLightMode = true;
+
+    }
+
+    else if (
+        displayMode === "system"
+    ) {
+
+        useLightMode =
+            !window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+    }
+
+
+    document.body.classList.toggle(
+        "light-mode",
+        useLightMode
+    );
+
+}
+
+
+applySavedDisplayMode();
+
+
+
+/* ==================================
+   システムテーマ変更
+================================== */
+
+const systemThemeQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function handleSystemThemeChange() {
+
+    const currentMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    if (
+        currentMode === "system"
+    ) {
+
+        applySavedDisplayMode();
+
+    }
+
+}
+
+
+if (
+    systemThemeQuery.addEventListener
+) {
+
+    systemThemeQuery.addEventListener(
+        "change",
+        handleSystemThemeChange
+    );
+
+}
+
+else {
+
+    systemThemeQuery.addListener(
+        handleSystemThemeChange
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

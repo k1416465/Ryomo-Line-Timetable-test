@@ -1,0 +1,3019 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>設定 - 両毛線 時刻表</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+
+<style>
+
+    /* ==========================================
+       設定項目の折りたたみ
+    ========================================== */
+
+    .settings-section {
+
+        margin-bottom: 14px;
+
+    }
+
+
+    .settings-section-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        width: 100%;
+
+        padding: 15px 16px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 12px;
+
+        background: #fff;
+
+        color: #111;
+
+        cursor: pointer;
+
+        font-family: inherit;
+
+        text-align: left;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.15s ease;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .settings-section-header:active {
+
+        transform: scale(0.99);
+
+    }
+
+
+    .settings-section-header-text {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 3px;
+
+        min-width: 0;
+
+    }
+
+
+    .settings-section-title {
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        line-height: 1.3;
+
+    }
+
+
+    .settings-section-en {
+
+        font-size: 12px;
+
+        color: #666;
+
+        line-height: 1.3;
+
+        font-weight: normal;
+
+    }
+
+
+    .settings-section-toggle {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 28px;
+
+        height: 28px;
+
+        flex-shrink: 0;
+
+        font-size: 24px;
+
+        font-weight: normal;
+
+        line-height: 1;
+
+    }
+
+
+    .settings-section-content {
+
+        display: none;
+
+        padding: 14px 2px 4px 2px;
+
+    }
+
+
+    .settings-section.open
+    .settings-section-content {
+
+        display: block;
+
+    }
+
+
+    /* ==========================================
+       ダークモード
+    ========================================== */
+
+    body:not(.light-mode)
+    .settings-section-header {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode)
+    .settings-section-en {
+
+        color: #aaa;
+
+    }
+
+
+    /* ==========================================
+       ライトモード
+    ========================================== */
+
+    body.light-mode
+    .settings-section-header {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode
+    .settings-section-en {
+
+        color: #666;
+
+    }
+
+
+    /* ==========================================
+       列車一覧
+    ========================================== */
+
+    .train-list-direction {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+        margin-top: 0;
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .train-direction-button {
+
+        width: 100%;
+
+        padding: 12px 10px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        color: #111;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.15s ease;
+
+    }
+
+
+    .train-direction-button:active {
+
+        transform: scale(0.97);
+
+    }
+
+
+    .train-direction-button.active {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #222;
+
+    }
+
+
+    /* ==========================================
+       列車番号一覧
+    ========================================== */
+
+    .train-number-list {
+
+        display: none;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 8px;
+
+    }
+
+
+    .train-number-list.show {
+
+        display: grid;
+
+    }
+
+
+    .train-number-item {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        min-height: 50px;
+
+        padding: 8px 6px;
+
+        background: #fff;
+
+        color: #111;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        text-decoration: none;
+
+        font-size: 19px;
+
+        font-weight: bold;
+
+        white-space: nowrap;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            opacity 0.15s ease,
+            transform 0.15s ease;
+
+    }
+
+
+    .train-number-item:hover {
+
+        opacity: 0.8;
+
+    }
+
+
+    .train-number-item:active {
+
+        transform: scale(0.97);
+
+    }
+
+
+    .train-list-empty {
+
+        display: block;
+
+        grid-column: 1 / -1;
+
+        padding: 20px 10px;
+
+        text-align: center;
+
+        color: #666;
+
+        font-size: 15px;
+
+    }
+
+
+    /* ==========================================
+       駅一覧
+    ========================================== */
+
+    .station-list-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        margin-top: 0;
+
+    }
+
+
+    .station-list-button {
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        width: 100%;
+
+        min-height: 62px;
+
+        padding: 9px 8px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        color: #111;
+
+        cursor: pointer;
+
+        font-family: inherit;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            opacity 0.15s ease,
+            transform 0.15s ease;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .station-list-button:hover {
+
+        opacity: 0.8;
+
+    }
+
+
+    .station-list-button:active {
+
+        transform: scale(0.97);
+
+    }
+
+
+    .station-list-button strong {
+
+        font-size: 16px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .station-list-button small {
+
+        margin-top: 2px;
+
+        color: #666;
+
+        font-size: 11px;
+
+        line-height: 1.3;
+
+    }
+
+
+    /* ==========================================
+       詳しい運行情報
+    ========================================== */
+
+    .operation-info-list {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-top: 0;
+
+    }
+
+
+    .operation-info-link {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        gap: 15px;
+
+        min-height: 58px;
+
+        padding: 10px 16px;
+
+        background: #fff;
+
+        color: #111;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            opacity 0.15s ease,
+            transform 0.15s ease;
+
+    }
+
+
+    .operation-info-link:hover {
+
+        opacity: 0.8;
+
+    }
+
+
+    .operation-info-link:active {
+
+        transform: scale(0.98);
+
+    }
+
+
+    .operation-info-text {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 3px;
+
+    }
+
+
+    .operation-info-text strong {
+
+        font-size: 16px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .operation-info-text small {
+
+        font-size: 12px;
+
+        font-weight: normal;
+
+        color: #666;
+
+        line-height: 1.4;
+
+    }
+
+
+    /* ==========================================
+       外部リンク矢印
+       横向き「→」
+    ========================================== */
+
+    .operation-info-arrow {
+
+        width: 11px;
+
+        height: 11px;
+
+        border-top: 2px solid currentColor;
+
+        border-right: 2px solid currentColor;
+
+        flex-shrink: 0;
+
+        transform:
+            rotate(45deg)
+            translate(-2px, 2px);
+
+    }
+
+
+    /* ==========================================
+       ダークモードの選択肢
+    ========================================== */
+
+    body:not(.light-mode) .settings-option {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode) .settings-option-text strong {
+
+        color: #fff;
+
+    }
+
+
+    body:not(.light-mode) .settings-option-text small {
+
+        color: #aaa;
+
+    }
+
+
+    body:not(.light-mode)
+    .settings-option input[type="radio"] {
+
+        accent-color: #fff;
+
+    }
+
+
+    /* ==========================================
+       ダークモードの列車方向ボタン
+    ========================================== */
+
+    body:not(.light-mode)
+    .train-direction-button {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode)
+    .train-direction-button.active {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #fff;
+
+    }
+
+
+    /* ==========================================
+       ダークモードの列車番号
+    ========================================== */
+
+    body:not(.light-mode)
+    .train-number-item {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode)
+    .train-list-empty {
+
+        color: #aaa;
+
+    }
+
+
+    /* ==========================================
+       ダークモードの駅一覧
+    ========================================== */
+
+    body:not(.light-mode)
+    .station-list-button {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode)
+    .station-list-button small {
+
+        color: #aaa;
+
+    }
+
+
+    /* ==========================================
+       ダークモードの運行情報
+    ========================================== */
+
+    body:not(.light-mode)
+    .operation-info-link {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #333;
+
+    }
+
+
+    body:not(.light-mode)
+    .operation-info-text strong {
+
+        color: #fff;
+
+    }
+
+
+    body:not(.light-mode)
+    .operation-info-text small {
+
+        color: #aaa;
+
+    }
+
+
+    /* ==========================================
+       ライトモード
+    ========================================== */
+
+    body.light-mode .settings-option {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode .settings-option-text strong {
+
+        color: #111;
+
+    }
+
+
+    body.light-mode .settings-option-text small {
+
+        color: #666;
+
+    }
+
+
+    body.light-mode
+    .settings-option input[type="radio"] {
+
+        accent-color: #222;
+
+    }
+
+
+    body.light-mode
+    .train-direction-button {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode
+    .train-direction-button.active {
+
+        background: #222;
+
+        color: #fff;
+
+        border-color: #222;
+
+    }
+
+
+    body.light-mode
+    .train-number-item {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode
+    .train-list-empty {
+
+        color: #666;
+
+    }
+
+
+    /* ==========================================
+       ライトモードの駅一覧
+    ========================================== */
+
+    body.light-mode
+    .station-list-button {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode
+    .station-list-button small {
+
+        color: #666;
+
+    }
+
+
+    body.light-mode
+    .operation-info-link {
+
+        background: #fff;
+
+        color: #111;
+
+        border-color: #ccc;
+
+    }
+
+
+    body.light-mode
+    .operation-info-text strong {
+
+        color: #111;
+
+    }
+
+
+    body.light-mode
+    .operation-info-text small {
+
+        color: #666;
+
+    }
+
+
+    /* ==========================================
+       スマートフォン
+    ========================================== */
+
+    @media (max-width: 600px) {
+
+
+        .settings-section {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .settings-section-header {
+
+            padding: 13px 14px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .settings-section-title {
+
+            font-size: 16px;
+
+        }
+
+
+        .settings-section-en {
+
+            font-size: 11px;
+
+        }
+
+
+        .settings-section-toggle {
+
+            width: 26px;
+
+            height: 26px;
+
+            font-size: 22px;
+
+        }
+
+
+        .settings-section-content {
+
+            padding: 11px 1px 3px 1px;
+
+        }
+
+
+        .train-list-direction {
+
+            gap: 8px;
+
+            margin-top: 0;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .train-direction-button {
+
+            padding: 11px 8px;
+
+            font-size: 15px;
+
+            border-radius: 9px;
+
+        }
+
+
+        .train-number-list {
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 7px;
+
+        }
+
+
+        .train-number-item {
+
+            min-height: 48px;
+
+            padding: 8px 5px;
+
+            font-size: 18px;
+
+            border-radius: 9px;
+
+        }
+
+
+        /* 駅一覧 */
+
+        .station-list-grid {
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 8px;
+
+            margin-top: 0;
+
+        }
+
+
+        .station-list-button {
+
+            min-height: 58px;
+
+            padding: 8px 5px;
+
+            border-radius: 9px;
+
+        }
+
+
+        .station-list-button strong {
+
+            font-size: 14px;
+
+        }
+
+
+        .station-list-button small {
+
+            font-size: 10px;
+
+        }
+
+
+        .operation-info-list {
+
+            gap: 8px;
+
+            margin-top: 0;
+
+        }
+
+
+        .operation-info-link {
+
+            min-height: 54px;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            gap: 10px;
+
+        }
+
+
+        .operation-info-text strong {
+
+            font-size: 14px;
+
+        }
+
+
+        .operation-info-text small {
+
+            font-size: 11px;
+
+        }
+
+
+        .operation-info-arrow {
+
+            width: 10px;
+
+            height: 10px;
+
+            border-top-width: 2px;
+
+            border-right-width: 2px;
+
+            transform:
+                rotate(45deg)
+                translate(-2px, 2px);
+
+        }
+
+    }
+
+</style>
+
+
+<!-- Google Analytics -->
+
+<script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-CKW0P57706"
+></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", "G-CKW0P57706");
+
+</script>
+
+</head>
+
+
+<body class="settings-page">
+
+
+<div class="settings-container">
+
+
+<!-- ==================================
+     ヘッダー
+================================== -->
+
+<header class="settings-header">
+
+<h1>
+    設定
+</h1>
+
+<div class="settings-header-en">
+    Settings
+</div>
+
+</header>
+
+
+
+<!-- ==================================
+     デフォルト駅
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            デフォルト駅
+        </span>
+
+        <span class="settings-section-en">
+            Default Station
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="settings-options">
+
+
+    <!-- 選択しない -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="none"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                選択しない
+            </strong>
+
+            <small>
+                Open Home Screen
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 小山 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="oyama"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                小山駅
+            </strong>
+
+            <small>
+                Oyama Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 思川 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="omoigawa"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                思川駅
+            </strong>
+
+            <small>
+                Omoigawa Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 栃木 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="tochigi"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                栃木駅
+            </strong>
+
+            <small>
+                Tochigi Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 大平下 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="ohirashita"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                大平下駅
+            </strong>
+
+            <small>
+                Ōhirashita Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 岩舟 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="iwafune"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                岩舟駅
+            </strong>
+
+            <small>
+                Iwafune Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 佐野 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="sano"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                佐野駅
+            </strong>
+
+            <small>
+                Sano Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 富田 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="tomita"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                富田駅
+            </strong>
+
+            <small>
+                Tomita Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- あしかがフラワーパーク -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="ashikaga_flower_park"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                あしかがフラワーパーク駅
+            </strong>
+
+            <small>
+                Ashikaga Flower Park Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 足利 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="ashikaga"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                足利駅
+            </strong>
+
+            <small>
+                Ashikaga Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 山前 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="yamamae"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                山前駅
+            </strong>
+
+            <small>
+                Yamamae Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 小俣 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="omata"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                小俣駅
+            </strong>
+
+            <small>
+                Omata Station
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <!-- 現在地の最寄り駅 -->
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="defaultStation"
+            value="nearest"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                現在地の最寄り駅
+            </strong>
+
+            <small>
+                Nearest Station to Current Location
+            </small>
+
+        </span>
+
+    </label>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     表示モード
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            表示モード
+        </span>
+
+        <span class="settings-section-en">
+            Display Mode
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="settings-options">
+
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="displayMode"
+            value="dark"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                ダーク
+            </strong>
+
+            <small>
+                Dark
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="displayMode"
+            value="light"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                ライト
+            </strong>
+
+            <small>
+                Light
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="displayMode"
+            value="system"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                端末の設定を使う
+            </strong>
+
+            <small>
+                Use Device Settings
+            </small>
+
+        </span>
+
+    </label>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     時刻表の形式
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            時刻表の形式
+        </span>
+
+        <span class="settings-section-en">
+            Timetable Format
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="settings-options">
+
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="timetableFormat"
+            value="board"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                電光掲示板
+            </strong>
+
+            <small>
+                Electric Bulletin Board
+            </small>
+
+        </span>
+
+    </label>
+
+
+    <label class="settings-option">
+
+        <input
+            type="radio"
+            name="timetableFormat"
+            value="list"
+        >
+
+        <span class="settings-option-text">
+
+            <strong>
+                リスト
+            </strong>
+
+            <small>
+                List
+            </small>
+
+        </span>
+
+    </label>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     駅一覧
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            駅一覧
+        </span>
+
+        <span class="settings-section-en">
+            Station List
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="station-list-grid">
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('oyama')"
+    >
+
+        <strong>
+            小山駅
+        </strong>
+
+        <small>
+            Oyama Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('omoigawa')"
+    >
+
+        <strong>
+            思川駅
+        </strong>
+
+        <small>
+            Omoigawa Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('tochigi')"
+    >
+
+        <strong>
+            栃木駅
+        </strong>
+
+        <small>
+            Tochigi Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('ohirashita')"
+    >
+
+        <strong>
+            大平下駅
+        </strong>
+
+        <small>
+            Ōhirashita Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('iwafune')"
+    >
+
+        <strong>
+            岩舟駅
+        </strong>
+
+        <small>
+            Iwafune Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('sano')"
+    >
+
+        <strong>
+            佐野駅
+        </strong>
+
+        <small>
+            Sano Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('tomita')"
+    >
+
+        <strong>
+            富田駅
+        </strong>
+
+        <small>
+            Tomita Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('ashikaga_flower_park')"
+    >
+
+        <strong>
+            あしかがフラワーパーク駅
+        </strong>
+
+        <small>
+            Ashikaga Flower Park Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('ashikaga')"
+    >
+
+        <strong>
+            足利駅
+        </strong>
+
+        <small>
+            Ashikaga Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('yamamae')"
+    >
+
+        <strong>
+            山前駅
+        </strong>
+
+        <small>
+            Yamamae Station
+        </small>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="station-list-button"
+        onclick="openStationPage('omata')"
+    >
+
+        <strong>
+            小俣駅
+        </strong>
+
+        <small>
+            Omata Station
+        </small>
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     列車一覧
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            列車一覧
+        </span>
+
+        <span class="settings-section-en">
+            Train List
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="train-list-direction">
+
+
+    <button
+        type="button"
+        class="train-direction-button"
+        id="upButton"
+        onclick="showTrainDirection('up')"
+    >
+        上り
+    </button>
+
+
+    <button
+        type="button"
+        class="train-direction-button"
+        id="downButton"
+        onclick="showTrainDirection('down')"
+    >
+        下り
+    </button>
+
+
+</div>
+
+
+<div
+    id="trainNumberList"
+    class="train-number-list"
+>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     詳しい運行情報
+================================== -->
+
+<section class="settings-section">
+
+
+<button
+    type="button"
+    class="settings-section-header"
+    onclick="toggleSettingsSection(this)"
+    aria-expanded="false"
+>
+
+    <span class="settings-section-header-text">
+
+        <span class="settings-section-title">
+            詳しい運行情報
+        </span>
+
+        <span class="settings-section-en">
+            Detailed Operation Information
+        </span>
+
+    </span>
+
+    <span class="settings-section-toggle">
+        ＋
+    </span>
+
+</button>
+
+
+<div class="settings-section-content">
+
+
+<div class="operation-info-list">
+
+
+    <a
+        href="https://traininfo.jreast.co.jp/train_info/line.aspx?gid=1&lineid=ryomoline"
+        class="operation-info-link"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        <span class="operation-info-text">
+
+            <strong>
+                JR東日本 両毛線 運行情報
+            </strong>
+
+            <small>
+                JR East Ryomo Line Operation information
+            </small>
+
+        </span>
+
+        <span class="operation-info-arrow"></span>
+
+    </a>
+
+
+    <a
+        href="https://doko-train.jp/pc/"
+        class="operation-info-link"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        <span class="operation-info-text">
+
+            <strong>
+                どこトレ
+            </strong>
+
+            <small>
+                Doko-train
+            </small>
+
+            <small>
+                列車の遅れと走行位置をリアルタイムで確認できます
+            </small>
+
+        </span>
+
+        <span class="operation-info-arrow"></span>
+
+    </a>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================
+     保存
+================================== -->
+
+<button
+    class="settings-save-button"
+    onclick="saveSettings()"
+    type="button"
+>
+
+設定を保存
+
+</button>
+
+
+
+<!-- ==================================
+     ホームへ戻る
+================================== -->
+
+<div class="settings-back-area">
+
+<a
+    href="/?home=1"
+    class="settings-back-button"
+>
+
+    <span>
+        ホームへ戻る
+    </span>
+
+    <small>
+        Back to Home
+    </small>
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================
+   設定項目の開閉
+================================== */
+
+function toggleSettingsSection(
+    button
+) {
+
+
+    const section =
+        button.closest(
+            ".settings-section"
+        );
+
+
+    const isOpen =
+        section.classList.contains(
+            "open"
+        );
+
+
+    section.classList.toggle(
+        "open",
+        !isOpen
+    );
+
+
+    button.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+    );
+
+
+    const toggle =
+        button.querySelector(
+            ".settings-section-toggle"
+        );
+
+
+    if (toggle) {
+
+        toggle.textContent =
+            isOpen
+                ? "＋"
+                : "−";
+
+    }
+
+}
+
+
+
+/* ==================================
+   列車データ
+================================== */
+
+let allTrains = [];
+
+let currentTrainDirection = null;
+
+
+
+/* ==================================
+   設定読み込み
+================================== */
+
+function loadSettings() {
+
+
+    const defaultStation =
+        localStorage.getItem(
+            "defaultStation"
+        ) || "none";
+
+
+    const displayMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    const timetableFormat =
+        localStorage.getItem(
+            "timetableFormat"
+        ) || "board";
+
+
+
+    /* デフォルト駅 */
+
+    const stationRadio =
+        document.querySelector(
+            `input[name="defaultStation"][value="${defaultStation}"]`
+        );
+
+
+    if (stationRadio) {
+
+        stationRadio.checked = true;
+
+    }
+
+
+
+    /* 表示モード */
+
+    const modeRadio =
+        document.querySelector(
+            `input[name="displayMode"][value="${displayMode}"]`
+        );
+
+
+    if (modeRadio) {
+
+        modeRadio.checked = true;
+
+    }
+
+
+
+    /* 時刻表の形式 */
+
+    const timetableRadio =
+        document.querySelector(
+            `input[name="timetableFormat"][value="${timetableFormat}"]`
+        );
+
+
+    if (timetableRadio) {
+
+        timetableRadio.checked = true;
+
+    }
+
+}
+
+
+
+/* ==================================
+   設定保存
+================================== */
+
+function saveSettings() {
+
+
+    const station =
+        document.querySelector(
+            'input[name="defaultStation"]:checked'
+        );
+
+
+    const mode =
+        document.querySelector(
+            'input[name="displayMode"]:checked'
+        );
+
+
+    const timetableFormat =
+        document.querySelector(
+            'input[name="timetableFormat"]:checked'
+        );
+
+
+
+    if (!station) {
+
+        alert(
+            "デフォルト駅を選択してください。"
+        );
+
+        return;
+
+    }
+
+
+
+    if (!mode) {
+
+        alert(
+            "表示モードを選択してください。"
+        );
+
+        return;
+
+    }
+
+
+
+    if (!timetableFormat) {
+
+        alert(
+            "時刻表の形式を選択してください。"
+        );
+
+        return;
+
+    }
+
+
+
+    localStorage.setItem(
+        "defaultStation",
+        station.value
+    );
+
+
+    localStorage.setItem(
+        "displayMode",
+        mode.value
+    );
+
+
+    localStorage.setItem(
+        "timetableFormat",
+        timetableFormat.value
+    );
+
+
+
+    applyDisplayMode(
+        mode.value
+    );
+
+
+    alert(
+        "設定を保存しました。"
+    );
+
+
+    window.location.href =
+        "/?home=1";
+
+}
+
+
+
+/* ==================================
+   表示モード
+================================== */
+
+function applyDisplayMode(
+    mode
+) {
+
+
+    if (
+        mode === "dark"
+    ) {
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+        return;
+
+    }
+
+
+
+    if (
+        mode === "light"
+    ) {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+        return;
+
+    }
+
+
+
+    if (
+        mode === "system"
+    ) {
+
+
+        const prefersDark =
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+
+        if (
+            prefersDark
+        ) {
+
+            document.body.classList.remove(
+                "light-mode"
+            );
+
+        } else {
+
+            document.body.classList.add(
+                "light-mode"
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* ==================================
+   端末の設定変更を監視
+================================== */
+
+const systemThemeQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function handleSystemThemeChange() {
+
+
+    const currentMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    if (
+        currentMode === "system"
+    ) {
+
+        applyDisplayMode(
+            "system"
+        );
+
+    }
+
+}
+
+
+
+if (
+    systemThemeQuery.addEventListener
+) {
+
+    systemThemeQuery.addEventListener(
+        "change",
+        handleSystemThemeChange
+    );
+
+} else {
+
+    systemThemeQuery.addListener(
+        handleSystemThemeChange
+    );
+
+}
+
+
+
+/* ==================================
+   駅一覧
+================================== */
+
+function openStationPage(
+    stationId
+) {
+
+
+    const timetableFormat =
+        localStorage.getItem(
+            "timetableFormat"
+        ) || "board";
+
+
+    if (
+        timetableFormat === "list"
+    ) {
+
+        window.location.href =
+            "/station/" +
+            encodeURIComponent(
+                stationId
+            ) +
+            "/timetable";
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "/station/" +
+        encodeURIComponent(
+            stationId
+        );
+
+}
+
+
+
+/* ==================================
+   列車番号を取得
+================================== */
+
+function getTrainNumber(
+    train
+) {
+
+
+    let trainNumber =
+        String(
+            train.train_number || ""
+        ).trim();
+
+
+    if (
+
+        trainNumber === "普通"
+
+        &&
+
+        typeof train.cars === "string"
+
+        &&
+
+        /^\d+M$/.test(
+            train.cars.trim()
+        )
+
+    ) {
+
+        trainNumber =
+            train.cars.trim();
+
+    }
+
+
+    return trainNumber;
+
+}
+
+
+
+/* ==================================
+   列車番号の数字部分
+================================== */
+
+function getTrainNumberValue(
+    trainNumber
+) {
+
+
+    const match =
+        trainNumber.match(
+            /^(\d+)/
+        );
+
+
+    if (!match) {
+
+        return null;
+
+    }
+
+
+    return Number(
+        match[1]
+    );
+
+}
+
+
+
+/* ==================================
+   列車の方向
+================================== */
+
+function getTrainDirection(
+    trainNumber
+) {
+
+
+    const number =
+        getTrainNumberValue(
+            trainNumber
+        );
+
+
+    if (
+        number === null
+    ) {
+
+        return null;
+
+    }
+
+
+    if (
+        number % 2 === 1
+    ) {
+
+        return "down";
+
+    }
+
+
+    return "up";
+
+}
+
+
+
+/* ==================================
+   列車一覧取得
+================================== */
+
+async function loadTrainList() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/timetable"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "列車情報を取得できませんでした。"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        allTrains =
+            Array.isArray(
+                data.trains
+            )
+                ? data.trains
+                : [];
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==================================
+   列車一覧を閉じる
+================================== */
+
+function closeTrainDirection() {
+
+
+    const upButton =
+        document.getElementById(
+            "upButton"
+        );
+
+
+    const downButton =
+        document.getElementById(
+            "downButton"
+        );
+
+
+    const list =
+        document.getElementById(
+            "trainNumberList"
+        );
+
+
+    upButton.classList.remove(
+        "active"
+    );
+
+
+    downButton.classList.remove(
+        "active"
+    );
+
+
+    list.innerHTML = "";
+
+
+    list.classList.remove(
+        "show"
+    );
+
+
+    currentTrainDirection = null;
+
+}
+
+
+
+/* ==================================
+   上り・下り表示
+================================== */
+
+function showTrainDirection(
+    direction
+) {
+
+
+    if (
+        currentTrainDirection ===
+        direction
+    ) {
+
+        closeTrainDirection();
+
+        return;
+
+    }
+
+
+    const upButton =
+        document.getElementById(
+            "upButton"
+        );
+
+
+    const downButton =
+        document.getElementById(
+            "downButton"
+        );
+
+
+    currentTrainDirection =
+        direction;
+
+
+    if (
+        direction === "up"
+    ) {
+
+        upButton.classList.add(
+            "active"
+        );
+
+        downButton.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    else {
+
+        upButton.classList.remove(
+            "active"
+        );
+
+        downButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+
+    const directionTrains =
+        allTrains.filter(
+            function (train) {
+
+
+                const trainNumber =
+                    getTrainNumber(
+                        train
+                    );
+
+
+                const trainDirection =
+                    getTrainDirection(
+                        trainNumber
+                    );
+
+
+                return (
+                    trainDirection ===
+                    direction
+                );
+
+            }
+        );
+
+
+
+    directionTrains.sort(
+        function (a, b) {
+
+
+            const numberA =
+                getTrainNumberValue(
+                    getTrainNumber(a)
+                );
+
+
+            const numberB =
+                getTrainNumberValue(
+                    getTrainNumber(b)
+                );
+
+
+            if (
+
+                numberA === null
+
+                &&
+
+                numberB === null
+
+            ) {
+
+                return 0;
+
+            }
+
+
+            if (
+                numberA === null
+            ) {
+
+                return 1;
+
+            }
+
+
+            if (
+                numberB === null
+            ) {
+
+                return -1;
+
+            }
+
+
+            return numberA - numberB;
+
+        }
+    );
+
+
+
+    const list =
+        document.getElementById(
+            "trainNumberList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    list.classList.add(
+        "show"
+    );
+
+
+
+    if (
+        directionTrains.length === 0
+    ) {
+
+
+        list.innerHTML = `
+
+            <div class="train-list-empty">
+
+                該当する列車がありません。
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    directionTrains.forEach(
+        function (train) {
+
+
+            const trainNumber =
+                getTrainNumber(
+                    train
+                );
+
+
+            if (!trainNumber) {
+
+                return;
+
+            }
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.className =
+                "train-number-item";
+
+
+            link.href =
+                "/train/" +
+                encodeURIComponent(
+                    trainNumber
+                );
+
+
+            link.textContent =
+                trainNumber;
+
+
+            list.appendChild(
+                link
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==================================
+   初期設定
+================================== */
+
+const savedMode =
+    localStorage.getItem(
+        "displayMode"
+    ) || "system";
+
+
+applyDisplayMode(
+    savedMode
+);
+
+
+loadSettings();
+
+
+loadTrainList();
+
+
+</script>
+
+
+</body>
+
+</html>

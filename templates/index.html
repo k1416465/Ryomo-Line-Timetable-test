@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>両毛線 時刻表</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+
+
+<!-- ==================================
+     通知・ヘッダーボタン用CSS
+================================== -->
+
+<style>
+
+.home-header-buttons {
+
+    position: absolute;
+
+    right: 5px;
+    top: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.notification-button,
+.settings-button {
+
+    position: relative !important;
+
+    right: auto !important;
+    top: auto !important;
+
+}
+
+
+/* ==================================
+   お知らせボタン
+================================== */
+
+.notification-button {
+
+    width: 58px;
+    height: 58px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    position: relative;
+
+}
+
+
+.notification-button img {
+
+    width: 72%;
+    height: 72%;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: auto;
+
+}
+
+
+/* ==================================
+   未読件数バッジ
+================================== */
+
+.notification-badge {
+
+    position: absolute;
+
+    top: -3px;
+    right: -3px;
+
+    min-width: 25px;
+    height: 25px;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background: #ff1744;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    border: 2px solid #080909;
+
+}
+
+
+body.light-mode .notification-badge {
+
+    border-color: #ffffff;
+
+}
+
+
+/* ==================================
+   タブレット
+================================== */
+
+@media (max-width: 800px) {
+
+    .home-header-buttons {
+
+        right: 2px;
+
+        gap: 8px;
+
+    }
+
+
+    .notification-button,
+    .settings-button {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+}
+
+
+/* ==================================
+   スマートフォン
+================================== */
+
+@media (max-width: 600px) {
+
+    .home-header-buttons {
+
+        right: 2px;
+
+        gap: 5px;
+
+    }
+
+
+    .notification-button,
+    .settings-button {
+
+        width: 42px;
+        height: 42px;
+
+    }
+
+
+    .notification-badge {
+
+        top: -2px;
+        right: -2px;
+
+        min-width: 21px;
+        height: 21px;
+
+        font-size: 11px;
+
+        padding: 0 3px;
+
+    }
+
+}
+
+
+/* ==================================
+   小型スマートフォン
+================================== */
+
+@media (max-width: 390px) {
+
+    .home-header-buttons {
+
+        gap: 2px;
+
+    }
+
+
+    .notification-button,
+    .settings-button {
+
+        width: 38px;
+        height: 38px;
+
+    }
+
+}
+
+</style>
+
+
+<!-- Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKW0P57706"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", "G-CKW0P57706");
+
+</script>
+
+</head>
+
+
+<body onload="initializeHome()">
+
+
+<div class="home">
+
+
+<!-- ==================================
+     ヘッダー
+================================== -->
+
+<header class="home-header">
+
+
+<h1>
+    両毛線 時刻表
+</h1>
+
+
+<div class="english-title">
+    Ryomo Line Timetable
+</div>
+
+
+<!-- ==================================
+     ヘッダーボタン
+================================== -->
+
+<div class="home-header-buttons">
+
+
+<!-- お知らせボタン -->
+
+<button
+    class="notification-button"
+    onclick="openNotifications()"
+    aria-label="お知らせ"
+    type="button"
+>
+
+<img
+    src="{{ url_for('static', filename='icons/notification.png') }}"
+    alt="お知らせ"
+>
+
+
+<span
+    id="notification-badge"
+    class="notification-badge"
+    hidden
+></span>
+
+
+</button>
+
+
+
+<!-- 設定ボタン -->
+
+<button
+    class="settings-button"
+    onclick="openSettings()"
+    aria-label="設定"
+    type="button"
+>
+
+<img
+    src="{{ url_for('static', filename='icons/settings.png') }}"
+    alt="設定"
+>
+
+</button>
+
+
+</div>
+
+
+</header>
+
+
+
+<!-- ==================================
+     現在日時
+================================== -->
+
+<div class="current-info">
+
+
+<span id="current-date"></span>
+
+
+<div class="date-divider"></div>
+
+
+<span id="current-time"></span>
+
+
+</div>
+
+
+
+<!-- ==================================
+     駅選択タイトル
+================================== -->
+
+<div class="select-title">
+
+表示する駅を選択してください
+
+</div>
+
+
+
+<!-- ==================================
+     駅一覧
+================================== -->
+
+<main class="station-grid">
+
+
+<!-- 栃木駅 -->
+
+<a
+    href="/station/tochigi"
+    class="station-card tochigi"
+    onclick="openStation(event, 'tochigi')"
+>
+
+<div class="station-icon">
+
+<img
+    src="{{ url_for('static', filename='icons/tochigi.png') }}"
+    alt="栃木駅"
+>
+
+</div>
+
+
+<div class="station-name">
+    栃木駅
+</div>
+
+
+<div class="station-en">
+    Tochigi Station
+</div>
+
+
+</a>
+
+
+
+<!-- 佐野駅 -->
+
+<a
+    href="/station/sano"
+    class="station-card sano"
+    onclick="openStation(event, 'sano')"
+>
+
+<div class="station-icon">
+
+<img
+    src="{{ url_for('static', filename='icons/sano.png') }}"
+    alt="佐野駅"
+>
+
+</div>
+
+
+<div class="station-name">
+    佐野駅
+</div>
+
+
+<div class="station-en">
+    Sano Station
+</div>
+
+
+</a>
+
+
+
+<!-- 足利駅 -->
+
+<a
+    href="/station/ashikaga"
+    class="station-card ashikaga"
+    onclick="openStation(event, 'ashikaga')"
+>
+
+<div class="station-icon">
+
+<img
+    src="{{ url_for('static', filename='icons/ashikaga.png') }}"
+    alt="足利駅"
+>
+
+</div>
+
+
+<div class="station-name">
+    足利駅
+</div>
+
+
+<div class="station-en">
+    Ashikaga Station
+</div>
+
+
+</a>
+
+
+
+<!-- 現在地 -->
+
+<button
+    class="station-card current-location"
+    onclick="findNearestStation()"
+    type="button"
+>
+
+<div class="station-icon">
+
+<img
+    src="{{ url_for('static', filename='icons/location.png') }}"
+    alt="現在地"
+>
+
+</div>
+
+
+<div class="station-name">
+    現在地
+</div>
+
+
+<div class="station-en">
+    Current Location
+</div>
+
+
+</button>
+
+
+</main>
+
+
+
+<!-- ==================================
+     運行情報
+================================== -->
+
+<section
+    class="operation-info normal"
+    id="operation-info"
+    role="link"
+    tabindex="0"
+    aria-label="両毛線の運行情報を開く"
+>
+
+
+<div
+    class="operation-icon"
+    id="operation-icon"
+>
+    ○
+</div>
+
+
+<div class="operation-content">
+
+
+<div class="operation-title">
+    運行情報
+</div>
+
+
+<div
+    class="operation-status"
+    id="operation-status"
+>
+    平常運転
+</div>
+
+
+<div
+    class="operation-text"
+    id="operation-text"
+>
+    両毛線は平常通り運転しています。
+</div>
+
+
+<div
+    class="operation-updated"
+    id="operation-updated"
+>
+    情報取得中
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================
+   お知らせ
+================================== */
+
+const notificationReadKey =
+    "ryomoNotificationReadIds";
+
+
+
+/* ==================================
+   既読お知らせID取得
+================================== */
+
+function getReadNotificationIds() {
+
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    notificationReadKey
+                ) || "[]"
+            );
+
+
+        if (
+            Array.isArray(data)
+        ) {
+
+            return data.map(
+                String
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "既読お知らせ情報の取得に失敗しました:",
+            error
+        );
+
+    }
+
+
+    return [];
+
+}
+
+
+
+/* ==================================
+   既読お知らせID保存
+================================== */
+
+function setReadNotificationIds(
+    ids
+) {
+
+    try {
+
+        localStorage.setItem(
+
+            notificationReadKey,
+
+            JSON.stringify(
+                [
+                    ...new Set(
+                        ids.map(String)
+                    )
+                ]
+            )
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "既読お知らせ情報の保存に失敗しました:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==================================
+   未読件数表示用数字
+================================== */
+
+function getNotificationCountText(
+    number
+) {
+
+    if (
+        number >= 10
+    ) {
+
+        return "9＋";
+
+    }
+
+
+    return String(number);
+
+}
+
+
+
+/* ==================================
+   お知らせ未読件数更新
+================================== */
+
+async function updateNotificationBadge() {
+
+    const badge =
+        document.getElementById(
+            "notification-badge"
+        );
+
+
+    if (!badge) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "/api/notifications?"
+                +
+                Date.now(),
+
+                {
+                    cache: "no-store"
+                }
+
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                "お知らせ取得失敗"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const notifications =
+            Array.isArray(data)
+
+                ? data
+
+                : (
+                    Array.isArray(
+                        data.notifications
+                    )
+
+                        ? data.notifications
+
+                        : []
+                );
+
+
+        const readIds =
+            getReadNotificationIds();
+
+
+        const unreadCount =
+            notifications.filter(
+
+                function(item) {
+
+                    if (
+                        !item
+                        ||
+                        typeof item !== "object"
+                    ) {
+
+                        return false;
+
+                    }
+
+                    return !readIds.includes(
+                        String(item.id)
+                    );
+
+                }
+
+            ).length;
+
+
+
+        /* ==================================
+           未読あり
+        ================================== */
+
+        if (
+            unreadCount > 0
+        ) {
+
+            badge.textContent =
+                getNotificationCountText(
+                    unreadCount
+                );
+
+            badge.hidden = false;
+
+            /*
+             * hidden属性だけでなく
+             * displayも明示的に戻す
+             */
+            badge.style.display = "flex";
+
+        }
+
+
+
+        /* ==================================
+           未読なし
+        ================================== */
+
+        else {
+
+            badge.textContent = "";
+
+            /*
+             * hidden属性
+             */
+            badge.hidden = true;
+
+            /*
+             * 赤い丸そのものを完全に非表示
+             */
+            badge.style.display = "none";
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "お知らせ取得エラー:",
+            error
+        );
+
+
+        badge.textContent = "";
+
+        badge.hidden = true;
+
+        /*
+         * エラー時も赤い丸を表示しない
+         */
+        badge.style.display = "none";
+
+    }
+
+}
+
+
+
+/* ==================================
+   お知らせページを開く
+================================== */
+
+function openNotifications() {
+
+    window.location.href =
+        "/notifications";
+
+}
+
+
+
+/* ==================================
+   お知らせ未読件数確認
+================================== */
+
+updateNotificationBadge();
+
+
+
+/* ==================================
+   30秒ごとに新しいお知らせを確認
+================================== */
+
+setInterval(
+
+    updateNotificationBadge,
+
+    30000
+
+);
+
+
+
+/* ==================================
+   既読状態変更を監視
+================================== */
+
+/*
+ * 別タブなどで既読状態が変更された場合
+ */
+window.addEventListener(
+
+    "storage",
+
+    function(event) {
+
+        if (
+            event.key ===
+            notificationReadKey
+        ) {
+
+            updateNotificationBadge();
+
+        }
+
+    }
+
+);
+
+
+
+/*
+ * お知らせ画面からホームに戻った場合
+ *
+ * ブラウザの戻る・進むや
+ * ページキャッシュから復帰した場合にも
+ * 未読件数を再確認する
+ */
+window.addEventListener(
+
+    "pageshow",
+
+    function() {
+
+        updateNotificationBadge();
+
+    }
+
+);
+
+
+
+/*
+ * タブを再び表示した場合
+ */
+document.addEventListener(
+
+    "visibilitychange",
+
+    function() {
+
+        if (
+            document.visibilityState ===
+            "visible"
+        ) {
+
+            updateNotificationBadge();
+
+        }
+
+    }
+
+);
+
+
+
+/*
+ * ブラウザの別画面から
+ * ホームに戻った場合にも再確認
+ */
+window.addEventListener(
+
+    "focus",
+
+    function() {
+
+        updateNotificationBadge();
+
+    }
+
+);
+
+
+
+/* ==================================
+   ホーム初期化
+================================== */
+
+function initializeHome() {
+
+
+    /* ==================================
+       表示モード
+    ================================== */
+
+    applySavedDisplayMode();
+
+
+
+    /* ==================================
+       強制的にホームを表示する場合
+    ================================== */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const forceHome =
+        urlParams.get("home") === "1";
+
+
+    /*
+     * ?home=1 の場合は
+     * デフォルト駅への自動移動を行わない
+     */
+
+    if (forceHome) {
+
+
+        window.history.replaceState(
+            null,
+            "",
+            "/"
+        );
+
+    }
+
+
+
+    /* ==================================
+       時計開始
+    ================================== */
+
+    updateClock();
+
+
+    setInterval(
+        updateClock,
+        1000
+    );
+
+
+
+    /* ==================================
+       運行情報
+    ================================== */
+
+    loadOperationInfo();
+
+
+    setInterval(
+        loadOperationInfo,
+        60000
+    );
+
+
+
+    /* ==================================
+       デフォルト駅
+    ================================== */
+
+    if (forceHome) {
+
+        return;
+
+    }
+
+
+    const defaultStation =
+        localStorage.getItem(
+            "defaultStation"
+        ) || "none";
+
+
+
+    if (
+        defaultStation === "none"
+    ) {
+
+        return;
+
+    }
+
+
+
+    const stationIds = [
+
+        "oyama",
+
+        "omoigawa",
+
+        "tochigi",
+
+        "ohirashita",
+
+        "iwafune",
+
+        "sano",
+
+        "tomita",
+
+        "ashikaga_flower_park",
+
+        "ashikaga",
+
+        "yamamae",
+
+        "omata"
+
+    ];
+
+
+
+    if (
+        stationIds.includes(
+            defaultStation
+        )
+    ) {
+
+        openStationPage(
+            defaultStation
+        );
+
+        return;
+
+    }
+
+
+
+    if (
+        defaultStation === "nearest"
+    ) {
+
+        findNearestStation(
+            true
+        );
+
+        return;
+
+    }
+
+}
+
+
+
+/* ==================================
+   時刻表の形式を取得
+================================== */
+
+function getTimetableFormat() {
+
+    return (
+
+        localStorage.getItem(
+            "timetableFormat"
+        ) || "board"
+
+    );
+
+}
+
+
+
+/* ==================================
+   駅ページを開く
+================================== */
+
+function openStationPage(
+    stationId
+) {
+
+
+    const timetableFormat =
+        getTimetableFormat();
+
+
+
+    if (
+        timetableFormat === "list"
+    ) {
+
+        window.location.href =
+            "/station/"
+            +
+            stationId
+            +
+            "/timetable";
+
+        return;
+
+    }
+
+
+
+    window.location.href =
+        "/station/"
+        +
+        stationId;
+
+}
+
+
+
+/* ==================================
+   駅カードクリック
+================================== */
+
+function openStation(
+    event,
+    stationId
+) {
+
+
+    event.preventDefault();
+
+
+    openStationPage(
+        stationId
+    );
+
+}
+
+
+
+/* ==================================
+   表示モード
+================================== */
+
+function applySavedDisplayMode() {
+
+
+    const displayMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    let useLightMode =
+        false;
+
+
+
+    if (
+        displayMode === "light"
+    ) {
+
+        useLightMode =
+            true;
+
+    }
+
+
+    else if (
+        displayMode === "system"
+    ) {
+
+        useLightMode =
+            !window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+    }
+
+
+
+    document.body.classList.toggle(
+        "light-mode",
+        useLightMode
+    );
+
+}
+
+
+
+/* ==================================
+   端末テーマ変更監視
+================================== */
+
+const systemThemeQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function handleSystemThemeChange() {
+
+
+    const currentMode =
+        localStorage.getItem(
+            "displayMode"
+        ) || "system";
+
+
+    if (
+        currentMode === "system"
+    ) {
+
+        applySavedDisplayMode();
+
+    }
+
+}
+
+
+
+if (
+    systemThemeQuery.addEventListener
+) {
+
+    systemThemeQuery.addEventListener(
+        "change",
+        handleSystemThemeChange
+    );
+
+}
+
+
+else {
+
+    systemThemeQuery.addListener(
+        handleSystemThemeChange
+    );
+
+}
+
+
+
+/* ==================================
+   駅情報
+================================== */
+
+const stations = [
+
+    {
+        id: "oyama",
+        name: "小山駅",
+        lat: 36.31163,
+        lon: 139.80599
+    },
+
+
+    {
+        id: "omoigawa",
+        name: "思川駅",
+        lat: 36.3511557,
+        lon: 139.7810172
+    },
+
+
+    {
+        id: "tochigi",
+        name: "栃木駅",
+        lat: 36.371797,
+        lon: 139.731088
+    },
+
+
+    {
+        id: "ohirashita",
+        name: "大平下駅",
+        lat: 36.341166,
+        lon: 139.700833
+    },
+
+
+    {
+        id: "iwafune",
+        name: "岩舟駅",
+        lat: 36.323583,
+        lon: 139.660944
+    },
+
+
+    {
+        id: "sano",
+        name: "佐野駅",
+        lat: 36.316633,
+        lon: 139.578992
+    },
+
+
+    {
+        id: "tomita",
+        name: "富田駅",
+        lat: 36.3162158,
+        lon: 139.5288003
+    },
+
+
+    {
+        id: "ashikaga_flower_park",
+        name: "あしかがフラワーパーク駅",
+        lat: 36.31516,
+        lon: 139.51839
+    },
+
+
+    {
+        id: "ashikaga",
+        name: "足利駅",
+        lat: 36.332053,
+        lon: 139.456047
+    },
+
+
+    {
+        id: "yamamae",
+        name: "山前駅",
+        lat: 36.34736,
+        lon: 139.41128
+    },
+
+
+    {
+        id: "omata",
+        name: "小俣駅",
+        lat: 36.375217,
+        lon: 139.374044
+    }
+
+];
+
+
+
+/* ==================================
+   時計
+================================== */
+
+function updateClock() {
+
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const seconds =
+        String(
+            now.getSeconds()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const weekdays = [
+
+        "日",
+        "月",
+        "火",
+        "水",
+        "木",
+        "金",
+        "土"
+
+    ];
+
+
+    const weekday =
+        weekdays[
+            now.getDay()
+        ];
+
+
+
+    document.getElementById(
+        "current-date"
+    ).textContent =
+        `${year}/${month}/${day}(${weekday})`;
+
+
+    document.getElementById(
+        "current-time"
+    ).textContent =
+        `${hours}:${minutes}:${seconds}`;
+
+}
+
+
+
+/* ==================================
+   運行情報
+================================== */
+
+async function loadOperationInfo() {
+
+
+    const operationBox =
+        document.getElementById(
+            "operation-info"
+        );
+
+
+    const operationIcon =
+        document.getElementById(
+            "operation-icon"
+        );
+
+
+    const operationStatus =
+        document.getElementById(
+            "operation-status"
+        );
+
+
+    const operationText =
+        document.getElementById(
+            "operation-text"
+        );
+
+
+    const operationUpdated =
+        document.getElementById(
+            "operation-updated"
+        );
+
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/operation",
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "運行情報の取得に失敗しました"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        operationBox.className =
+            "operation-info";
+
+
+
+        if (
+            data.status === "平常運転"
+        ) {
+
+
+            operationBox.classList.add(
+                "normal"
+            );
+
+
+            operationIcon.textContent =
+                "○";
+
+
+            operationStatus.textContent =
+                "平常運転";
+
+
+            operationText.textContent =
+                data.message ||
+                "両毛線は平常通り運転しています。";
+
+        }
+
+
+
+        else if (
+            data.status === "遅延"
+        ) {
+
+
+            operationBox.classList.add(
+                "delay"
+            );
+
+
+            operationIcon.textContent =
+                "△";
+
+
+            operationStatus.textContent =
+                "遅延";
+
+
+            operationText.textContent =
+                data.message ||
+                "両毛線は、一部列車に遅れが出ています。";
+
+        }
+
+
+
+        else if (
+
+            data.status === "運転見合わせ"
+
+            ||
+
+            data.status === "運休"
+
+        ) {
+
+
+            operationBox.classList.add(
+                "suspended"
+            );
+
+
+            operationIcon.textContent =
+                "×";
+
+
+            operationStatus.textContent =
+                data.status;
+
+
+            operationText.textContent =
+                data.message ||
+                "両毛線は、運転を見合わせています。";
+
+        }
+
+
+
+        else {
+
+
+            operationBox.classList.add(
+                "unknown"
+            );
+
+
+            operationIcon.textContent =
+                "－";
+
+
+            operationStatus.textContent =
+                data.status ||
+                "情報取得中";
+
+
+            operationText.textContent =
+                data.message ||
+                "現在、運行情報を取得しています。";
+
+        }
+
+
+
+        if (
+            data.updated
+        ) {
+
+
+            operationUpdated.textContent =
+                "更新：" +
+                data.updated.replace(
+                    /\s*更新\s*$/,
+                    ""
+                );
+
+        }
+
+
+        else {
+
+            operationUpdated.textContent =
+                "";
+
+        }
+
+    }
+
+
+
+    catch (error) {
+
+
+        console.error(
+            "運行情報取得エラー:",
+            error
+        );
+
+
+        operationBox.className =
+            "operation-info unknown";
+
+
+        operationIcon.textContent =
+            "－";
+
+
+        operationStatus.textContent =
+            "情報取得中";
+
+
+        operationText.textContent =
+            "現在、運行情報を取得できません。";
+
+
+        operationUpdated.textContent =
+            "";
+
+    }
+
+}
+
+
+
+/* ==================================
+   運行情報クリック
+================================== */
+
+function openOperationInfo() {
+
+
+    window.open(
+
+        "https://traininfo.jreast.co.jp/train_info/line.aspx?gid=1&lineid=ryomoline",
+
+        "_blank",
+
+        "noopener,noreferrer"
+
+    );
+
+}
+
+
+
+const operationInfo =
+    document.getElementById(
+        "operation-info"
+    );
+
+
+operationInfo.addEventListener(
+    "click",
+    openOperationInfo
+);
+
+
+
+/* ==================================
+   キーボード操作
+================================== */
+
+operationInfo.addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+
+        if (
+
+            event.key === "Enter"
+
+            ||
+
+            event.key === " "
+
+        ) {
+
+
+            event.preventDefault();
+
+
+            openOperationInfo();
+
+        }
+
+    }
+
+);
+
+
+
+/* ==================================
+   設定
+================================== */
+
+function openSettings() {
+
+
+    window.location.href =
+        "/settings";
+
+}
+
+
+
+/* ==================================
+   現在地
+================================== */
+
+function findNearestStation(
+    isDefaultStation = false
+) {
+
+
+    if (
+        !navigator.geolocation
+    ) {
+
+
+        if (!isDefaultStation) {
+
+
+            alert(
+                "このブラウザでは現在地を取得できません。"
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+
+    navigator.geolocation.getCurrentPosition(
+
+
+        function(position) {
+
+
+            const userLat =
+                position.coords.latitude;
+
+
+            const userLon =
+                position.coords.longitude;
+
+
+
+            let nearestStation =
+                null;
+
+
+            let nearestDistance =
+                Infinity;
+
+
+
+            stations.forEach(
+                function(station) {
+
+
+                    const distance =
+                        calculateDistance(
+
+                            userLat,
+                            userLon,
+
+                            station.lat,
+                            station.lon
+
+                        );
+
+
+
+                    if (
+                        distance <
+                        nearestDistance
+                    ) {
+
+
+                        nearestDistance =
+                            distance;
+
+
+                        nearestStation =
+                            station;
+
+                    }
+
+                }
+            );
+
+
+
+            if (
+                nearestStation
+            ) {
+
+
+                openStationPage(
+                    nearestStation.id
+                );
+
+            }
+
+        },
+
+
+
+        function(error) {
+
+
+            console.error(
+                "現在地取得エラー:",
+                error
+            );
+
+
+
+            if (
+                !isDefaultStation
+            ) {
+
+
+                if (
+                    error.code === 1
+                ) {
+
+
+                    alert(
+                        "現在地の取得が許可されていません。"
+                    );
+
+                }
+
+
+                else {
+
+
+                    alert(
+                        "現在地を取得できませんでした。"
+                    );
+
+                }
+
+            }
+
+        },
+
+
+
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 10000,
+
+            maximumAge: 60000
+
+        }
+
+    );
+
+}
+
+
+
+/* ==================================
+   距離計算
+================================== */
+
+function calculateDistance(
+
+    lat1,
+    lon1,
+
+    lat2,
+    lon2
+
+) {
+
+
+    const R =
+        6371;
+
+
+
+    const dLat =
+        (lat2 - lat1)
+        * Math.PI
+        / 180;
+
+
+
+    const dLon =
+        (lon2 - lon1)
+        * Math.PI
+        / 180;
+
+
+
+    const a =
+
+        Math.sin(
+            dLat / 2
+        )
+        *
+        Math.sin(
+            dLat / 2
+        )
+
+        +
+
+        Math.cos(
+            lat1 * Math.PI / 180
+        )
+
+        *
+
+        Math.cos(
+            lat2 * Math.PI / 180
+        )
+
+        *
+
+        Math.sin(
+            dLon / 2
+        )
+        *
+        Math.sin(
+            dLon / 2
+        );
+
+
+
+    const c =
+        2 *
+        Math.atan2(
+
+            Math.sqrt(a),
+
+            Math.sqrt(
+                1 - a
+            )
+
+        );
+
+
+
+    return R * c;
+
+}
+
+
+</script>
+
+</body>
+
+</html>
