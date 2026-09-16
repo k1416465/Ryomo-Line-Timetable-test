@@ -1,0 +1,321 @@
+[
+  {
+    "platform": 1,
+    "time": "06:30",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "06:59",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "07:34",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "07:46",
+    "destination": "桐生",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "08:06",
+    "destination": "桐生",
+    "cars": 4,
+    "note": "終点桐生で高崎行の列車に接続します。"
+  },
+  {
+    "platform": 1,
+    "time": "08:37",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "09:26",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "09:59",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "10:46",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "11:30",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "12:29",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "13:29",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "14:29",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "15:29",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "16:31",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "17:14",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "17:54",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "18:27",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "18:58",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "19:30",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "20:01",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "20:34",
+    "destination": "高崎",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "21:14",
+    "destination": "高崎",
+    "cars": 4
+  },
+  {
+    "platform": 1,
+    "time": "21:58",
+    "destination": "高崎",
+    "cars": 4,
+    "note": "桐生より先へ行く最後の列車です。"
+  },
+  {
+    "platform": 1,
+    "time": "22:46",
+    "destination": "桐生",
+    "cars": 6
+  },
+  {
+    "platform": 1,
+    "time": "23:38",
+    "destination": "桐生",
+    "cars": 4,
+    "note": "最終電車です。"
+  },
+  {
+    "platform": 2,
+    "time": "05:48",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "06:22",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "06:43",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "07:00",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "07:34",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "08:19",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "08:40",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "09:25",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "09:58",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "10:58",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "11:57",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "12:57",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "13:57",
+    "destination": "小山",
+    "cars": 4,
+    "note": "小山駅9番線に到着します。"
+  },
+  {
+    "platform": 2,
+    "time": "14:57",
+    "destination": "小山",
+    "cars": 4,
+    "note": "小山駅6番線に到着します。"
+  },
+  {
+    "platform": 2,
+    "time": "15:57",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "16:30",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "17:10",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "17:53",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "18:26",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "18:55",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "19:26",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "20:01",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "20:30",
+    "destination": "小山",
+    "cars": 4
+  },
+  {
+    "platform": 2,
+    "time": "21:13",
+    "destination": "小山",
+    "cars": 6
+  },
+  {
+    "platform": 2,
+    "time": "21:53",
+    "destination": "小山",
+    "cars": 4,
+    "note": "栃木で南栗橋行最終電車にお乗り換えできます。"
+  },
+  {
+    "platform": 2,
+    "time": "22:58",
+    "destination": "小山",
+    "cars": 6,
+    "note": "最終電車です。小山駅6番線に到着します。"
+  }
+]
