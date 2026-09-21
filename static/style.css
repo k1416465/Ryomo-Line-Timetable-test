@@ -281,6 +281,20 @@ body {
     border-radius: 18px;
 
     background: #171509;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.operation-info:hover {
+    transform: translateY(-3px);
+}
+
+.operation-info:active {
+    transform: scale(0.98);
 }
 
 
@@ -296,7 +310,7 @@ body {
 
     border-radius: 12px;
 
-    background: #ffffff;
+    background: transparent;
 
     display: flex;
     align-items: center;
@@ -309,24 +323,52 @@ body {
     transform: translateY(-7px);
 
     position: relative;
+
+    overflow: hidden;
 }
 
 
 /* ==================================
-    ○アイコン
+    CSSで○を生成しない
 ================================== */
 
 .operation-icon::after {
-    content: "";
+    content: none !important;
 
-    width: 27px;
-    height: 27px;
+    display: none !important;
 
-    border: 5px solid currentColor;
+    width: 0 !important;
+    height: 0 !important;
 
-    border-radius: 50%;
+    border: none !important;
+}
+
+
+/* ==================================
+    運行情報アイコン画像
+================================== */
+
+.operation-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
 
     display: block;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
+
+.operation-icon-image {
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
 }
 
 
@@ -467,6 +509,39 @@ body {
 
 
 /* ==================================
+    その他の路線
+================================== */
+
+/*
+    カード全体の背景は変更しない。
+    枠とタイトル部分だけ #808080 にする。
+*/
+
+#other-operation-info {
+    border-color: #808080 !important;
+}
+
+
+/* 「その他の路線」のタイトル部分 */
+#other-operation-info .operation-title {
+    background: #808080 !important;
+    color: #ffffff !important;
+}
+
+
+/* その他の路線の更新時刻 */
+#other-operation-info .operation-updated {
+    color: #aaaaaa;
+}
+
+
+/* その他の路線の矢印 */
+#other-operation-info .other-operation-arrow {
+    color: inherit;
+}
+
+
+/* ==================================
     ホームフッター
 ================================== */
 
@@ -575,13 +650,6 @@ body {
         height: 48px;
 
         transform: translateY(-6px);
-    }
-
-    .operation-icon::after {
-        width: 23px;
-        height: 23px;
-
-        border-width: 4px;
     }
 
     .operation-title {
@@ -727,13 +795,6 @@ body {
         transform: translateY(-5px);
     }
 
-    .operation-icon::after {
-        width: 18px;
-        height: 18px;
-
-        border-width: 3px;
-    }
-
     .operation-title {
         padding: 4px 8px;
 
@@ -826,13 +887,6 @@ body {
 
     .operation-icon {
         transform: translateY(-5px);
-    }
-
-    .operation-icon::after {
-        width: 17px;
-        height: 17px;
-
-        border-width: 3px;
     }
 
     .operation-status {
@@ -1933,6 +1987,103 @@ body {
 
 
 /* ==================================================
+    その他の路線アイコン
+================================================== */
+
+.other-operation-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
+
+.other-operation-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
+
+
+/* ==================================================
+    その他の路線 矢印
+================================================== */
+
+.other-operation-arrow {
+    margin-left: auto;
+
+    padding-left: 10px;
+
+    font-size: 24px;
+
+    color: inherit;
+
+    opacity: 0.65;
+}
+
+
+/* ==================================================
+    その他の路線 タイトル
+================================================== */
+
+/*
+    ここが今回の重要部分です。
+
+    ダークモード：
+    タイトル背景 #808080
+    タイトル文字 #ffffff
+
+    ライトモード：
+    タイトル背景 #808080
+    タイトル文字 #ffffff
+
+    !important を付けて、上にある
+    .operation-title や
+    .operation-info .operation-title
+    の指定に負けないようにしています。
+*/
+
+#other-operation-info .operation-title,
+body.light-mode #other-operation-info .operation-title {
+    background: #808080 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==================================================
+    その他の路線カード
+================================================== */
+
+/*
+    カード全体はタイトルと別。
+    カード全体の背景色はここでは変更しない。
+*/
+
+#other-operation-info {
+    border-color: #808080 !important;
+}
+
+
+/* ==================================================
     設定画面
 ================================================== */
 
@@ -2489,7 +2640,50 @@ body.light-mode .operation-info .operation-updated {
 /* ===== 運行情報アイコン ===== */
 
 body.light-mode .operation-icon {
-    background: #ffffff;
+    background: transparent !important;
+}
+
+
+/* ==================================================
+    その他の路線 ライトモード
+================================================== */
+
+/*
+    カード全体：
+    白背景
+    グレーの枠
+
+    タイトル部分：
+    グレー #808080
+    白文字
+*/
+
+body.light-mode #other-operation-info {
+    background: #ffffff !important;
+    border-color: #808080 !important;
+    color: #111111 !important;
+}
+
+body.light-mode #other-operation-info .operation-title {
+    background: #808080 !important;
+    color: #ffffff !important;
+}
+
+body.light-mode #other-operation-info .operation-text {
+    color: #111111 !important;
+}
+
+body.light-mode #other-operation-info .operation-updated {
+    color: #666666 !important;
+}
+
+body.light-mode #other-operation-info .other-operation-arrow {
+    color: #111111 !important;
+}
+
+body.light-mode #other-operation-info .other-operation-icon,
+body.light-mode #other-operation-info .other-operation-icon img {
+    background: transparent !important;
 }
 
 
@@ -2881,6 +3075,7 @@ body.light-mode .back-timetable-button:hover {
 
 }
 
+
 /* ==================================================
    戻るボタン
    ダークモード・ライトモード共通
@@ -3010,4 +3205,29 @@ body.light-mode .back-timetable-button:hover {
         white-space: nowrap;
     }
 
+}
+
+
+/* ==================================================
+   最終強制指定
+   「その他の路線」タイトル部分
+================================================== */
+
+/*
+   CSSの他の指定より確実に優先させるため、
+   ファイルの一番最後に置いています。
+*/
+
+#other-operation-info .operation-title {
+    background-color: #808080 !important;
+    color: #ffffff !important;
+}
+
+body.light-mode #other-operation-info .operation-title {
+    background-color: #808080 !important;
+    color: #ffffff !important;
+}
+
+#other-operation-info {
+    border-color: #808080 !important;
 }
