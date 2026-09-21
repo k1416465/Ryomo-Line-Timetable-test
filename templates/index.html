@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 
 <head>
@@ -134,6 +133,315 @@ body.light-mode .notification-badge {
 
 
 /* ==================================
+   運行情報アイコン
+================================== */
+
+.operation-icon {
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+.operation-icon img {
+
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+/* ==================================
+   その他の路線追加部分
+================================== */
+
+.operation-info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+}
+
+
+.operation-info-grid .operation-info {
+
+    min-width: 0;
+
+}
+
+
+.operation-icon-image {
+
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+.other-operation-icon {
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+.other-operation-icon img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+.other-operation-arrow {
+
+    margin-left: auto;
+
+    padding-left: 10px;
+
+    font-size: 24px;
+
+    color: inherit;
+
+    opacity: 0.65;
+
+}
+
+
+/* ==================================
+   その他の路線
+================================== */
+
+#other-operation-info {
+
+    border-color: #808080 !important;
+
+}
+
+
+/*
+   ダークモード
+   背景：#808080
+   文字：#ffffff
+*/
+
+#other-operation-info .operation-title {
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+/* ==================================
+   ダークモード
+================================== */
+
+body:not(.light-mode) #other-operation-info {
+
+    border-color: #808080 !important;
+
+}
+
+
+body:not(.light-mode) #other-operation-info .operation-title {
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+/* ==================================
+   ライトモード
+================================== */
+
+body.light-mode #other-operation-info {
+
+    background: #ffffff !important;
+
+    border-color: #808080 !important;
+
+    color: #111111 !important;
+
+}
+
+
+/*
+   ライトモードでは
+   白寄りのグレー＋黒文字
+*/
+
+body.light-mode #other-operation-info .operation-title {
+
+    background: #d6d6d6 !important;
+
+    background-color: #d6d6d6 !important;
+
+    color: #000000 !important;
+
+}
+
+
+/* ==================================
+   ライトモードの文字
+================================== */
+
+body.light-mode #other-operation-info .operation-text {
+
+    color: #111111 !important;
+
+}
+
+
+body.light-mode #other-operation-info .operation-updated {
+
+    color: #666666 !important;
+
+}
+
+
+body.light-mode #other-operation-info .other-operation-arrow {
+
+    color: #111111 !important;
+
+}
+
+
+/* ==================================
+   ライトモードのアイコン
+================================== */
+
+body.light-mode #other-operation-info .other-operation-icon {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+body.light-mode #other-operation-info .other-operation-icon img {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+
+/* ==================================
+   タイトル最終指定
+================================== */
+
+#other-operation-info .operation-title {
+
+    display: inline-block !important;
+
+    padding: 6px 14px !important;
+
+    border-radius: 7px !important;
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    color: #ffffff !important;
+
+    font-weight: 900 !important;
+
+}
+
+
+/* ==================================
+   ライトモードでは
+   白寄りのグレー＋黒文字
+================================== */
+
+body.light-mode #other-operation-info .operation-title {
+
+    background: #d6d6d6 !important;
+
+    background-color: #d6d6d6 !important;
+
+    color: #000000 !important;
+
+}
+
+
+/* ==================================
    タブレット
 ================================== */
 
@@ -153,6 +461,35 @@ body.light-mode .notification-badge {
 
         width: 48px;
         height: 48px;
+
+    }
+
+
+    .operation-info-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #other-operation-info .operation-title {
+
+        background: #808080 !important;
+
+        background-color: #808080 !important;
+
+        color: #ffffff !important;
+
+    }
+
+
+    body.light-mode #other-operation-info .operation-title {
+
+        background: #d6d6d6 !important;
+
+        background-color: #d6d6d6 !important;
+
+        color: #000000 !important;
 
     }
 
@@ -197,6 +534,71 @@ body.light-mode .notification-badge {
 
     }
 
+
+    .operation-info-grid {
+
+        gap: 10px;
+
+    }
+
+
+    .operation-icon-image {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+
+    .operation-icon {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+
+    .operation-icon img {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+
+    .other-operation-icon {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+
+    #other-operation-info .operation-title {
+
+        padding: 4px 8px !important;
+
+        background: #808080 !important;
+
+        background-color: #808080 !important;
+
+        color: #ffffff !important;
+
+        font-size: 12px !important;
+
+    }
+
+
+    body.light-mode #other-operation-info .operation-title {
+
+        background: #d6d6d6 !important;
+
+        background-color: #d6d6d6 !important;
+
+        color: #000000 !important;
+
+    }
+
 }
 
 
@@ -221,6 +623,60 @@ body.light-mode .notification-badge {
 
     }
 
+
+    .operation-icon {
+
+        width: 44px;
+        height: 44px;
+
+    }
+
+
+    .operation-icon img {
+
+        width: 44px;
+        height: 44px;
+
+    }
+
+
+    .operation-icon-image {
+
+        width: 44px;
+        height: 44px;
+
+    }
+
+
+    .other-operation-icon {
+
+        width: 44px;
+        height: 44px;
+
+    }
+
+
+    #other-operation-info .operation-title {
+
+        background: #808080 !important;
+
+        background-color: #808080 !important;
+
+        color: #ffffff !important;
+
+    }
+
+
+    body.light-mode #other-operation-info .operation-title {
+
+        background: #d6d6d6 !important;
+
+        background-color: #d6d6d6 !important;
+
+        color: #000000 !important;
+
+    }
+
 }
 
 </style>
@@ -228,21 +684,25 @@ body.light-mode .notification-badge {
 
 <!-- Google Analytics -->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKW0P57706"></script>
+<script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-CKW0P57706"
+></script>
 
 <script>
 
-    window.dataLayer = window.dataLayer || [];
+window.dataLayer =
+    window.dataLayer || [];
 
-    function gtag() {
+function gtag() {
 
-        dataLayer.push(arguments);
+    dataLayer.push(arguments);
 
-    }
+}
 
-    gtag("js", new Date());
+gtag("js", new Date());
 
-    gtag("config", "G-CKW0P57706");
+gtag("config", "G-CKW0P57706");
 
 </script>
 
@@ -250,7 +710,6 @@ body.light-mode .notification-badge {
 
 
 <body onload="initializeHome()">
-
 
 <div class="home">
 
@@ -261,11 +720,9 @@ body.light-mode .notification-badge {
 
 <header class="home-header">
 
-
 <h1>
     両毛線 時刻表
 </h1>
-
 
 <div class="english-title">
     Ryomo Line Timetable
@@ -293,16 +750,13 @@ body.light-mode .notification-badge {
     alt="お知らせ"
 >
 
-
 <span
     id="notification-badge"
     class="notification-badge"
     hidden
 ></span>
 
-
 </button>
-
 
 
 <!-- 設定ボタン -->
@@ -321,12 +775,9 @@ body.light-mode .notification-badge {
 
 </button>
 
-
 </div>
 
-
 </header>
-
 
 
 <!-- ==================================
@@ -335,18 +786,13 @@ body.light-mode .notification-badge {
 
 <div class="current-info">
 
-
 <span id="current-date"></span>
-
 
 <div class="date-divider"></div>
 
-
 <span id="current-time"></span>
 
-
 </div>
-
 
 
 <!-- ==================================
@@ -358,7 +804,6 @@ body.light-mode .notification-badge {
 表示する駅を選択してください
 
 </div>
-
 
 
 <!-- ==================================
@@ -385,19 +830,15 @@ body.light-mode .notification-badge {
 
 </div>
 
-
 <div class="station-name">
     栃木駅
 </div>
-
 
 <div class="station-en">
     Tochigi Station
 </div>
 
-
 </a>
-
 
 
 <!-- 佐野駅 -->
@@ -417,19 +858,15 @@ body.light-mode .notification-badge {
 
 </div>
 
-
 <div class="station-name">
     佐野駅
 </div>
-
 
 <div class="station-en">
     Sano Station
 </div>
 
-
 </a>
-
 
 
 <!-- 足利駅 -->
@@ -449,19 +886,15 @@ body.light-mode .notification-badge {
 
 </div>
 
-
 <div class="station-name">
     足利駅
 </div>
-
 
 <div class="station-en">
     Ashikaga Station
 </div>
 
-
 </a>
-
 
 
 <!-- 現在地 -->
@@ -481,26 +914,28 @@ body.light-mode .notification-badge {
 
 </div>
 
-
 <div class="station-name">
     現在地
 </div>
-
 
 <div class="station-en">
     Current Location
 </div>
 
-
 </button>
-
 
 </main>
 
 
-
 <!-- ==================================
      運行情報
+================================== -->
+
+<div class="operation-info-grid">
+
+
+<!-- ==================================
+     両毛線
 ================================== -->
 
 <section
@@ -511,22 +946,25 @@ body.light-mode .notification-badge {
     aria-label="両毛線の運行情報を開く"
 >
 
-
 <div
     class="operation-icon"
     id="operation-icon"
 >
-    ○
+
+<img
+    id="operation-icon-image"
+    src="{{ url_for('static', filename='icons/operation-normal.png') }}"
+    alt="平常運転"
+>
+
 </div>
 
 
 <div class="operation-content">
 
-
 <div class="operation-title">
-    運行情報
+    両毛線
 </div>
-
 
 <div
     class="operation-status"
@@ -535,14 +973,12 @@ body.light-mode .notification-badge {
     平常運転
 </div>
 
-
 <div
     class="operation-text"
     id="operation-text"
 >
     両毛線は平常通り運転しています。
 </div>
-
 
 <div
     class="operation-updated"
@@ -551,15 +987,63 @@ body.light-mode .notification-badge {
     情報取得中
 </div>
 
-
 </div>
-
 
 </section>
 
 
+<!-- ==================================
+     その他の路線
+================================== -->
+
+<section
+    class="operation-info"
+    id="other-operation-info"
+    role="link"
+    tabindex="0"
+    aria-label="その他の路線の運行情報を開く"
+>
+
+<div class="other-operation-icon">
+
+<img
+    src="{{ url_for('static', filename='icons/operation-info.png') }}"
+    alt="その他の路線"
+>
+
 </div>
 
+
+<div class="operation-content">
+
+<div class="operation-title">
+    その他の路線
+</div>
+
+<div class="operation-status">
+    関東エリア
+</div>
+
+<div class="operation-text">
+    他の路線の運行情報を確認
+</div>
+
+<div class="operation-updated">
+    Other Lines
+</div>
+
+</div>
+
+
+<div class="other-operation-arrow">
+    →
+</div>
+
+</section>
+
+</div>
+
+</div>
 
 
 <script>
@@ -571,7 +1055,6 @@ body.light-mode .notification-badge {
 
 const notificationReadKey =
     "ryomoNotificationReadIds";
-
 
 
 /* ==================================
@@ -617,7 +1100,6 @@ function getReadNotificationIds() {
 }
 
 
-
 /* ==================================
    既読お知らせID保存
 ================================== */
@@ -656,7 +1138,6 @@ function setReadNotificationIds(
 }
 
 
-
 /* ==================================
    未読件数表示用数字
 ================================== */
@@ -677,7 +1158,6 @@ function getNotificationCountText(
     return String(number);
 
 }
-
 
 
 /* ==================================
@@ -765,6 +1245,7 @@ async function updateNotificationBadge() {
 
                     }
 
+
                     return !readIds.includes(
                         String(item.id)
                     );
@@ -773,11 +1254,6 @@ async function updateNotificationBadge() {
 
             ).length;
 
-
-
-        /* ==================================
-           未読あり
-        ================================== */
 
         if (
             unreadCount > 0
@@ -790,32 +1266,16 @@ async function updateNotificationBadge() {
 
             badge.hidden = false;
 
-            /*
-             * hidden属性だけでなく
-             * displayも明示的に戻す
-             */
             badge.style.display = "flex";
 
         }
-
-
-
-        /* ==================================
-           未読なし
-        ================================== */
 
         else {
 
             badge.textContent = "";
 
-            /*
-             * hidden属性
-             */
             badge.hidden = true;
 
-            /*
-             * 赤い丸そのものを完全に非表示
-             */
             badge.style.display = "none";
 
         }
@@ -835,15 +1295,11 @@ async function updateNotificationBadge() {
 
         badge.hidden = true;
 
-        /*
-         * エラー時も赤い丸を表示しない
-         */
         badge.style.display = "none";
 
     }
 
 }
-
 
 
 /* ==================================
@@ -858,13 +1314,11 @@ function openNotifications() {
 }
 
 
-
 /* ==================================
    お知らせ未読件数確認
 ================================== */
 
 updateNotificationBadge();
-
 
 
 /* ==================================
@@ -880,14 +1334,10 @@ setInterval(
 );
 
 
-
 /* ==================================
    既読状態変更を監視
 ================================== */
 
-/*
- * 別タブなどで既読状態が変更された場合
- */
 window.addEventListener(
 
     "storage",
@@ -908,14 +1358,10 @@ window.addEventListener(
 );
 
 
-
 /*
  * お知らせ画面からホームに戻った場合
- *
- * ブラウザの戻る・進むや
- * ページキャッシュから復帰した場合にも
- * 未読件数を再確認する
  */
+
 window.addEventListener(
 
     "pageshow",
@@ -929,10 +1375,10 @@ window.addEventListener(
 );
 
 
-
 /*
  * タブを再び表示した場合
  */
+
 document.addEventListener(
 
     "visibilitychange",
@@ -953,11 +1399,11 @@ document.addEventListener(
 );
 
 
-
 /*
  * ブラウザの別画面から
  * ホームに戻った場合にも再確認
  */
+
 window.addEventListener(
 
     "focus",
@@ -971,7 +1417,6 @@ window.addEventListener(
 );
 
 
-
 /* ==================================
    ホーム初期化
 ================================== */
@@ -979,17 +1424,8 @@ window.addEventListener(
 function initializeHome() {
 
 
-    /* ==================================
-       表示モード
-    ================================== */
-
     applySavedDisplayMode();
 
-
-
-    /* ==================================
-       強制的にホームを表示する場合
-    ================================== */
 
     const urlParams =
         new URLSearchParams(
@@ -1001,13 +1437,7 @@ function initializeHome() {
         urlParams.get("home") === "1";
 
 
-    /*
-     * ?home=1 の場合は
-     * デフォルト駅への自動移動を行わない
-     */
-
     if (forceHome) {
-
 
         window.history.replaceState(
             null,
@@ -1018,11 +1448,6 @@ function initializeHome() {
     }
 
 
-
-    /* ==================================
-       時計開始
-    ================================== */
-
     updateClock();
 
 
@@ -1032,11 +1457,6 @@ function initializeHome() {
     );
 
 
-
-    /* ==================================
-       運行情報
-    ================================== */
-
     loadOperationInfo();
 
 
@@ -1045,11 +1465,6 @@ function initializeHome() {
         60000
     );
 
-
-
-    /* ==================================
-       デフォルト駅
-    ================================== */
 
     if (forceHome) {
 
@@ -1064,7 +1479,6 @@ function initializeHome() {
         ) || "none";
 
 
-
     if (
         defaultStation === "none"
     ) {
@@ -1072,7 +1486,6 @@ function initializeHome() {
         return;
 
     }
-
 
 
     const stationIds = [
@@ -1102,7 +1515,6 @@ function initializeHome() {
     ];
 
 
-
     if (
         stationIds.includes(
             defaultStation
@@ -1118,7 +1530,6 @@ function initializeHome() {
     }
 
 
-
     if (
         defaultStation === "nearest"
     ) {
@@ -1132,7 +1543,6 @@ function initializeHome() {
     }
 
 }
-
 
 
 /* ==================================
@@ -1152,7 +1562,6 @@ function getTimetableFormat() {
 }
 
 
-
 /* ==================================
    駅ページを開く
 ================================== */
@@ -1161,10 +1570,8 @@ function openStationPage(
     stationId
 ) {
 
-
     const timetableFormat =
         getTimetableFormat();
-
 
 
     if (
@@ -1183,14 +1590,12 @@ function openStationPage(
     }
 
 
-
     window.location.href =
         "/station/"
         +
         stationId;
 
 }
-
 
 
 /* ==================================
@@ -1202,7 +1607,6 @@ function openStation(
     stationId
 ) {
 
-
     event.preventDefault();
 
 
@@ -1213,13 +1617,11 @@ function openStation(
 }
 
 
-
 /* ==================================
    表示モード
 ================================== */
 
 function applySavedDisplayMode() {
-
 
     const displayMode =
         localStorage.getItem(
@@ -1231,7 +1633,6 @@ function applySavedDisplayMode() {
         false;
 
 
-
     if (
         displayMode === "light"
     ) {
@@ -1240,7 +1641,6 @@ function applySavedDisplayMode() {
             true;
 
     }
-
 
     else if (
         displayMode === "system"
@@ -1254,14 +1654,12 @@ function applySavedDisplayMode() {
     }
 
 
-
     document.body.classList.toggle(
         "light-mode",
         useLightMode
     );
 
 }
-
 
 
 /* ==================================
@@ -1275,7 +1673,6 @@ const systemThemeQuery =
 
 
 function handleSystemThemeChange() {
-
 
     const currentMode =
         localStorage.getItem(
@@ -1294,7 +1691,6 @@ function handleSystemThemeChange() {
 }
 
 
-
 if (
     systemThemeQuery.addEventListener
 ) {
@@ -1306,7 +1702,6 @@ if (
 
 }
 
-
 else {
 
     systemThemeQuery.addListener(
@@ -1314,7 +1709,6 @@ else {
     );
 
 }
-
 
 
 /* ==================================
@@ -1413,13 +1807,11 @@ const stations = [
 ];
 
 
-
 /* ==================================
    時計
 ================================== */
 
 function updateClock() {
-
 
     const now =
         new Date();
@@ -1493,7 +1885,6 @@ function updateClock() {
         ];
 
 
-
     document.getElementById(
         "current-date"
     ).textContent =
@@ -1508,13 +1899,11 @@ function updateClock() {
 }
 
 
-
 /* ==================================
    運行情報
 ================================== */
 
 async function loadOperationInfo() {
-
 
     const operationBox =
         document.getElementById(
@@ -1522,9 +1911,9 @@ async function loadOperationInfo() {
         );
 
 
-    const operationIcon =
+    const operationIconImage =
         document.getElementById(
-            "operation-icon"
+            "operation-icon-image"
         );
 
 
@@ -1546,9 +1935,7 @@ async function loadOperationInfo() {
         );
 
 
-
     try {
-
 
         const response =
             await fetch(
@@ -1576,19 +1963,21 @@ async function loadOperationInfo() {
             "operation-info";
 
 
-
         if (
             data.status === "平常運転"
         ) {
-
 
             operationBox.classList.add(
                 "normal"
             );
 
 
-            operationIcon.textContent =
-                "○";
+            operationIconImage.src =
+                "{{ url_for('static', filename='icons/operation-normal.png') }}";
+
+
+            operationIconImage.alt =
+                "平常運転";
 
 
             operationStatus.textContent =
@@ -1602,19 +1991,21 @@ async function loadOperationInfo() {
         }
 
 
-
         else if (
             data.status === "遅延"
         ) {
-
 
             operationBox.classList.add(
                 "delay"
             );
 
 
-            operationIcon.textContent =
-                "△";
+            operationIconImage.src =
+                "{{ url_for('static', filename='icons/operation-delay.png') }}";
+
+
+            operationIconImage.alt =
+                "遅延";
 
 
             operationStatus.textContent =
@@ -1628,7 +2019,6 @@ async function loadOperationInfo() {
         }
 
 
-
         else if (
 
             data.status === "運転見合わせ"
@@ -1639,14 +2029,17 @@ async function loadOperationInfo() {
 
         ) {
 
-
             operationBox.classList.add(
                 "suspended"
             );
 
 
-            operationIcon.textContent =
-                "×";
+            operationIconImage.src =
+                "{{ url_for('static', filename='icons/operation-suspended.png') }}";
+
+
+            operationIconImage.alt =
+                data.status;
 
 
             operationStatus.textContent =
@@ -1660,17 +2053,19 @@ async function loadOperationInfo() {
         }
 
 
-
         else {
-
 
             operationBox.classList.add(
                 "unknown"
             );
 
 
-            operationIcon.textContent =
-                "－";
+            operationIconImage.src =
+                "{{ url_for('static', filename='icons/operation-info.png') }}";
+
+
+            operationIconImage.alt =
+                "情報取得中";
 
 
             operationStatus.textContent =
@@ -1685,21 +2080,20 @@ async function loadOperationInfo() {
         }
 
 
-
         if (
             data.updated
         ) {
 
-
             operationUpdated.textContent =
                 "更新：" +
-                data.updated.replace(
+                String(
+                    data.updated
+                ).replace(
                     /\s*更新\s*$/,
                     ""
                 );
 
         }
-
 
         else {
 
@@ -1711,9 +2105,7 @@ async function loadOperationInfo() {
     }
 
 
-
     catch (error) {
-
 
         console.error(
             "運行情報取得エラー:",
@@ -1725,8 +2117,12 @@ async function loadOperationInfo() {
             "operation-info unknown";
 
 
-        operationIcon.textContent =
-            "－";
+        operationIconImage.src =
+            "{{ url_for('static', filename='icons/operation-info.png') }}";
+
+
+        operationIconImage.alt =
+            "情報取得中";
 
 
         operationStatus.textContent =
@@ -1745,13 +2141,11 @@ async function loadOperationInfo() {
 }
 
 
-
 /* ==================================
-   運行情報クリック
+   両毛線 運行情報クリック
 ================================== */
 
 function openOperationInfo() {
-
 
     window.open(
 
@@ -1766,7 +2160,6 @@ function openOperationInfo() {
 }
 
 
-
 const operationInfo =
     document.getElementById(
         "operation-info"
@@ -1779,9 +2172,8 @@ operationInfo.addEventListener(
 );
 
 
-
 /* ==================================
-   キーボード操作
+   両毛線 キーボード操作
 ================================== */
 
 operationInfo.addEventListener(
@@ -1789,7 +2181,6 @@ operationInfo.addEventListener(
     "keydown",
 
     function(event) {
-
 
         if (
 
@@ -1801,9 +2192,7 @@ operationInfo.addEventListener(
 
         ) {
 
-
             event.preventDefault();
-
 
             openOperationInfo();
 
@@ -1814,6 +2203,60 @@ operationInfo.addEventListener(
 );
 
 
+/* ==================================
+   その他の路線
+================================== */
+
+function openOtherOperationInfo() {
+
+    window.location.href =
+        "/other-operation";
+
+}
+
+
+const otherOperationInfo =
+    document.getElementById(
+        "other-operation-info"
+    );
+
+
+otherOperationInfo.addEventListener(
+    "click",
+    openOtherOperationInfo
+);
+
+
+/* ==================================
+   その他の路線 キーボード操作
+================================== */
+
+otherOperationInfo.addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+        if (
+
+            event.key === "Enter"
+
+            ||
+
+            event.key === " "
+
+        ) {
+
+            event.preventDefault();
+
+            openOtherOperationInfo();
+
+        }
+
+    }
+
+);
+
 
 /* ==================================
    設定
@@ -1821,12 +2264,10 @@ operationInfo.addEventListener(
 
 function openSettings() {
 
-
     window.location.href =
         "/settings";
 
 }
-
 
 
 /* ==================================
@@ -1837,14 +2278,11 @@ function findNearestStation(
     isDefaultStation = false
 ) {
 
-
     if (
         !navigator.geolocation
     ) {
 
-
         if (!isDefaultStation) {
-
 
             alert(
                 "このブラウザでは現在地を取得できません。"
@@ -1852,18 +2290,14 @@ function findNearestStation(
 
         }
 
-
         return;
 
     }
 
 
-
     navigator.geolocation.getCurrentPosition(
 
-
         function(position) {
-
 
             const userLat =
                 position.coords.latitude;
@@ -1871,7 +2305,6 @@ function findNearestStation(
 
             const userLon =
                 position.coords.longitude;
-
 
 
             let nearestStation =
@@ -1882,10 +2315,8 @@ function findNearestStation(
                 Infinity;
 
 
-
             stations.forEach(
                 function(station) {
-
 
                     const distance =
                         calculateDistance(
@@ -1899,12 +2330,10 @@ function findNearestStation(
                         );
 
 
-
                     if (
                         distance <
                         nearestDistance
                     ) {
-
 
                         nearestDistance =
                             distance;
@@ -1919,11 +2348,9 @@ function findNearestStation(
             );
 
 
-
             if (
                 nearestStation
             ) {
-
 
                 openStationPage(
                     nearestStation.id
@@ -1934,9 +2361,7 @@ function findNearestStation(
         },
 
 
-
         function(error) {
-
 
             console.error(
                 "現在地取得エラー:",
@@ -1944,16 +2369,13 @@ function findNearestStation(
             );
 
 
-
             if (
                 !isDefaultStation
             ) {
 
-
                 if (
                     error.code === 1
                 ) {
-
 
                     alert(
                         "現在地の取得が許可されていません。"
@@ -1961,9 +2383,7 @@ function findNearestStation(
 
                 }
 
-
                 else {
-
 
                     alert(
                         "現在地を取得できませんでした。"
@@ -1974,7 +2394,6 @@ function findNearestStation(
             }
 
         },
-
 
 
         {
@@ -1992,7 +2411,6 @@ function findNearestStation(
 }
 
 
-
 /* ==================================
    距離計算
 ================================== */
@@ -2007,10 +2425,8 @@ function calculateDistance(
 
 ) {
 
-
     const R =
         6371;
-
 
 
     const dLat =
@@ -2019,12 +2435,10 @@ function calculateDistance(
         / 180;
 
 
-
     const dLon =
         (lon2 - lon1)
         * Math.PI
         / 180;
-
 
 
     const a =
@@ -2060,7 +2474,6 @@ function calculateDistance(
         );
 
 
-
     const c =
         2 *
         Math.atan2(
@@ -2074,11 +2487,9 @@ function calculateDistance(
         );
 
 
-
     return R * c;
 
 }
-
 
 </script>
 

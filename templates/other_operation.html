@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>その他の路線 運行情報</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+    background: #080909;
+
+    color: #ffffff;
+
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        "Yu Gothic",
+        sans-serif;
+
+}
+
+
+body {
+
+    padding: 20px;
+
+    overflow-x: hidden;
+
+}
+
+
+.page {
+
+    width: min(
+        760px,
+        100%
+    );
+
+    margin: 0 auto;
+
+}
+
+
+/* ==================================================
+   ヘッダー
+================================================== */
+
+.header {
+
+    position: relative;
+
+    margin-bottom: 24px;
+
+    text-align: center;
+
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    line-height: 1.3;
+
+}
+
+
+.header-en {
+
+    margin-top: 5px;
+
+    font-size: 15px;
+
+    opacity: 0.65;
+
+}
+
+
+.back-button {
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #262626;
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.back-button:hover {
+
+    filter: brightness(1.15);
+
+}
+
+
+/* ==================================================
+   更新情報
+================================================== */
+
+.update-info {
+
+    margin-bottom: 14px;
+
+    text-align: right;
+
+    font-size: 12px;
+
+    color: #999999;
+
+}
+
+
+/* ==================================================
+   路線一覧
+================================================== */
+
+.line-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+/* ==================================================
+   路線カード
+================================================== */
+
+.line-item {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid #333333;
+
+    border-radius: 12px;
+
+    background: #151515;
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
+
+}
+
+
+/* ==================================================
+   路線ヘッダー
+================================================== */
+
+.line-header {
+
+    width: 100%;
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 8px 14px 8px 10px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+
+/* ==================================================
+   路線カラー
+================================================== */
+
+.line-color {
+
+    width: 12px;
+
+    min-width: 12px;
+
+    align-self: stretch;
+
+    margin-right: 12px;
+
+    border-radius: 4px;
+
+}
+
+
+/* ==================================================
+   アイコン
+================================================== */
+
+.line-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+    min-width: 46px;
+
+    margin-right: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.line-icon img {
+
+    width: 46px;
+
+    height: 46px;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: transparent;
+
+    border: none;
+
+}
+
+
+/* ==================================================
+   路線名
+================================================== */
+
+.line-name {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.line-name-ja {
+
+    display: block;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    line-height: 1.35;
+
+}
+
+
+.line-name-en {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    line-height: 1.3;
+
+    opacity: 0.6;
+
+}
+
+
+/* ==================================================
+   詳細
+================================================== */
+
+.line-detail {
+
+    display: none;
+
+    padding:
+        0
+        18px
+        18px
+        88px;
+
+}
+
+
+.line-item.open
+.line-detail {
+
+    display: block;
+
+}
+
+
+.line-message {
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+}
+
+
+.line-updated {
+
+    margin-top: 9px;
+
+    font-size: 12px;
+
+    color: #888888;
+
+}
+
+
+/* ==================================================
+   状態ごとのカード枠
+================================================== */
+
+.line-item.status-normal {
+
+    border-color: #333333;
+
+}
+
+
+.line-item.status-delay {
+
+    border-color: rgba(
+        245,
+        139,
+        30,
+        0.65
+    );
+
+}
+
+
+.line-item.status-suspended {
+
+    border-color: rgba(
+        225,
+        31,
+        38,
+        0.75
+    );
+
+}
+
+
+.line-item.status-info {
+
+    border-color: #555555;
+
+}
+
+
+/* ==================================================
+   読み込み中
+================================================== */
+
+.loading {
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #999999;
+
+    font-size: 14px;
+
+}
+
+
+/* ==================================================
+   ホームボタン
+================================================== */
+
+.home-button-area {
+
+    margin-top: 22px;
+
+}
+
+
+.home-button {
+
+    width: 100%;
+
+    min-height: 50px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #333333;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+.home-button:hover {
+
+    filter: brightness(1.15);
+
+}
+
+
+/* ==================================================
+   ライトモード
+================================================== */
+
+body.light-mode {
+
+    background: #f5f5f5;
+
+    color: #111111;
+
+}
+
+
+body.light-mode
+.back-button {
+
+    background: #e5e5e5;
+
+    color: #111111;
+
+}
+
+
+body.light-mode
+.line-item {
+
+    border-color: #cccccc;
+
+    background: #ffffff;
+
+}
+
+
+/* ==================================================
+   ライトモード
+   運転見合わせ・運休は赤枠
+================================================== */
+
+body.light-mode
+.line-item.status-suspended {
+
+    border-color: #ff3b30 !important;
+
+}
+
+
+body.light-mode
+.line-header {
+
+    color: #111111;
+
+}
+
+
+body.light-mode
+.line-updated {
+
+    color: #777777;
+
+}
+
+
+body.light-mode
+.home-button {
+
+    background: #dddddd;
+
+    color: #111111;
+
+}
+
+
+/* ==================================================
+   タブレット
+================================================== */
+
+@media (
+    max-width: 800px
+) {
+
+    body {
+
+        padding: 16px;
+
+    }
+
+
+    .header h1 {
+
+        font-size: 24px;
+
+    }
+
+
+    .line-name-ja {
+
+        font-size: 17px;
+
+    }
+
+}
+
+
+/* ==================================================
+   スマートフォン
+================================================== */
+
+@media (
+    max-width: 600px
+) {
+
+    body {
+
+        padding: 12px;
+
+    }
+
+
+    .header {
+
+        padding-top: 4px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .header h1 {
+
+        padding-left: 42px;
+
+        padding-right: 42px;
+
+        font-size: 21px;
+
+    }
+
+
+    .header-en {
+
+        font-size: 12px;
+
+    }
+
+
+    .back-button {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 20px;
+
+    }
+
+
+    .line-header {
+
+        min-height: 62px;
+
+        padding:
+            7px
+            10px
+            7px
+            8px;
+
+    }
+
+
+    .line-color {
+
+        width: 10px;
+
+        min-width: 10px;
+
+        margin-right: 9px;
+
+    }
+
+
+    .line-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        margin-right: 9px;
+
+    }
+
+
+    .line-icon img {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .line-name-ja {
+
+        font-size: 15px;
+
+    }
+
+
+    .line-name-en {
+
+        margin-top: 1px;
+
+        font-size: 10px;
+
+    }
+
+
+    .line-detail {
+
+        padding:
+            0
+            13px
+            14px
+            69px;
+
+    }
+
+
+    .line-message {
+
+        font-size: 13px;
+
+        line-height: 1.65;
+
+    }
+
+
+    .line-updated {
+
+        font-size: 11px;
+
+    }
+
+}
+
+
+/* ==================================================
+   小型スマートフォン
+================================================== */
+
+@media (
+    max-width: 390px
+) {
+
+    .line-color {
+
+        width: 10px;
+
+        min-width: 10px;
+
+    }
+
+
+    .line-icon {
+
+        width: 36px;
+
+        height: 36px;
+
+        min-width: 36px;
+
+    }
+
+
+    .line-icon img {
+
+        width: 36px;
+
+        height: 36px;
+
+    }
+
+
+    .line-name-ja {
+
+        font-size: 14px;
+
+    }
+
+
+    .line-name-en {
+
+        font-size: 9px;
+
+    }
+
+
+    .line-detail {
+
+        padding-left: 64px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- ==================================================
+     ヘッダー
+================================================== -->
+
+<header class="header">
+
+<button
+    class="back-button"
+    type="button"
+    onclick="goHome()"
+    aria-label="ホームへ戻る"
+>
+    ←
+</button>
+
+
+<h1>
+    その他の路線
+</h1>
+
+
+<div class="header-en">
+    Other Lines
+</div>
+
+</header>
+
+
+<!-- ==================================================
+     更新日時
+================================================== -->
+
+<div
+    id="update-info"
+    class="update-info"
+>
+    情報取得中
+</div>
+
+
+<!-- ==================================================
+     路線一覧
+================================================== -->
+
+<main
+    id="line-list"
+    class="line-list"
+>
+
+<div class="loading">
+    運行情報を取得しています。
+</div>
+
+</main>
+
+
+<!-- ==================================================
+     ホームボタン
+================================================== -->
+
+<div class="home-button-area">
+
+<button
+    class="home-button"
+    type="button"
+    onclick="goHome()"
+>
+    ホームへ戻る
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   路線カラー
+================================================== */
+
+const lineColors = {
+
+    "東北新幹線":
+        "#41934C",
+
+    "JR宇都宮線":
+        "#F68B1E",
+
+    "JR高崎線":
+        "#F68B1E",
+
+    "上野東京ライン":
+        "#83186D",
+
+    "湘南新宿ライン":
+        "#E21F26",
+
+    "JR水戸線":
+        "#007AC0",
+
+    "JR上越線":
+        "#00ACD1",
+
+    "JR吾妻線":
+        "#008689",
+
+    "JR信越線":
+        "#73C11D",
+
+    "東武スカイツリーライン":
+        "#0071BB",
+
+    "東武日光線":
+        "#F58220",
+
+    "東武宇都宮線":
+        "#CFA348",
+
+    "東武伊勢崎線":
+        "#B10439",
+
+    "東武佐野線":
+        "#A065AA"
+
+};
+
+
+/* ==================================================
+   英語路線名
+================================================== */
+
+const lineEnglishNames = {
+
+    "東北新幹線":
+        "Tōhoku Shinkansen",
+
+    "JR宇都宮線":
+        "JR Utsunomiya Line",
+
+    "JR高崎線":
+        "JR Takasaki Line",
+
+    "上野東京ライン":
+        "Ueno-Tōkyō Line",
+
+    "湘南新宿ライン":
+        "Shōnan-Shinjuku Line",
+
+    "JR水戸線":
+        "JR Mito Line",
+
+    "JR上越線":
+        "JR Jōetsu Line",
+
+    "JR吾妻線":
+        "JR Agatsuma Line",
+
+    "JR信越線":
+        "JR Shin-etsu Line",
+
+    "東武スカイツリーライン":
+        "TOBU SKYTREE Line",
+
+    "東武日光線":
+        "Tobu Nikko Line",
+
+    "東武宇都宮線":
+        "Tobu Utsunomiya Line",
+
+    "東武伊勢崎線":
+        "Tobu Isesaki Line",
+
+    "東武佐野線":
+        "Tobu Sano Line"
+
+};
+
+
+/* ==================================================
+   表示順
+================================================== */
+
+const displayOrder = [
+
+    "東北新幹線",
+
+    "JR宇都宮線",
+
+    "JR高崎線",
+
+    "上野東京ライン",
+
+    "湘南新宿ライン",
+
+    "JR水戸線",
+
+    "JR上越線",
+
+    "JR吾妻線",
+
+    "JR信越線",
+
+    "東武スカイツリーライン",
+
+    "東武日光線",
+
+    "東武宇都宮線",
+
+    "東武伊勢崎線",
+
+    "東武佐野線"
+
+];
+
+
+/* ==================================================
+   アイコン
+================================================== */
+
+const iconPaths = {
+
+    normal:
+        "{{ url_for('static', filename='icons/operation-normal.png') }}",
+
+    delay:
+        "{{ url_for('static', filename='icons/operation-delay.png') }}",
+
+    info:
+        "{{ url_for('static', filename='icons/operation-info.png') }}",
+
+    suspended:
+        "{{ url_for('static', filename='icons/operation-suspended.png') }}"
+
+};
+
+
+/* ==================================================
+   状態からアイコン種類を決定
+================================================== */
+
+function getIconType(
+    status
+) {
+
+    const value =
+        String(
+            status || ""
+        ).trim();
+
+
+    /*
+     * 通常運転
+     */
+
+    if (
+        value === "平常運転"
+        ||
+        value.includes(
+            "事故・遅延情報はありません"
+        )
+        ||
+        value.includes(
+            "事故･遅延情報はありません"
+        )
+        ||
+        value.includes(
+            "事故・遅延に関する情報はありません"
+        )
+        ||
+        value.includes(
+            "事故･遅延に関する情報はありません"
+        )
+    ) {
+
+        return "normal";
+
+    }
+
+
+    /*
+     * 運転見合わせ・運休
+     */
+
+    if (
+        value.includes(
+            "運転見合わせ"
+        )
+        ||
+        value.includes(
+            "運転を見合わせ"
+        )
+        ||
+        value.includes(
+            "運転を見合せ"
+        )
+        ||
+        value.includes(
+            "一部運休"
+        )
+        ||
+        value === "運休"
+    ) {
+
+        return "suspended";
+
+    }
+
+
+    /*
+     * 遅延・運転状況
+     */
+
+    if (
+        value.includes(
+            "遅延"
+        )
+        ||
+        value.includes(
+            "遅れ"
+        )
+        ||
+        value === "運転状況"
+    ) {
+
+        return "delay";
+
+    }
+
+
+    /*
+     * その他
+     */
+
+    return "info";
+
+}
+
+
+/* ==================================================
+   アイコン取得
+================================================== */
+
+function getIconPath(
+    iconType
+) {
+
+    if (
+        iconType === "normal"
+    ) {
+
+        return iconPaths.normal;
+
+    }
+
+
+    if (
+        iconType === "delay"
+    ) {
+
+        return iconPaths.delay;
+
+    }
+
+
+    if (
+        iconType === "suspended"
+    ) {
+
+        return iconPaths.suspended;
+
+    }
+
+
+    return iconPaths.info;
+
+}
+
+
+/* ==================================================
+   状態クラス
+================================================== */
+
+function getStatusClass(
+    iconType
+) {
+
+    if (
+        iconType === "normal"
+    ) {
+
+        return "status-normal";
+
+    }
+
+
+    if (
+        iconType === "delay"
+    ) {
+
+        return "status-delay";
+
+    }
+
+
+    if (
+        iconType === "suspended"
+    ) {
+
+        return "status-suspended";
+
+    }
+
+
+    return "status-info";
+
+}
+
+
+/* ==================================================
+   路線名を正規化
+================================================== */
+
+function normalizeLineName(
+    name
+) {
+
+    const value =
+        String(
+            name || ""
+        )
+        .trim();
+
+
+    if (
+        value === "宇都宮線"
+        ||
+        value === "JR宇都宮線"
+        ||
+        value.startsWith(
+            "宇都宮線["
+        )
+    ) {
+
+        return "JR宇都宮線";
+
+    }
+
+
+    if (
+        value === "高崎線"
+        ||
+        value === "JR高崎線"
+        ||
+        value.startsWith(
+            "高崎線["
+        )
+    ) {
+
+        return "JR高崎線";
+
+    }
+
+
+    if (
+        value === "水戸線"
+        ||
+        value === "JR水戸線"
+        ||
+        value.startsWith(
+            "水戸線["
+        )
+    ) {
+
+        return "JR水戸線";
+
+    }
+
+
+    if (
+        value === "上越線"
+        ||
+        value === "JR上越線"
+        ||
+        value.startsWith(
+            "上越線["
+        )
+    ) {
+
+        return "JR上越線";
+
+    }
+
+
+    if (
+        value === "吾妻線"
+        ||
+        value === "JR吾妻線"
+        ||
+        value.startsWith(
+            "吾妻線["
+        )
+    ) {
+
+        return "JR吾妻線";
+
+    }
+
+
+    if (
+        value === "信越本線"
+        ||
+        value === "信越線"
+        ||
+        value === "JR信越線"
+        ||
+        value === "JR信越本線"
+        ||
+        value.startsWith(
+            "信越線["
+        )
+    ) {
+
+        return "JR信越線";
+
+    }
+
+
+    return value;
+
+}
+
+
+/* ==================================================
+   運行情報から路線名部分を削除
+================================================== */
+
+function cleanOperationMessage(
+    message,
+    lineName
+) {
+
+    let value =
+        String(
+            message || ""
+        );
+
+
+    /*
+     * 改行・タブ・全角スペース・連続スペースを整理
+     */
+
+    value =
+        value
+        .replace(
+            /[\r\n\t]+/g,
+            " "
+        )
+        .replace(
+            /[\u00A0\u3000]+/g,
+            " "
+        )
+        .replace(
+            /\s+/g,
+            " "
+        )
+        .trim();
+
+
+    /*
+     * 「JR吾妻線は」のような
+     * 路線名＋「は」を削除。
+     */
+
+    const normalizedLineName =
+        normalizeLineName(
+            lineName
+        );
+
+
+    const alternativeNames = {
+
+        "JR宇都宮線":
+            [
+                "JR宇都宮線",
+                "宇都宮線"
+            ],
+
+        "JR高崎線":
+            [
+                "JR高崎線",
+                "高崎線"
+            ],
+
+        "JR水戸線":
+            [
+                "JR水戸線",
+                "水戸線"
+            ],
+
+        "JR上越線":
+            [
+                "JR上越線",
+                "上越線"
+            ],
+
+        "JR吾妻線":
+            [
+                "JR吾妻線",
+                "吾妻線"
+            ],
+
+        "JR信越線":
+            [
+                "JR信越線",
+                "JR信越本線",
+                "信越線",
+                "信越本線"
+            ]
+
+    };
+
+
+    const names =
+        alternativeNames[
+            normalizedLineName
+        ]
+        ||
+        [
+            normalizedLineName
+        ];
+
+
+    names.forEach(
+        function(name) {
+
+            if (
+                !name
+            ) {
+
+                return;
+
+            }
+
+
+            const escaped =
+                name.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                );
+
+
+            value =
+                value.replace(
+                    new RegExp(
+                        "^\\s*"
+                        +
+                        escaped
+                        +
+                        "\\s*は\\s*",
+                        "i"
+                    ),
+                    ""
+                );
+
+        }
+    );
+
+
+    /*
+     * 路線名を削除した後に、
+     * もう一度先頭・末尾の空白を完全に削除。
+     */
+
+    value =
+        value
+        .replace(
+            /^[\s\u00A0\u3000]+/g,
+            ""
+        )
+        .replace(
+            /[\s\u00A0\u3000]+$/g,
+            ""
+        );
+
+
+    /*
+     * 文中の連続した空白も整理。
+     */
+
+    value =
+        value.replace(
+            /[\s\u00A0\u3000]+/g,
+            " "
+        );
+
+
+    return value.trim();
+
+}
+
+
+/* ==================================================
+   HTMLエスケープ
+================================================== */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ==================================================
+   路線カード作成
+================================================== */
+
+function createLineItem(
+    line
+) {
+
+    /*
+     * APIは「name」を返す。
+     * 古い形式の「line」にも対応。
+     */
+
+    const originalName =
+        normalizeLineName(
+            line.name
+            ||
+            line.line
+        );
+
+
+    const displayName =
+        originalName;
+
+
+    const englishName =
+        lineEnglishNames[
+            originalName
+        ]
+        ||
+        "";
+
+
+    const color =
+        lineColors[
+            originalName
+        ]
+        ||
+        line.color
+        ||
+        "#808080";
+
+
+    /*
+     * APIのstatusから
+     * アイコンを決定。
+     */
+
+    const status =
+        String(
+            line.status
+            ||
+            ""
+        )
+        .trim();
+
+
+    const iconType =
+        getIconType(
+            status
+        );
+
+
+    const icon =
+        getIconPath(
+            iconType
+        );
+
+
+    const statusClass =
+        getStatusClass(
+            iconType
+        );
+
+
+    /*
+     * 運行情報本文。
+     */
+
+    let message =
+        line.message
+        ||
+        "";
+
+
+    /*
+     * 路線名＋「は」を削除。
+     */
+
+    message =
+        cleanOperationMessage(
+            message,
+            originalName
+        );
+
+
+    /*
+     * messageが空の場合はstatusを表示。
+     */
+
+    if (
+        !message
+        &&
+        status
+    ) {
+
+        message =
+            status;
+
+    }
+
+
+    /*
+     * それでも空なら取得中。
+     */
+
+    if (
+        !message
+    ) {
+
+        message =
+            "現在、運行情報を取得しています。";
+
+    }
+
+
+    const updated =
+        line.updated
+        ||
+        "";
+
+
+    const item =
+        document.createElement(
+            "section"
+        );
+
+
+    item.className =
+        "line-item "
+        +
+        statusClass;
+
+
+    item.dataset.line =
+        originalName;
+
+
+    /*
+     * 重要：
+     *
+     * line-messageの${message}を
+     * HTML上の改行・インデントなしで配置。
+     *
+     * これにより、
+     * 「                平常通り運転しています。」
+     * のような先頭空白が発生しない。
+     */
+
+    item.innerHTML = `
+
+        <button
+            type="button"
+            class="line-header"
+            aria-expanded="false"
+        >
+
+            <span
+                class="line-color"
+                style="background:${escapeHtml(color)}"
+            ></span>
+
+
+            <span class="line-icon"><img
+                src="${escapeHtml(icon)}"
+                alt=""
+            ></span>
+
+
+            <span class="line-name"><span class="line-name-ja">${escapeHtml(displayName)}</span><span class="line-name-en">${escapeHtml(englishName)}</span></span>
+
+        </button>
+
+
+        <div class="line-detail">
+
+            <div class="line-message">${escapeHtml(message)}</div>
+
+            ${
+                updated
+                    ? `<div class="line-updated">更新：${escapeHtml(updated)}</div>`
+                    : ""
+            }
+
+        </div>
+
+    `;
+
+
+    const header =
+        item.querySelector(
+            ".line-header"
+        );
+
+
+    header.addEventListener(
+        "click",
+        function() {
+
+            const isOpen =
+                item.classList.contains(
+                    "open"
+                );
+
+
+            document
+                .querySelectorAll(
+                    ".line-item.open"
+                )
+                .forEach(
+                    function(otherItem) {
+
+                        if (
+                            otherItem !== item
+                        ) {
+
+                            otherItem.classList.remove(
+                                "open"
+                            );
+
+
+                            const otherHeader =
+                                otherItem.querySelector(
+                                    ".line-header"
+                                );
+
+
+                            if (
+                                otherHeader
+                            ) {
+
+                                otherHeader.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+            if (
+                isOpen
+            ) {
+
+                item.classList.remove(
+                    "open"
+                );
+
+                header.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+            else {
+
+                item.classList.add(
+                    "open"
+                );
+
+                header.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
+        }
+    );
+
+
+    return item;
+
+}
+
+
+/* ==================================================
+   路線一覧表示
+================================================== */
+
+function renderLines(
+    lines
+) {
+
+    const container =
+        document.getElementById(
+            "line-list"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const lineMap = {};
+
+
+    if (
+        Array.isArray(lines)
+    ) {
+
+        lines.forEach(
+            function(line) {
+
+                if (
+                    !line
+                ) {
+
+                    return;
+
+                }
+
+
+                const rawName =
+                    line.name
+                    ||
+                    line.line
+                    ||
+                    "";
+
+
+                if (
+                    !rawName
+                ) {
+
+                    return;
+
+                }
+
+
+                const normalized =
+                    normalizeLineName(
+                        rawName
+                    );
+
+
+                lineMap[
+                    normalized
+                ] = line;
+
+            }
+        );
+
+    }
+
+
+    displayOrder.forEach(
+        function(lineName) {
+
+            const line =
+                lineMap[
+                    lineName
+                ];
+
+
+            const data =
+                line
+                ||
+                {
+
+                    name:
+                        lineName,
+
+                    status:
+                        "情報取得中",
+
+                    message:
+                        "現在、運行情報を取得しています。",
+
+                    updated:
+                        ""
+
+                };
+
+
+            container.appendChild(
+                createLineItem(
+                    data
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   運行情報取得
+================================================== */
+
+async function loadOtherOperationInfo() {
+
+    const updateInfo =
+        document.getElementById(
+            "update-info"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "/api/other-operation?"
+                +
+                Date.now(),
+
+                {
+                    cache:
+                        "no-store"
+                }
+
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                "運行情報の取得に失敗しました"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "その他の路線API:",
+            data
+        );
+
+
+        renderLines(
+            Array.isArray(
+                data.lines
+            )
+                ? data.lines
+                : []
+        );
+
+
+        if (
+            data.updated
+        ) {
+
+            updateInfo.textContent =
+                "更新：" +
+                String(
+                    data.updated
+                ).replace(
+                    /\s*更新\s*$/,
+                    ""
+                );
+
+        }
+
+        else {
+
+            updateInfo.textContent =
+                "運行情報を表示しています";
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "その他の路線運行情報取得エラー:",
+            error
+        );
+
+
+        renderLines(
+            []
+        );
+
+
+        updateInfo.textContent =
+            "運行情報を取得できません";
+
+    }
+
+}
+
+
+/* ==================================================
+   表示モード
+================================================== */
+
+function applySavedDisplayMode() {
+
+    const displayMode =
+        localStorage.getItem(
+            "displayMode"
+        )
+        ||
+        "system";
+
+
+    let useLightMode =
+        false;
+
+
+    if (
+        displayMode === "light"
+    ) {
+
+        useLightMode =
+            true;
+
+    }
+
+    else if (
+        displayMode === "system"
+    ) {
+
+        useLightMode =
+            !window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+    }
+
+
+    document.body.classList.toggle(
+        "light-mode",
+        useLightMode
+    );
+
+}
+
+
+/* ==================================================
+   システムテーマ変更
+================================================== */
+
+const systemThemeQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function handleSystemThemeChange() {
+
+    const currentMode =
+        localStorage.getItem(
+            "displayMode"
+        )
+        ||
+        "system";
+
+
+    if (
+        currentMode === "system"
+    ) {
+
+        applySavedDisplayMode();
+
+    }
+
+}
+
+
+if (
+    systemThemeQuery.addEventListener
+) {
+
+    systemThemeQuery.addEventListener(
+        "change",
+        handleSystemThemeChange
+    );
+
+}
+
+else {
+
+    systemThemeQuery.addListener(
+        handleSystemThemeChange
+    );
+
+}
+
+
+/* ==================================================
+   ホームへ戻る
+================================================== */
+
+function goHome() {
+
+    window.location.href =
+        "/?home=1";
+
+}
+
+
+/* ==================================================
+   次回の定時更新を予約
+================================================== */
+
+function scheduleNextOperationUpdate() {
+
+    const now =
+        new Date();
+
+
+    const minutes =
+        now.getMinutes();
+
+
+    const seconds =
+        now.getSeconds();
+
+
+    const milliseconds =
+        now.getMilliseconds();
+
+
+    /*
+     * 次の5分単位までの分数。
+     *
+     * 例：
+     *
+     * 12:01 → 12:05
+     * 12:04 → 12:05
+     * 12:05 → 12:10
+     * 12:09 → 12:10
+     */
+
+    let minutesUntilNext =
+        5 - (
+            minutes % 5
+        );
+
+
+    /*
+     * ちょうど00・05・10・15…分に
+     * この関数が呼ばれた場合は、
+     * 次の5分後に設定。
+     */
+
+    if (
+        minutes % 5 === 0
+        &&
+        seconds === 0
+        &&
+        milliseconds === 0
+    ) {
+
+        minutesUntilNext =
+            5;
+
+    }
+
+
+    const delay =
+        (
+            minutesUntilNext
+            *
+            60
+            *
+            1000
+        )
+        -
+        (
+            seconds
+            *
+            1000
+        )
+        -
+        milliseconds;
+
+
+    setTimeout(
+        async function() {
+
+            /*
+             * 00・05・10・15…分に
+             * 運行情報を再取得。
+             */
+
+            await loadOtherOperationInfo();
+
+
+            /*
+             * 次の5分単位を再計算。
+             *
+             * setIntervalではなく、
+             * 毎回次の定時を計算することで
+             * ページを開いた時刻によるズレを防ぐ。
+             */
+
+            scheduleNextOperationUpdate();
+
+        },
+        delay
+    );
+
+}
+
+
+/* ==================================================
+   初期化
+================================================== */
+
+applySavedDisplayMode();
+
+
+/*
+ * ページを開いたらすぐ取得。
+ */
+
+loadOtherOperationInfo();
+
+
+/*
+ * 次の00・05・10・15…分まで待って更新。
+ */
+
+scheduleNextOperationUpdate();
+
+</script>
+
+</body>
+
+</html>
