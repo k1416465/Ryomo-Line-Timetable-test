@@ -1,0 +1,266 @@
+{
+  "lines": [
+    {
+      "name": "東北新幹線",
+      "color": "#41934C",
+      "status": "平常運転",
+      "message": "東北新幹線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時6分",
+      "routes": [
+        {
+          "name": "東北新幹線",
+          "status": "平常運転",
+          "message": "東北新幹線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/1/0"
+        }
+      ]
+    },
+    {
+      "name": "JR宇都宮線",
+      "color": "#F68B1E",
+      "status": "平常運転",
+      "message": "JR宇都宮線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時6分",
+      "routes": [
+        {
+          "name": "JR宇都宮線",
+          "status": "平常運転",
+          "message": "JR宇都宮線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/46/46"
+        },
+        {
+          "name": "JR宇都宮線",
+          "status": "平常運転",
+          "message": "JR宇都宮線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/46/47"
+        }
+      ]
+    },
+    {
+      "name": "JR高崎線",
+      "color": "#F68B1E",
+      "status": "平常運転",
+      "message": "JR高崎線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時6分",
+      "routes": [
+        {
+          "name": "JR高崎線",
+          "status": "平常運転",
+          "message": "JR高崎線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/48/0"
+        }
+      ]
+    },
+    {
+      "name": "上野東京ライン",
+      "color": "#83186D",
+      "status": "平常運転",
+      "message": "上野東京ラインは平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時6分",
+      "routes": [
+        {
+          "name": "上野東京ライン",
+          "status": "平常運転",
+          "message": "上野東京ラインは平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/627/0"
+        }
+      ]
+    },
+    {
+      "name": "湘南新宿ライン",
+      "color": "#E21F26",
+      "status": "平常運転",
+      "message": "湘南新宿ラインは平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "湘南新宿ライン",
+          "status": "平常運転",
+          "message": "湘南新宿ラインは平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/25/0"
+        }
+      ]
+    },
+    {
+      "name": "JR水戸線",
+      "color": "#007AC0",
+      "status": "平常運転",
+      "message": "JR水戸線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "JR水戸線",
+          "status": "平常運転",
+          "message": "JR水戸線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/167/0"
+        }
+      ]
+    },
+    {
+      "name": "JR上越線",
+      "color": "#00ACD1",
+      "status": "平常運転",
+      "message": "JR上越線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "JR上越線",
+          "status": "平常運転",
+          "message": "JR上越線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/164/0"
+        }
+      ]
+    },
+    {
+      "name": "JR吾妻線",
+      "color": "#008689",
+      "status": "平常運転",
+      "message": "JR吾妻線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "JR吾妻線",
+          "status": "平常運転",
+          "message": "JR吾妻線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/162/0"
+        }
+      ]
+    },
+    {
+      "name": "JR信越線",
+      "color": "#73C11D",
+      "status": "平常運転",
+      "message": "JR信越線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "JR信越線",
+          "status": "平常運転",
+          "message": "JR信越線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/165/0"
+        }
+      ]
+    },
+    {
+      "name": "東武スカイツリーライン",
+      "color": "#0071BB",
+      "status": "平常運転",
+      "message": "東武スカイツリーラインは平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時6分",
+      "routes": [
+        {
+          "name": "東武スカイツリーライン",
+          "status": "平常運転",
+          "message": "東武スカイツリーラインは平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時6分",
+          "url": "https://transit.yahoo.co.jp/diainfo/77/0"
+        }
+      ]
+    },
+    {
+      "name": "東武日光線",
+      "color": "#F58220",
+      "status": "平常運転",
+      "message": "東武日光線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "東武日光線",
+          "status": "平常運転",
+          "message": "東武日光線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/80/0"
+        }
+      ]
+    },
+    {
+      "name": "東武宇都宮線",
+      "color": "#CFA348",
+      "status": "平常運転",
+      "message": "東武宇都宮線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "東武宇都宮線",
+          "status": "平常運転",
+          "message": "東武宇都宮線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/169/0"
+        }
+      ]
+    },
+    {
+      "name": "東武伊勢崎線",
+      "color": "#B10439",
+      "status": "平常運転",
+      "message": "東武伊勢崎線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "東武伊勢崎線",
+          "status": "平常運転",
+          "message": "東武伊勢崎線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/639/0"
+        }
+      ]
+    },
+    {
+      "name": "東武佐野線",
+      "color": "#A065AA",
+      "status": "平常運転",
+      "message": "東武佐野線は平常通り運転しています。",
+      "detail": "",
+      "updated": "9月22日 2時7分",
+      "routes": [
+        {
+          "name": "東武佐野線",
+          "status": "平常運転",
+          "message": "東武佐野線は平常通り運転しています。",
+          "detail": "",
+          "updated": "9月22日 2時7分",
+          "url": "https://transit.yahoo.co.jp/diainfo/172/0"
+        }
+      ]
+    }
+  ],
+  "updated": "2026-09-22 02:08:15",
+  "_cache_time": 1790010495.053432
+}
