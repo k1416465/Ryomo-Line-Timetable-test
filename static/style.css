@@ -3066,3 +3066,22 @@ body.light-mode #other-operation-info.other-normal .operation-title {
     }
 
 }
+
+/* ==================================================
+   スマホ版ホーム
+   「両毛線」と「その他の路線」の間隔を縮小
+================================================== */
+
+@media (max-width: 600px) {
+
+    /* 両毛線の運行情報 */
+    .operation-info {
+        margin-top: 15px;
+    }
+
+    /* その他の路線 */
+    #other-operation-info {
+        margin-top: 6px;
+    }
+
+}
