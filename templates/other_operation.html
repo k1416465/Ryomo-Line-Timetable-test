@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 
 <head>
@@ -6,11 +7,12 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
-<title>その他の路線 運行情報</title>
+<title>その他の路線の運行情報</title>
 
 <style>
 
@@ -379,6 +381,11 @@ body {
 
 /* ==================================================
    状態ごとのカード枠
+
+   ○ 平常       → グレー
+   △ 遅延・運休 → オレンジ
+   ！情報あり   → オレンジ
+   × 運転見合わせ → 赤
 ================================================== */
 
 .line-item.status-normal {
@@ -390,31 +397,21 @@ body {
 
 .line-item.status-delay {
 
-    border-color: rgba(
-        245,
-        139,
-        30,
-        0.65
-    );
+    border-color: #ff9800;
 
 }
 
 
 .line-item.status-suspended {
 
-    border-color: rgba(
-        225,
-        31,
-        38,
-        0.75
-    );
+    border-color: #ff1744;
 
 }
 
 
 .line-item.status-info {
 
-    border-color: #555555;
+    border-color: #ff9800;
 
 }
 
@@ -512,13 +509,29 @@ body.light-mode
 
 /* ==================================================
    ライトモード
-   運転見合わせ・運休は赤枠
+   状態別の枠線
 ================================================== */
+
+body.light-mode
+.line-item.status-delay {
+
+    border-color: #ff9800 !important;
+
+}
+
+
+body.light-mode
+.line-item.status-info {
+
+    border-color: #ff9800 !important;
+
+}
+
 
 body.light-mode
 .line-item.status-suspended {
 
-    border-color: #ff3b30 !important;
+    border-color: #ff1744 !important;
 
 }
 
@@ -787,11 +800,9 @@ body.light-mode
 
 </head>
 
-
 <body>
 
 <div class="page">
-
 
 <!-- ==================================================
      ヘッダー
@@ -800,26 +811,26 @@ body.light-mode
 <header class="header">
 
 <button
-    class="back-button"
-    type="button"
-    onclick="goHome()"
-    aria-label="ホームへ戻る"
->
-    ←
-</button>
+class="back-button"
+type="button"
+onclick="goHome()"
+aria-label="ホームへ戻る"
 
+>
+
+←
+
+</button>
 
 <h1>
     その他の路線
 </h1>
-
 
 <div class="header-en">
     Other Lines
 </div>
 
 </header>
-
 
 <!-- ==================================================
      更新日時
@@ -831,7 +842,6 @@ body.light-mode
 >
     情報取得中
 </div>
-
 
 <!-- ==================================================
      路線一覧
@@ -848,7 +858,6 @@ body.light-mode
 
 </main>
 
-
 <!-- ==================================================
      ホームボタン
 ================================================== -->
@@ -856,17 +865,19 @@ body.light-mode
 <div class="home-button-area">
 
 <button
-    class="home-button"
-    type="button"
-    onclick="goHome()"
+class="home-button"
+type="button"
+onclick="goHome()"
+
 >
-    ホームへ戻る
+
+ホームへ戻る
+
 </button>
 
 </div>
 
 </div>
-
 
 <script>
 
@@ -1035,35 +1046,247 @@ const iconPaths = {
 ================================================== */
 
 function getIconType(
-    status
+    status,
+    message
 ) {
 
-    const value =
+    const statusValue =
         String(
             status || ""
         ).trim();
 
 
+    const messageValue =
+        String(
+            message || ""
+        ).trim();
+
+
+    const combinedValue =
+        statusValue
+        +
+        " "
+        +
+        messageValue;
+
+
     /*
-     * 通常運転
+     * ----------------------------------------------
+     * ① 運転見合わせ
+     * ----------------------------------------------
+     */
+
+    const isRestartWithDelay =
+
+        (
+            combinedValue.includes(
+                "運転を再開"
+            )
+            ||
+            combinedValue.includes(
+                "運転再開"
+            )
+        )
+        &&
+        (
+            combinedValue.includes(
+                "遅れ"
+            )
+            ||
+            combinedValue.includes(
+                "遅延"
+            )
+            ||
+            combinedValue.includes(
+                "列車遅延"
+            )
+        );
+
+
+    if (
+        !isRestartWithDelay
+        &&
+        (
+            statusValue.includes(
+                "運転見合わせ"
+            )
+            ||
+            statusValue.includes(
+                "運転を見合わせ"
+            )
+            ||
+            statusValue.includes(
+                "運転を見合せ"
+            )
+            ||
+            (
+                messageValue.includes(
+                    "運転見合わせ"
+                )
+                &&
+                !messageValue.includes(
+                    "運転を再開"
+                )
+            )
+            ||
+            (
+                messageValue.includes(
+                    "運転を見合わせ"
+                )
+                &&
+                !messageValue.includes(
+                    "運転を再開"
+                )
+            )
+        )
+    ) {
+
+        return "suspended";
+
+    }
+
+
+    /*
+     * ----------------------------------------------
+     * ② 運休・一部運休
+     * ----------------------------------------------
      */
 
     if (
-        value === "平常運転"
+        statusValue.includes(
+            "一部運休"
+        )
         ||
-        value.includes(
+        statusValue === "運休"
+        ||
+        statusValue.includes(
+            "運休"
+        )
+        ||
+        messageValue.includes(
+            "一部運休"
+        )
+        ||
+        messageValue.includes(
+            "一部列車に運休"
+        )
+        ||
+        messageValue.includes(
+            "一部列車が運休"
+        )
+        ||
+        messageValue.includes(
+            "一部の列車に運休"
+        )
+        ||
+        messageValue.includes(
+            "一部の列車が運休"
+        )
+    ) {
+
+        return "delay";
+
+    }
+
+
+    /*
+     * ----------------------------------------------
+     * ③ 運転を再開したが遅れがある
+     * ----------------------------------------------
+     */
+
+    if (
+        isRestartWithDelay
+    ) {
+
+        return "delay";
+
+    }
+
+
+    /*
+     * ----------------------------------------------
+     * ④ 遅延
+     * ----------------------------------------------
+     */
+
+    if (
+        statusValue.includes(
+            "遅延"
+        )
+        ||
+        statusValue.includes(
+            "遅れ"
+        )
+        ||
+        statusValue.includes(
+            "列車遅延"
+        )
+        ||
+        messageValue.includes(
+            "遅延"
+        )
+        ||
+        messageValue.includes(
+            "遅れ"
+        )
+        ||
+        messageValue.includes(
+            "列車遅延"
+        )
+    ) {
+
+        return "delay";
+
+    }
+
+
+    /*
+     * ----------------------------------------------
+     * ⑤ 平常運転
+     * ----------------------------------------------
+     */
+
+    if (
+        statusValue === "平常運転"
+        ||
+        statusValue.includes(
+            "平常運転"
+        )
+        ||
+        statusValue.includes(
+            "平常通り"
+        )
+        ||
+        statusValue.includes(
+            "平常どおり"
+        )
+        ||
+        messageValue.includes(
+            "平常運転"
+        )
+        ||
+        messageValue.includes(
+            "平常通り運転"
+        )
+        ||
+        messageValue.includes(
+            "平常どおり運転"
+        )
+        ||
+        statusValue.includes(
             "事故・遅延情報はありません"
         )
         ||
-        value.includes(
+        statusValue.includes(
             "事故･遅延情報はありません"
         )
         ||
-        value.includes(
+        statusValue.includes(
             "事故・遅延に関する情報はありません"
         )
         ||
-        value.includes(
+        statusValue.includes(
             "事故･遅延に関する情報はありません"
         )
     ) {
@@ -1074,57 +1297,38 @@ function getIconType(
 
 
     /*
-     * 運転見合わせ・運休
+     * ----------------------------------------------
+     * ⑥ 運転再開
+     * ----------------------------------------------
      */
 
     if (
-        value.includes(
-            "運転見合わせ"
+        statusValue.includes(
+            "運転再開"
         )
         ||
-        value.includes(
-            "運転を見合わせ"
+        statusValue.includes(
+            "運転を再開"
         )
         ||
-        value.includes(
-            "運転を見合せ"
+        messageValue.includes(
+            "運転再開"
         )
         ||
-        value.includes(
-            "一部運休"
+        messageValue.includes(
+            "運転を再開"
         )
-        ||
-        value === "運休"
     ) {
 
-        return "suspended";
+        return "normal";
 
     }
 
 
     /*
-     * 遅延・運転状況
-     */
-
-    if (
-        value.includes(
-            "遅延"
-        )
-        ||
-        value.includes(
-            "遅れ"
-        )
-        ||
-        value === "運転状況"
-    ) {
-
-        return "delay";
-
-    }
-
-
-    /*
-     * その他
+     * ----------------------------------------------
+     * ⑦ その他
+     * ----------------------------------------------
      */
 
     return "info";
@@ -1341,10 +1545,6 @@ function cleanOperationMessage(
         );
 
 
-    /*
-     * 改行・タブ・全角スペース・連続スペースを整理
-     */
-
     value =
         value
         .replace(
@@ -1361,11 +1561,6 @@ function cleanOperationMessage(
         )
         .trim();
 
-
-    /*
-     * 「JR吾妻線は」のような
-     * 路線名＋「は」を削除。
-     */
 
     const normalizedLineName =
         normalizeLineName(
@@ -1462,11 +1657,6 @@ function cleanOperationMessage(
     );
 
 
-    /*
-     * 路線名を削除した後に、
-     * もう一度先頭・末尾の空白を完全に削除。
-     */
-
     value =
         value
         .replace(
@@ -1478,10 +1668,6 @@ function cleanOperationMessage(
             ""
         );
 
-
-    /*
-     * 文中の連続した空白も整理。
-     */
 
     value =
         value.replace(
@@ -1543,11 +1729,6 @@ function createLineItem(
     line
 ) {
 
-    /*
-     * APIは「name」を返す。
-     * 古い形式の「line」にも対応。
-     */
-
     const originalName =
         normalizeLineName(
             line.name
@@ -1578,11 +1759,6 @@ function createLineItem(
         "#808080";
 
 
-    /*
-     * APIのstatusから
-     * アイコンを決定。
-     */
-
     const status =
         String(
             line.status
@@ -1592,9 +1768,23 @@ function createLineItem(
         .trim();
 
 
+    let message =
+        line.message
+        ||
+        "";
+
+
+    message =
+        cleanOperationMessage(
+            message,
+            originalName
+        );
+
+
     const iconType =
         getIconType(
-            status
+            status,
+            message
         );
 
 
@@ -1610,31 +1800,6 @@ function createLineItem(
         );
 
 
-    /*
-     * 運行情報本文。
-     */
-
-    let message =
-        line.message
-        ||
-        "";
-
-
-    /*
-     * 路線名＋「は」を削除。
-     */
-
-    message =
-        cleanOperationMessage(
-            message,
-            originalName
-        );
-
-
-    /*
-     * messageが空の場合はstatusを表示。
-     */
-
     if (
         !message
         &&
@@ -1646,10 +1811,6 @@ function createLineItem(
 
     }
 
-
-    /*
-     * それでも空なら取得中。
-     */
 
     if (
         !message
@@ -1682,17 +1843,6 @@ function createLineItem(
     item.dataset.line =
         originalName;
 
-
-    /*
-     * 重要：
-     *
-     * line-messageの${message}を
-     * HTML上の改行・インデントなしで配置。
-     *
-     * これにより、
-     * 「                平常通り運転しています。」
-     * のような先頭空白が発生しない。
-     */
 
     item.innerHTML = `
 
@@ -1740,6 +1890,16 @@ function createLineItem(
         );
 
 
+    /*
+     * 他の路線を閉じない。
+     *
+     * クリックした路線だけを
+     * 開閉する。
+     *
+     * そのため、複数の路線を
+     * 同時に開いた状態にできる。
+     */
+
     header.addEventListener(
         "click",
         function() {
@@ -1747,45 +1907,6 @@ function createLineItem(
             const isOpen =
                 item.classList.contains(
                     "open"
-                );
-
-
-            document
-                .querySelectorAll(
-                    ".line-item.open"
-                )
-                .forEach(
-                    function(otherItem) {
-
-                        if (
-                            otherItem !== item
-                        ) {
-
-                            otherItem.classList.remove(
-                                "open"
-                            );
-
-
-                            const otherHeader =
-                                otherItem.querySelector(
-                                    ".line-header"
-                                );
-
-
-                            if (
-                                otherHeader
-                            ) {
-
-                                otherHeader.setAttribute(
-                                    "aria-expanded",
-                                    "false"
-                                );
-
-                            }
-
-                        }
-
-                    }
                 );
 
 
@@ -2173,28 +2294,11 @@ function scheduleNextOperationUpdate() {
         now.getMilliseconds();
 
 
-    /*
-     * 次の5分単位までの分数。
-     *
-     * 例：
-     *
-     * 12:01 → 12:05
-     * 12:04 → 12:05
-     * 12:05 → 12:10
-     * 12:09 → 12:10
-     */
-
     let minutesUntilNext =
         5 - (
             minutes % 5
         );
 
-
-    /*
-     * ちょうど00・05・10・15…分に
-     * この関数が呼ばれた場合は、
-     * 次の5分後に設定。
-     */
 
     if (
         minutes % 5 === 0
@@ -2231,21 +2335,8 @@ function scheduleNextOperationUpdate() {
     setTimeout(
         async function() {
 
-            /*
-             * 00・05・10・15…分に
-             * 運行情報を再取得。
-             */
-
             await loadOtherOperationInfo();
 
-
-            /*
-             * 次の5分単位を再計算。
-             *
-             * setIntervalではなく、
-             * 毎回次の定時を計算することで
-             * ページを開いた時刻によるズレを防ぐ。
-             */
 
             scheduleNextOperationUpdate();
 
@@ -2263,16 +2354,8 @@ function scheduleNextOperationUpdate() {
 applySavedDisplayMode();
 
 
-/*
- * ページを開いたらすぐ取得。
- */
-
 loadOtherOperationInfo();
 
-
-/*
- * 次の00・05・10・15…分まで待って更新。
- */
 
 scheduleNextOperationUpdate();
 

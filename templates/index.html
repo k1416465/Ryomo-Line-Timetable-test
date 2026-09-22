@@ -18,6 +18,7 @@
 >
 
 
+
 <!-- ==================================
      通知・ヘッダーボタン用CSS
 ================================== -->
@@ -40,6 +41,7 @@
 }
 
 
+
 .notification-button,
 .settings-button {
 
@@ -49,6 +51,7 @@
     top: auto !important;
 
 }
+
 
 
 /* ==================================
@@ -73,6 +76,7 @@
 }
 
 
+
 .notification-button img {
 
     width: 72%;
@@ -85,6 +89,7 @@
     margin: auto;
 
 }
+
 
 
 /* ==================================
@@ -125,11 +130,13 @@
 }
 
 
+
 body.light-mode .notification-badge {
 
     border-color: #ffffff;
 
 }
+
 
 
 /* ==================================
@@ -157,6 +164,7 @@ body.light-mode .notification-badge {
 }
 
 
+
 .operation-icon img {
 
     width: 58px;
@@ -175,6 +183,7 @@ body.light-mode .notification-badge {
 }
 
 
+
 /* ==================================
    その他の路線追加部分
 ================================== */
@@ -191,11 +200,13 @@ body.light-mode .notification-badge {
 }
 
 
+
 .operation-info-grid .operation-info {
 
     min-width: 0;
 
 }
+
 
 
 .operation-icon-image {
@@ -214,6 +225,7 @@ body.light-mode .notification-badge {
     box-shadow: none !important;
 
 }
+
 
 
 .other-operation-icon {
@@ -237,6 +249,7 @@ body.light-mode .notification-badge {
 }
 
 
+
 .other-operation-icon img {
 
     width: 100%;
@@ -255,37 +268,23 @@ body.light-mode .notification-badge {
 }
 
 
-.other-operation-arrow {
-
-    margin-left: auto;
-
-    padding-left: 10px;
-
-    font-size: 24px;
-
-    color: inherit;
-
-    opacity: 0.65;
-
-}
-
-
 /* ==================================
-   その他の路線
+   その他の路線 基本設定
 ================================== */
 
 #other-operation-info {
 
     border-color: #808080 !important;
 
+    background: transparent !important;
+
 }
 
 
-/*
-   ダークモード
-   背景：#808080
-   文字：#ffffff
-*/
+
+/* ==================================
+   ダークモード 基本
+================================== */
 
 #other-operation-info .operation-title {
 
@@ -298,15 +297,15 @@ body.light-mode .notification-badge {
 }
 
 
-/* ==================================
-   ダークモード
-================================== */
 
 body:not(.light-mode) #other-operation-info {
 
     border-color: #808080 !important;
 
+    background: transparent !important;
+
 }
+
 
 
 body:not(.light-mode) #other-operation-info .operation-title {
@@ -320,13 +319,14 @@ body:not(.light-mode) #other-operation-info .operation-title {
 }
 
 
+
 /* ==================================
-   ライトモード
+   ライトモード 基本
 ================================== */
 
 body.light-mode #other-operation-info {
 
-    background: #ffffff !important;
+    background: transparent !important;
 
     border-color: #808080 !important;
 
@@ -335,10 +335,6 @@ body.light-mode #other-operation-info {
 }
 
 
-/*
-   ライトモードでは
-   白寄りのグレー＋黒文字
-*/
 
 body.light-mode #other-operation-info .operation-title {
 
@@ -349,6 +345,7 @@ body.light-mode #other-operation-info .operation-title {
     color: #000000 !important;
 
 }
+
 
 
 /* ==================================
@@ -362,6 +359,7 @@ body.light-mode #other-operation-info .operation-text {
 }
 
 
+
 body.light-mode #other-operation-info .operation-updated {
 
     color: #666666 !important;
@@ -369,11 +367,13 @@ body.light-mode #other-operation-info .operation-updated {
 }
 
 
+
 body.light-mode #other-operation-info .other-operation-arrow {
 
     color: #111111 !important;
 
 }
+
 
 
 /* ==================================
@@ -391,6 +391,7 @@ body.light-mode #other-operation-info .other-operation-icon {
 }
 
 
+
 body.light-mode #other-operation-info .other-operation-icon img {
 
     background: transparent !important;
@@ -400,6 +401,7 @@ body.light-mode #other-operation-info .other-operation-icon img {
     box-shadow: none !important;
 
 }
+
 
 
 /* ==================================
@@ -425,10 +427,6 @@ body.light-mode #other-operation-info .other-operation-icon img {
 }
 
 
-/* ==================================
-   ライトモードでは
-   白寄りのグレー＋黒文字
-================================== */
 
 body.light-mode #other-operation-info .operation-title {
 
@@ -439,6 +437,194 @@ body.light-mode #other-operation-info .operation-title {
     color: #000000 !important;
 
 }
+
+
+
+/* ==================================
+   その他の路線
+   ○ 正常
+================================== */
+
+#other-operation-info.other-normal {
+
+    border-color: #808080 !important;
+
+    background: transparent !important;
+
+}
+
+
+
+#other-operation-info.other-normal .operation-title {
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-normal {
+
+    background: transparent !important;
+
+    border-color: #808080 !important;
+
+    color: #111111 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-normal .operation-title {
+
+    background: #d6d6d6 !important;
+
+    background-color: #d6d6d6 !important;
+
+    color: #000000 !important;
+
+}
+
+
+
+/* ==================================
+   その他の路線
+   △・！ オレンジ
+================================== */
+
+#other-operation-info.other-delay,
+#other-operation-info.other-info {
+
+    border-color: #ff9800 !important;
+
+    background: transparent !important;
+
+}
+
+
+
+#other-operation-info.other-delay .operation-title,
+#other-operation-info.other-info .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay,
+body.light-mode #other-operation-info.other-info {
+
+    background: transparent !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay .operation-title,
+body.light-mode #other-operation-info.other-info .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay .operation-text,
+body.light-mode #other-operation-info.other-info .operation-text {
+
+    color: #111111 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay .operation-updated,
+body.light-mode #other-operation-info.other-info .operation-updated {
+
+    color: #666666 !important;
+
+}
+
+
+
+/* ==================================
+   その他の路線
+   × 赤
+================================== */
+
+#other-operation-info.other-suspended {
+
+    border-color: #f44336 !important;
+
+    background: transparent !important;
+
+}
+
+
+
+#other-operation-info.other-suspended .operation-title {
+
+    background: #f44336 !important;
+
+    background-color: #f44336 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended {
+
+    background: transparent !important;
+
+    border-color: #f44336 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended .operation-title {
+
+    background: #f44336 !important;
+
+    background-color: #f44336 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended .operation-text {
+
+    color: #111111 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended .operation-updated {
+
+    color: #666666 !important;
+
+}
+
 
 
 /* ==================================
@@ -456,6 +642,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .notification-button,
     .settings-button {
 
@@ -465,11 +652,13 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .operation-info-grid {
 
         grid-template-columns: 1fr;
 
     }
+
 
 
     #other-operation-info .operation-title {
@@ -483,6 +672,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     body.light-mode #other-operation-info .operation-title {
 
         background: #d6d6d6 !important;
@@ -494,6 +684,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 }
+
 
 
 /* ==================================
@@ -511,6 +702,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .notification-button,
     .settings-button {
 
@@ -518,6 +710,7 @@ body.light-mode #other-operation-info .operation-title {
         height: 42px;
 
     }
+
 
 
     .notification-badge {
@@ -535,11 +728,13 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .operation-info-grid {
 
         gap: 10px;
 
     }
+
 
 
     .operation-icon-image {
@@ -550,12 +745,14 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .operation-icon {
 
         width: 48px;
         height: 48px;
 
     }
+
 
 
     .operation-icon img {
@@ -566,12 +763,14 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .other-operation-icon {
 
         width: 48px;
         height: 48px;
 
     }
+
 
 
     #other-operation-info .operation-title {
@@ -589,6 +788,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     body.light-mode #other-operation-info .operation-title {
 
         background: #d6d6d6 !important;
@@ -600,6 +800,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 }
+
 
 
 /* ==================================
@@ -615,6 +816,7 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .notification-button,
     .settings-button {
 
@@ -622,6 +824,7 @@ body.light-mode #other-operation-info .operation-title {
         height: 38px;
 
     }
+
 
 
     .operation-icon {
@@ -632,12 +835,14 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .operation-icon img {
 
         width: 44px;
         height: 44px;
 
     }
+
 
 
     .operation-icon-image {
@@ -648,12 +853,14 @@ body.light-mode #other-operation-info .operation-title {
     }
 
 
+
     .other-operation-icon {
 
         width: 44px;
         height: 44px;
 
     }
+
 
 
     #other-operation-info .operation-title {
@@ -665,6 +872,7 @@ body.light-mode #other-operation-info .operation-title {
         color: #ffffff !important;
 
     }
+
 
 
     body.light-mode #other-operation-info .operation-title {
@@ -679,7 +887,320 @@ body.light-mode #other-operation-info .operation-title {
 
 }
 
+
+
+/* ==================================
+   状態別カラーを最後に適用
+   ※メディアクエリより後でも
+     確実に反映させる
+================================== */
+
+/* ○ 平常運転 */
+
+#other-operation-info.other-normal {
+
+    background: transparent !important;
+
+    border-color: #808080 !important;
+
+}
+
+
+
+#other-operation-info.other-normal .operation-title {
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* △ 遅延 */
+
+#other-operation-info.other-delay {
+
+    background: transparent !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+#other-operation-info.other-delay .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* ！ 情報 */
+
+#other-operation-info.other-info {
+
+    background: transparent !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+#other-operation-info.other-info .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* × 運転見合わせ */
+
+#other-operation-info.other-suspended {
+
+    background: transparent !important;
+
+    border-color: #f44336 !important;
+
+}
+
+
+
+#other-operation-info.other-suspended .operation-title {
+
+    background: #f44336 !important;
+
+    background-color: #f44336 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* ==================================
+   ライトモード
+   状態別カラー
+================================== */
+
+body.light-mode #other-operation-info.other-normal {
+
+    background: transparent !important;
+
+    border-color: #808080 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-normal .operation-title {
+
+    background: #d6d6d6 !important;
+
+    background-color: #d6d6d6 !important;
+
+    color: #000000 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay {
+
+    background: transparent !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-delay .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-info {
+
+    background: transparent !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-info .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended {
+
+    background: transparent !important;
+
+    border-color: #f44336 !important;
+
+}
+
+
+
+body.light-mode #other-operation-info.other-suspended .operation-title {
+
+    background: #f44336 !important;
+
+    background-color: #f44336 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* ==================================
+   ダークモード
+   状態別カラー 最終指定
+================================== */
+
+/* ○ 通常 */
+
+body:not(.light-mode) #other-operation-info.other-normal {
+
+    background: transparent !important;
+
+    border: 2px solid #808080 !important;
+
+    border-color: #808080 !important;
+
+}
+
+
+
+body:not(.light-mode) #other-operation-info.other-normal .operation-title {
+
+    background: #808080 !important;
+
+    background-color: #808080 !important;
+
+    border-color: #808080 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* △ 遅延・運休 */
+
+body:not(.light-mode) #other-operation-info.other-delay {
+
+    background: transparent !important;
+
+    border: 2px solid #ff9800 !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+body:not(.light-mode) #other-operation-info.other-delay .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    border-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* ！ お知らせ */
+
+body:not(.light-mode) #other-operation-info.other-info {
+
+    background: transparent !important;
+
+    border: 2px solid #ff9800 !important;
+
+    border-color: #ff9800 !important;
+
+}
+
+
+
+body:not(.light-mode) #other-operation-info.other-info .operation-title {
+
+    background: #ff9800 !important;
+
+    background-color: #ff9800 !important;
+
+    border-color: #ff9800 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+
+/* × 運転見合わせ */
+
+body:not(.light-mode) #other-operation-info.other-suspended {
+
+    background: transparent !important;
+
+    border: 2px solid #f44336 !important;
+
+    border-color: #f44336 !important;
+
+}
+
+
+
+body:not(.light-mode) #other-operation-info.other-suspended .operation-title {
+
+    background: #f44336 !important;
+
+    background-color: #f44336 !important;
+
+    border-color: #f44336 !important;
+
+    color: #ffffff !important;
+
+}
+
 </style>
+
 
 
 <!-- Google Analytics -->
@@ -709,9 +1230,11 @@ gtag("config", "G-CKW0P57706");
 </head>
 
 
+
 <body onload="initializeHome()">
 
 <div class="home">
+
 
 
 <!-- ==================================
@@ -729,11 +1252,13 @@ gtag("config", "G-CKW0P57706");
 </div>
 
 
+
 <!-- ==================================
      ヘッダーボタン
 ================================== -->
 
 <div class="home-header-buttons">
+
 
 
 <!-- お知らせボタン -->
@@ -759,6 +1284,7 @@ gtag("config", "G-CKW0P57706");
 </button>
 
 
+
 <!-- 設定ボタン -->
 
 <button
@@ -780,6 +1306,7 @@ gtag("config", "G-CKW0P57706");
 </header>
 
 
+
 <!-- ==================================
      現在日時
 ================================== -->
@@ -795,6 +1322,7 @@ gtag("config", "G-CKW0P57706");
 </div>
 
 
+
 <!-- ==================================
      駅選択タイトル
 ================================== -->
@@ -806,11 +1334,13 @@ gtag("config", "G-CKW0P57706");
 </div>
 
 
+
 <!-- ==================================
      駅一覧
 ================================== -->
 
 <main class="station-grid">
+
 
 
 <!-- 栃木駅 -->
@@ -841,6 +1371,7 @@ gtag("config", "G-CKW0P57706");
 </a>
 
 
+
 <!-- 佐野駅 -->
 
 <a
@@ -869,6 +1400,7 @@ gtag("config", "G-CKW0P57706");
 </a>
 
 
+
 <!-- 足利駅 -->
 
 <a
@@ -895,6 +1427,7 @@ gtag("config", "G-CKW0P57706");
 </div>
 
 </a>
+
 
 
 <!-- 現在地 -->
@@ -927,11 +1460,13 @@ gtag("config", "G-CKW0P57706");
 </main>
 
 
+
 <!-- ==================================
      運行情報
 ================================== -->
 
 <div class="operation-info-grid">
+
 
 
 <!-- ==================================
@@ -958,6 +1493,7 @@ gtag("config", "G-CKW0P57706");
 >
 
 </div>
+
 
 
 <div class="operation-content">
@@ -992,26 +1528,32 @@ gtag("config", "G-CKW0P57706");
 </section>
 
 
+
 <!-- ==================================
      その他の路線
 ================================== -->
 
 <section
-    class="operation-info"
+    class="operation-info other-normal"
     id="other-operation-info"
     role="link"
     tabindex="0"
     aria-label="その他の路線の運行情報を開く"
 >
 
-<div class="other-operation-icon">
+<div
+    class="other-operation-icon"
+    id="other-operation-icon"
+>
 
 <img
-    src="{{ url_for('static', filename='icons/operation-info.png') }}"
-    alt="その他の路線"
+    id="other-operation-icon-image"
+    src="{{ url_for('static', filename='icons/operation-normal.png') }}"
+    alt="平常運転"
 >
 
 </div>
+
 
 
 <div class="operation-content">
@@ -1024,19 +1566,17 @@ gtag("config", "G-CKW0P57706");
     関東エリア
 </div>
 
-<div class="operation-text">
-    他の路線の運行情報を確認
+<div
+    class="operation-text"
+    id="other-operation-text"
+>
+    平常通り運転しています。
 </div>
 
 <div class="operation-updated">
     Other Lines
 </div>
 
-</div>
-
-
-<div class="other-operation-arrow">
-    →
 </div>
 
 </section>
@@ -1046,7 +1586,9 @@ gtag("config", "G-CKW0P57706");
 </div>
 
 
+
 <script>
+
 
 
 /* ==================================
@@ -1055,6 +1597,7 @@ gtag("config", "G-CKW0P57706");
 
 const notificationReadKey =
     "ryomoNotificationReadIds";
+
 
 
 /* ==================================
@@ -1071,6 +1614,7 @@ function getReadNotificationIds() {
                     notificationReadKey
                 ) || "[]"
             );
+
 
 
         if (
@@ -1095,9 +1639,11 @@ function getReadNotificationIds() {
     }
 
 
+
     return [];
 
 }
+
 
 
 /* ==================================
@@ -1138,6 +1684,7 @@ function setReadNotificationIds(
 }
 
 
+
 /* ==================================
    未読件数表示用数字
 ================================== */
@@ -1155,9 +1702,11 @@ function getNotificationCountText(
     }
 
 
+
     return String(number);
 
 }
+
 
 
 /* ==================================
@@ -1172,11 +1721,13 @@ async function updateNotificationBadge() {
         );
 
 
+
     if (!badge) {
 
         return;
 
     }
+
 
 
     try {
@@ -1195,6 +1746,7 @@ async function updateNotificationBadge() {
             );
 
 
+
         if (
             !response.ok
         ) {
@@ -1206,8 +1758,10 @@ async function updateNotificationBadge() {
         }
 
 
+
         const data =
             await response.json();
+
 
 
         const notifications =
@@ -1226,8 +1780,10 @@ async function updateNotificationBadge() {
                 );
 
 
+
         const readIds =
             getReadNotificationIds();
+
 
 
         const unreadCount =
@@ -1246,6 +1802,7 @@ async function updateNotificationBadge() {
                     }
 
 
+
                     return !readIds.includes(
                         String(item.id)
                     );
@@ -1253,6 +1810,7 @@ async function updateNotificationBadge() {
                 }
 
             ).length;
+
 
 
         if (
@@ -1283,12 +1841,14 @@ async function updateNotificationBadge() {
     }
 
 
+
     catch (error) {
 
         console.error(
             "お知らせ取得エラー:",
             error
         );
+
 
 
         badge.textContent = "";
@@ -1300,6 +1860,7 @@ async function updateNotificationBadge() {
     }
 
 }
+
 
 
 /* ==================================
@@ -1314,11 +1875,13 @@ function openNotifications() {
 }
 
 
+
 /* ==================================
    お知らせ未読件数確認
 ================================== */
 
 updateNotificationBadge();
+
 
 
 /* ==================================
@@ -1332,6 +1895,7 @@ setInterval(
     30000
 
 );
+
 
 
 /* ==================================
@@ -1358,6 +1922,7 @@ window.addEventListener(
 );
 
 
+
 /*
  * お知らせ画面からホームに戻った場合
  */
@@ -1373,6 +1938,7 @@ window.addEventListener(
     }
 
 );
+
 
 
 /*
@@ -1399,6 +1965,7 @@ document.addEventListener(
 );
 
 
+
 /*
  * ブラウザの別画面から
  * ホームに戻った場合にも再確認
@@ -1417,6 +1984,7 @@ window.addEventListener(
 );
 
 
+
 /* ==================================
    ホーム初期化
 ================================== */
@@ -1424,7 +1992,9 @@ window.addEventListener(
 function initializeHome() {
 
 
+
     applySavedDisplayMode();
+
 
 
     const urlParams =
@@ -1433,8 +2003,10 @@ function initializeHome() {
         );
 
 
+
     const forceHome =
         urlParams.get("home") === "1";
+
 
 
     if (forceHome) {
@@ -1448,7 +2020,9 @@ function initializeHome() {
     }
 
 
+
     updateClock();
+
 
 
     setInterval(
@@ -1457,13 +2031,34 @@ function initializeHome() {
     );
 
 
+
     loadOperationInfo();
+
 
 
     setInterval(
         loadOperationInfo,
         60000
     );
+
+
+
+    /*
+     * その他の路線の運行情報
+     *
+     * × → △ → ！ → ○
+     * の優先順位でアイコンを表示
+     */
+
+    loadOtherOperationInfo();
+
+
+
+    setInterval(
+        loadOtherOperationInfo,
+        60000
+    );
+
 
 
     if (forceHome) {
@@ -1473,10 +2068,12 @@ function initializeHome() {
     }
 
 
+
     const defaultStation =
         localStorage.getItem(
             "defaultStation"
         ) || "none";
+
 
 
     if (
@@ -1486,6 +2083,7 @@ function initializeHome() {
         return;
 
     }
+
 
 
     const stationIds = [
@@ -1515,6 +2113,7 @@ function initializeHome() {
     ];
 
 
+
     if (
         stationIds.includes(
             defaultStation
@@ -1530,6 +2129,7 @@ function initializeHome() {
     }
 
 
+
     if (
         defaultStation === "nearest"
     ) {
@@ -1543,6 +2143,7 @@ function initializeHome() {
     }
 
 }
+
 
 
 /* ==================================
@@ -1562,6 +2163,7 @@ function getTimetableFormat() {
 }
 
 
+
 /* ==================================
    駅ページを開く
 ================================== */
@@ -1572,6 +2174,7 @@ function openStationPage(
 
     const timetableFormat =
         getTimetableFormat();
+
 
 
     if (
@@ -1590,12 +2193,14 @@ function openStationPage(
     }
 
 
+
     window.location.href =
         "/station/"
         +
         stationId;
 
 }
+
 
 
 /* ==================================
@@ -1610,11 +2215,13 @@ function openStation(
     event.preventDefault();
 
 
+
     openStationPage(
         stationId
     );
 
 }
+
 
 
 /* ==================================
@@ -1629,8 +2236,10 @@ function applySavedDisplayMode() {
         ) || "system";
 
 
+
     let useLightMode =
         false;
+
 
 
     if (
@@ -1654,12 +2263,14 @@ function applySavedDisplayMode() {
     }
 
 
+
     document.body.classList.toggle(
         "light-mode",
         useLightMode
     );
 
 }
+
 
 
 /* ==================================
@@ -1672,12 +2283,14 @@ const systemThemeQuery =
     );
 
 
+
 function handleSystemThemeChange() {
 
     const currentMode =
         localStorage.getItem(
             "displayMode"
         ) || "system";
+
 
 
     if (
@@ -1689,6 +2302,7 @@ function handleSystemThemeChange() {
     }
 
 }
+
 
 
 if (
@@ -1711,6 +2325,7 @@ else {
 }
 
 
+
 /* ==================================
    駅情報
 ================================== */
@@ -1725,12 +2340,14 @@ const stations = [
     },
 
 
+
     {
         id: "omoigawa",
         name: "思川駅",
         lat: 36.3511557,
         lon: 139.7810172
     },
+
 
 
     {
@@ -1741,12 +2358,14 @@ const stations = [
     },
 
 
+
     {
         id: "ohirashita",
         name: "大平下駅",
         lat: 36.341166,
         lon: 139.700833
     },
+
 
 
     {
@@ -1757,12 +2376,14 @@ const stations = [
     },
 
 
+
     {
         id: "sano",
         name: "佐野駅",
         lat: 36.316633,
         lon: 139.578992
     },
+
 
 
     {
@@ -1773,12 +2394,14 @@ const stations = [
     },
 
 
+
     {
         id: "ashikaga_flower_park",
         name: "あしかがフラワーパーク駅",
         lat: 36.31516,
         lon: 139.51839
     },
+
 
 
     {
@@ -1789,12 +2412,14 @@ const stations = [
     },
 
 
+
     {
         id: "yamamae",
         name: "山前駅",
         lat: 36.34736,
         lon: 139.41128
     },
+
 
 
     {
@@ -1807,6 +2432,7 @@ const stations = [
 ];
 
 
+
 /* ==================================
    時計
 ================================== */
@@ -1817,8 +2443,10 @@ function updateClock() {
         new Date();
 
 
+
     const year =
         now.getFullYear();
+
 
 
     const month =
@@ -1830,6 +2458,7 @@ function updateClock() {
         );
 
 
+
     const day =
         String(
             now.getDate()
@@ -1837,6 +2466,7 @@ function updateClock() {
             2,
             "0"
         );
+
 
 
     const hours =
@@ -1848,6 +2478,7 @@ function updateClock() {
         );
 
 
+
     const minutes =
         String(
             now.getMinutes()
@@ -1857,6 +2488,7 @@ function updateClock() {
         );
 
 
+
     const seconds =
         String(
             now.getSeconds()
@@ -1864,6 +2496,7 @@ function updateClock() {
             2,
             "0"
         );
+
 
 
     const weekdays = [
@@ -1879,16 +2512,19 @@ function updateClock() {
     ];
 
 
+
     const weekday =
         weekdays[
             now.getDay()
         ];
 
 
+
     document.getElementById(
         "current-date"
     ).textContent =
         `${year}/${month}/${day}(${weekday})`;
+
 
 
     document.getElementById(
@@ -1899,8 +2535,169 @@ function updateClock() {
 }
 
 
+
 /* ==================================
-   運行情報
+   運行情報アイコン判定
+================================== */
+
+function getOperationDisplayType(
+    status,
+    detail,
+    message
+) {
+
+    const statusText =
+        String(status || "");
+
+    const detailText =
+        String(detail || "");
+
+    const messageText =
+        String(message || "");
+
+    const text =
+        statusText
+        + " "
+        + detailText
+        + " "
+        + messageText;
+
+
+
+    if (
+
+        (
+            text.includes("運転を再開")
+            ||
+            text.includes("運転再開")
+        )
+
+        &&
+
+        (
+            text.includes("遅れ")
+            ||
+            text.includes("遅延")
+            ||
+            text.includes("列車遅延")
+        )
+
+    ) {
+
+        return "delay";
+
+    }
+
+
+
+    if (
+
+        statusText === "運転見合わせ"
+
+        ||
+
+        text.includes("運転見合わせ")
+
+        ||
+
+        text.includes("運転を見合わせ")
+
+        ||
+
+        text.includes("運転を見合せ")
+
+    ) {
+
+        return "suspended";
+
+    }
+
+
+
+    if (
+
+        statusText === "運休"
+
+        ||
+
+        statusText === "一部運休"
+
+        ||
+
+        statusText === "遅延"
+
+        ||
+
+        text.includes("一部運休")
+
+        ||
+
+        text.includes("運休")
+
+        ||
+
+        text.includes("列車遅延")
+
+        ||
+
+        text.includes("遅延")
+
+        ||
+
+        text.includes("遅れ")
+
+    ) {
+
+        return "delay";
+
+    }
+
+
+
+    if (
+
+        statusText === "平常運転"
+
+        ||
+
+        text.includes("平常運転")
+
+    ) {
+
+        return "normal";
+
+    }
+
+
+
+    if (
+
+        statusText === "運転再開"
+
+        ||
+
+        text.includes("運転再開")
+
+        ||
+
+        text.includes("運転を再開")
+
+    ) {
+
+        return "normal";
+
+    }
+
+
+
+    return "info";
+
+}
+
+
+
+/* ==================================
+   両毛線 運行情報
 ================================== */
 
 async function loadOperationInfo() {
@@ -1911,10 +2708,12 @@ async function loadOperationInfo() {
         );
 
 
+
     const operationIconImage =
         document.getElementById(
             "operation-icon-image"
         );
+
 
 
     const operationStatus =
@@ -1923,16 +2722,19 @@ async function loadOperationInfo() {
         );
 
 
+
     const operationText =
         document.getElementById(
             "operation-text"
         );
 
 
+
     const operationUpdated =
         document.getElementById(
             "operation-updated"
         );
+
 
 
     try {
@@ -1946,6 +2748,7 @@ async function loadOperationInfo() {
             );
 
 
+
         if (!response.ok) {
 
             throw new Error(
@@ -1955,16 +2758,32 @@ async function loadOperationInfo() {
         }
 
 
+
         const data =
             await response.json();
+
+
+
+        const displayType =
+            getOperationDisplayType(
+
+                data.status,
+
+                data.detail,
+
+                data.message
+
+            );
+
 
 
         operationBox.className =
             "operation-info";
 
 
+
         if (
-            data.status === "平常運転"
+            displayType === "normal"
         ) {
 
             operationBox.classList.add(
@@ -1972,16 +2791,21 @@ async function loadOperationInfo() {
             );
 
 
+
             operationIconImage.src =
                 "{{ url_for('static', filename='icons/operation-normal.png') }}";
+
 
 
             operationIconImage.alt =
                 "平常運転";
 
 
+
             operationStatus.textContent =
+                data.status ||
                 "平常運転";
+
 
 
             operationText.textContent =
@@ -1991,8 +2815,9 @@ async function loadOperationInfo() {
         }
 
 
+
         else if (
-            data.status === "遅延"
+            displayType === "delay"
         ) {
 
             operationBox.classList.add(
@@ -2000,33 +2825,33 @@ async function loadOperationInfo() {
             );
 
 
+
             operationIconImage.src =
                 "{{ url_for('static', filename='icons/operation-delay.png') }}";
 
 
+
             operationIconImage.alt =
-                "遅延";
+                "△ 運行情報";
+
 
 
             operationStatus.textContent =
-                "遅延";
+                data.status ||
+                "運行情報";
+
 
 
             operationText.textContent =
                 data.message ||
-                "両毛線は、一部列車に遅れが出ています。";
+                "両毛線で運行情報があります。";
 
         }
 
 
+
         else if (
-
-            data.status === "運転見合わせ"
-
-            ||
-
-            data.status === "運休"
-
+            displayType === "suspended"
         ) {
 
             operationBox.classList.add(
@@ -2034,16 +2859,21 @@ async function loadOperationInfo() {
             );
 
 
+
             operationIconImage.src =
                 "{{ url_for('static', filename='icons/operation-suspended.png') }}";
 
 
+
             operationIconImage.alt =
-                data.status;
+                "× 運転見合わせ";
+
 
 
             operationStatus.textContent =
-                data.status;
+                data.status ||
+                "運転見合わせ";
+
 
 
             operationText.textContent =
@@ -2053,6 +2883,7 @@ async function loadOperationInfo() {
         }
 
 
+
         else {
 
             operationBox.classList.add(
@@ -2060,24 +2891,29 @@ async function loadOperationInfo() {
             );
 
 
+
             operationIconImage.src =
                 "{{ url_for('static', filename='icons/operation-info.png') }}";
 
 
+
             operationIconImage.alt =
-                "情報取得中";
+                "！ 運行情報";
+
 
 
             operationStatus.textContent =
                 data.status ||
-                "情報取得中";
+                "運行情報";
+
 
 
             operationText.textContent =
                 data.message ||
-                "現在、運行情報を取得しています。";
+                "現在、運行情報があります。";
 
         }
+
 
 
         if (
@@ -2105,6 +2941,7 @@ async function loadOperationInfo() {
     }
 
 
+
     catch (error) {
 
         console.error(
@@ -2113,24 +2950,30 @@ async function loadOperationInfo() {
         );
 
 
+
         operationBox.className =
             "operation-info unknown";
+
 
 
         operationIconImage.src =
             "{{ url_for('static', filename='icons/operation-info.png') }}";
 
 
+
         operationIconImage.alt =
-            "情報取得中";
+            "！ 情報取得中";
+
 
 
         operationStatus.textContent =
             "情報取得中";
 
 
+
         operationText.textContent =
             "現在、運行情報を取得できません。";
+
 
 
         operationUpdated.textContent =
@@ -2139,6 +2982,576 @@ async function loadOperationInfo() {
     }
 
 }
+
+
+
+/* ==================================
+   その他の路線 運行情報判定
+================================== */
+
+function getOtherOperationDisplayType(
+    lines
+) {
+
+    let hasSuspended =
+        false;
+
+    let hasDelay =
+        false;
+
+    let hasInfo =
+        false;
+
+
+
+    if (
+        !Array.isArray(lines)
+    ) {
+
+        return "normal";
+
+    }
+
+
+
+    lines.forEach(
+        function(line) {
+
+            if (
+                !line
+                ||
+                typeof line !== "object"
+            ) {
+
+                return;
+
+            }
+
+
+
+            const status =
+                String(
+                    line.status || ""
+                );
+
+
+
+            const detail =
+                String(
+                    line.detail || ""
+                );
+
+
+
+            const message =
+                String(
+                    line.message || ""
+                );
+
+
+
+            const text =
+                status
+                + " "
+                + detail
+                + " "
+                + message;
+
+
+
+            if (
+
+                status === "suspended"
+
+                ||
+
+                status === "運転見合わせ"
+
+                ||
+
+                text.includes(
+                    "運転見合わせ"
+                )
+
+                ||
+
+                text.includes(
+                    "運転を見合わせ"
+                )
+
+                ||
+
+                text.includes(
+                    "運転を見合せ"
+                )
+
+                ||
+
+                text.includes(
+                    "運休"
+                )
+
+                ||
+
+                text.includes(
+                    "一部運休"
+                )
+
+            ) {
+
+                hasSuspended =
+                    true;
+
+                return;
+
+            }
+
+
+
+            if (
+
+                status === "delay"
+
+                ||
+
+                status === "遅延"
+
+                ||
+
+                text.includes(
+                    "遅延"
+                )
+
+                ||
+
+                text.includes(
+                    "遅れ"
+                )
+
+                ||
+
+                text.includes(
+                    "列車遅延"
+                )
+
+            ) {
+
+                hasDelay =
+                    true;
+
+                return;
+
+            }
+
+
+
+            if (
+
+                status === "info"
+
+                ||
+
+                status === "unknown"
+
+                ||
+
+                text.includes(
+                    "お知らせ"
+                )
+
+                ||
+
+                text.includes(
+                    "運転計画"
+                )
+
+                ||
+
+                text.includes(
+                    "その他"
+                )
+
+            ) {
+
+                hasInfo =
+                    true;
+
+            }
+
+        }
+    );
+
+
+
+    if (
+        hasSuspended
+    ) {
+
+        return "suspended";
+
+    }
+
+
+
+    if (
+        hasDelay
+    ) {
+
+        return "delay";
+
+    }
+
+
+
+    if (
+        hasInfo
+    ) {
+
+        return "info";
+
+    }
+
+
+
+    return "normal";
+
+}
+
+
+
+/* ==================================
+   その他の路線 運行情報
+================================== */
+
+async function loadOtherOperationInfo() {
+
+    const iconImage =
+        document.getElementById(
+            "other-operation-icon-image"
+        );
+
+
+
+    const otherOperationBox =
+        document.getElementById(
+            "other-operation-info"
+        );
+
+
+
+    const otherOperationText =
+        document.getElementById(
+            "other-operation-text"
+        );
+
+
+
+    if (
+        !iconImage
+        ||
+        !otherOperationBox
+    ) {
+
+        return;
+
+    }
+
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "/api/other-operation?"
+                +
+                Date.now(),
+
+                {
+                    cache: "no-store"
+                }
+
+            );
+
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "その他の路線情報の取得に失敗しました"
+            );
+
+        }
+
+
+
+        const data =
+            await response.json();
+
+
+
+        let lines =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+
+        if (
+            !Array.isArray(data)
+            &&
+            Array.isArray(
+                data.lines
+            )
+        ) {
+
+            lines =
+                data.lines;
+
+        }
+
+
+
+        const displayType =
+            getOtherOperationDisplayType(
+                lines
+            );
+
+
+
+        /*
+         * ==================================
+         * 状態クラスをリセット
+         * ==================================
+         */
+
+        otherOperationBox.classList.remove(
+
+            "other-normal",
+
+            "other-delay",
+
+            "other-info",
+
+            "other-suspended"
+
+        );
+
+
+
+        /*
+         * ==================================
+         * ○ 正常
+         * ==================================
+         */
+
+        if (
+            displayType === "normal"
+        ) {
+
+            otherOperationBox.classList.add(
+                "other-normal"
+            );
+
+
+
+            iconImage.src =
+                "{{ url_for('static', filename='icons/operation-normal.png') }}";
+
+
+
+            iconImage.alt =
+                "平常運転";
+
+
+
+            if (
+                otherOperationText
+            ) {
+
+                otherOperationText.textContent =
+                    "平常通り運転しています。";
+
+            }
+
+        }
+
+
+
+        /*
+         * ==================================
+         * △ 遅延
+         * ==================================
+         */
+
+        else if (
+            displayType === "delay"
+        ) {
+
+            otherOperationBox.classList.add(
+                "other-delay"
+            );
+
+
+
+            iconImage.src =
+                "{{ url_for('static', filename='icons/operation-delay.png') }}";
+
+
+
+            iconImage.alt =
+                "遅延";
+
+
+
+            if (
+                otherOperationText
+            ) {
+
+                otherOperationText.textContent =
+                    "遅延・運休に関する情報があります。";
+
+            }
+
+        }
+
+
+
+        /*
+         * ==================================
+         * × 運休・運転見合わせ
+         * ==================================
+         */
+
+        else if (
+            displayType === "suspended"
+        ) {
+
+            otherOperationBox.classList.add(
+                "other-suspended"
+            );
+
+
+
+            iconImage.src =
+                "{{ url_for('static', filename='icons/operation-suspended.png') }}";
+
+
+
+            iconImage.alt =
+                "運休・運転見合わせ";
+
+
+
+            if (
+                otherOperationText
+            ) {
+
+                otherOperationText.textContent =
+                    "運転見合わせの情報があります。";
+
+            }
+
+        }
+
+
+
+        /*
+         * ==================================
+         * ！ その他
+         * ==================================
+         */
+
+        else {
+
+            otherOperationBox.classList.add(
+                "other-info"
+            );
+
+
+
+            iconImage.src =
+                "{{ url_for('static', filename='icons/operation-info.png') }}";
+
+
+
+            iconImage.alt =
+                "運行情報あり";
+
+
+
+            if (
+                otherOperationText
+            ) {
+
+                otherOperationText.textContent =
+                    "お知らせがあります。";
+
+            }
+
+        }
+
+    }
+
+
+
+    catch (error) {
+
+        console.error(
+            "その他の路線運行情報取得エラー:",
+            error
+        );
+
+
+
+        /*
+         * API取得失敗時も
+         * 情報アイコン＋オレンジ表示
+         */
+
+        otherOperationBox.classList.remove(
+
+            "other-normal",
+
+            "other-delay",
+
+            "other-info",
+
+            "other-suspended"
+
+        );
+
+
+
+        otherOperationBox.classList.add(
+            "other-info"
+        );
+
+
+
+        iconImage.src =
+            "{{ url_for('static', filename='icons/operation-info.png') }}";
+
+
+
+        iconImage.alt =
+            "運行情報";
+
+
+
+        if (
+            otherOperationText
+        ) {
+
+            otherOperationText.textContent =
+                "お知らせがあります。";
+
+        }
+
+    }
+
+}
+
 
 
 /* ==================================
@@ -2160,16 +3573,19 @@ function openOperationInfo() {
 }
 
 
+
 const operationInfo =
     document.getElementById(
         "operation-info"
     );
 
 
+
 operationInfo.addEventListener(
     "click",
     openOperationInfo
 );
+
 
 
 /* ==================================
@@ -2203,6 +3619,7 @@ operationInfo.addEventListener(
 );
 
 
+
 /* ==================================
    その他の路線
 ================================== */
@@ -2215,16 +3632,19 @@ function openOtherOperationInfo() {
 }
 
 
+
 const otherOperationInfo =
     document.getElementById(
         "other-operation-info"
     );
 
 
+
 otherOperationInfo.addEventListener(
     "click",
     openOtherOperationInfo
 );
+
 
 
 /* ==================================
@@ -2258,6 +3678,7 @@ otherOperationInfo.addEventListener(
 );
 
 
+
 /* ==================================
    設定
 ================================== */
@@ -2268,6 +3689,7 @@ function openSettings() {
         "/settings";
 
 }
+
 
 
 /* ==================================
@@ -2295,6 +3717,7 @@ function findNearestStation(
     }
 
 
+
     navigator.geolocation.getCurrentPosition(
 
         function(position) {
@@ -2303,16 +3726,20 @@ function findNearestStation(
                 position.coords.latitude;
 
 
+
             const userLon =
                 position.coords.longitude;
+
 
 
             let nearestStation =
                 null;
 
 
+
             let nearestDistance =
                 Infinity;
+
 
 
             stations.forEach(
@@ -2330,6 +3757,7 @@ function findNearestStation(
                         );
 
 
+
                     if (
                         distance <
                         nearestDistance
@@ -2339,6 +3767,7 @@ function findNearestStation(
                             distance;
 
 
+
                         nearestStation =
                             station;
 
@@ -2346,6 +3775,7 @@ function findNearestStation(
 
                 }
             );
+
 
 
             if (
@@ -2361,12 +3791,14 @@ function findNearestStation(
         },
 
 
+
         function(error) {
 
             console.error(
                 "現在地取得エラー:",
                 error
             );
+
 
 
             if (
@@ -2396,6 +3828,7 @@ function findNearestStation(
         },
 
 
+
         {
 
             enableHighAccuracy: true,
@@ -2409,6 +3842,7 @@ function findNearestStation(
     );
 
 }
+
 
 
 /* ==================================
@@ -2429,16 +3863,19 @@ function calculateDistance(
         6371;
 
 
+
     const dLat =
         (lat2 - lat1)
         * Math.PI
         / 180;
 
 
+
     const dLon =
         (lon2 - lon1)
         * Math.PI
         / 180;
+
 
 
     const a =
@@ -2474,6 +3911,7 @@ function calculateDistance(
         );
 
 
+
     const c =
         2 *
         Math.atan2(
@@ -2485,6 +3923,7 @@ function calculateDistance(
             )
 
         );
+
 
 
     return R * c;
