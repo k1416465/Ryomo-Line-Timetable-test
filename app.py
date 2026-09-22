@@ -783,48 +783,38 @@ def station_timetable(
 # 列車詳細
 # ==================================================
 
-@app.route(
-    "/train/<path:train_number>"
-)
-def train_detail(
-    train_number
-):
+@app.route("/train/<path:train_number>")
+def train_detail(train_number):
 
     data = load_timetable()
 
-
     target = None
 
+    # ------------------------------------------
+    # 列車番号から列車を検索
+    # ------------------------------------------
 
-    for train in data.get(
-        "trains",
-        []
-    ):
+    for train in data.get("trains", []):
 
-        current_number = get_train_number(
-            train
-        )
+        current_number = get_train_number(train)
 
+        if current_number == train_number:
 
-        if (
-            current_number
-            == train_number
-        ):
-
-            target = normalize_train(
-                train
-            )
+            target = normalize_train(train)
 
             break
 
+    # ------------------------------------------
+    # 列車が見つからない場合
+    # ------------------------------------------
 
     if target is None:
 
-        return (
-            "列車が見つかりません",
-            404
-        )
+        return "列車が見つかりません", 404
 
+    # ==================================================
+    # 駅名 → 英語
+    # ==================================================
 
     station_english_map = {
 
@@ -839,6 +829,7 @@ def train_detail(
         "あしかがフラワーパーク": "Ashikaga Flower Park",
         "山前": "Yamamae",
         "小俣": "Omata",
+
         "桐生": "Kiryū",
         "岩宿": "Iwajuku",
         "国定": "Kunisada",
@@ -850,6 +841,7 @@ def train_detail(
         "井野": "Ino",
         "高崎問屋町": "Takasakitonyamachi",
         "高崎": "Takasaki",
+
         "大宮": "Ōmiya",
         "浦和": "Urawa",
         "上野": "Ueno",
@@ -873,6 +865,9 @@ def train_detail(
 
     }
 
+    # ==================================================
+    # 種別 → 英語
+    # ==================================================
 
     type_english_map = {
 
@@ -886,19 +881,35 @@ def train_detail(
 
     }
 
+    # ==================================================
+    # 行先 → 英語
+    # ==================================================
 
     destination_english_map = {
 
         "高崎": "Takasaki",
+        "高崎問屋町": "Takasakitonyamachi",
+        "井野": "Ino",
         "新前橋": "Shin-Maebashi",
         "前橋": "Maebashi",
+        "前橋大島": "Maebashiōshima",
+        "駒形": "Komagata",
         "伊勢崎": "Isesaki",
+        "国定": "Kunisada",
+        "岩宿": "Iwajuku",
         "桐生": "Kiryū",
+        "小俣": "Omata",
+        "山前": "Yamamae",
         "足利": "Ashikaga",
+        "あしかがフラワーパーク": "Ashikaga Flower Park",
+        "富田": "Tomita",
         "佐野": "Sano",
         "岩舟": "Iwafune",
+        "大平下": "Ōhirashita",
         "栃木": "Tochigi",
+        "思川": "Omoigawa",
         "小山": "Oyama",
+
         "大船": "Ōfuna",
         "新宿": "Shinjuku",
         "吉川美南": "Yoshikawaminami",
@@ -908,28 +919,159 @@ def train_detail(
 
     }
 
+    # ==================================================
+    # 基本情報を確定
+    # ==================================================
 
-    target["station_english_map"] = (
-        station_english_map
+    actual_train_number = get_train_number(target)
+
+    train_type = target.get(
+        "type",
+        "普通"
+    ) or "普通"
+
+    cars = target.get(
+        "cars",
+        ""
     )
 
-    target["type_english_map"] = (
-        type_english_map
+    destination = target.get(
+        "destination",
+        ""
     )
 
-    target["destination_english_map"] = (
-        destination_english_map
+    type_english = type_english_map.get(
+        train_type,
+        train_type
     )
 
+    destination_english = destination_english_map.get(
+        destination,
+        destination
+    )
+
+    # ==================================================
+    # 停車駅データを作成
+    # ==================================================
+
+    stops = []
+
+    raw_stops = target.get(
+        "stops",
+        {}
+    )
+
+    # ------------------------------------------
+    # stops が辞書形式の場合
+    #
+    # {
+    #   "小山": {
+    #       "arrival": "",
+    #       "departure": "6:10"
+    #   },
+    #   "思川": {
+    #       "arrival": "6:17",
+    #       "departure": "6:18"
+    #   }
+    # }
+    # ------------------------------------------
+
+    if isinstance(raw_stops, dict):
+
+        for station_name, station_time in raw_stops.items():
+
+            if not isinstance(
+                station_time,
+                dict
+            ):
+                station_time = {}
+
+            stops.append({
+
+                "name": station_name,
+
+                "english": station_english_map.get(
+                    station_name,
+                    station_name
+                ),
+
+                "arrival": station_time.get(
+                    "arrival",
+                    ""
+                ),
+
+                "departure": station_time.get(
+                    "departure",
+                    ""
+                )
+
+            })
+
+    # ------------------------------------------
+    # stops がリスト形式の場合にも対応
+    # ------------------------------------------
+
+    elif isinstance(raw_stops, list):
+
+        for item in raw_stops:
+
+            if not isinstance(
+                item,
+                dict
+            ):
+                continue
+
+            station_name = (
+                item.get("name")
+                or item.get("station")
+                or ""
+            )
+
+            stops.append({
+
+                "name": station_name,
+
+                "english": (
+                    item.get("english")
+                    or station_english_map.get(
+                        station_name,
+                        station_name
+                    )
+                ),
+
+                "arrival": item.get(
+                    "arrival",
+                    ""
+                ),
+
+                "departure": item.get(
+                    "departure",
+                    ""
+                )
+
+            })
+
+    # ==================================================
+    # テンプレートへ渡す
+    # ==================================================
 
     return render_template(
 
         "train_detail.html",
 
-        train=target
+        train=target,
+
+        train_number=actual_train_number,
+
+        cars=cars,
+
+        type_english=type_english,
+
+        destination_english=destination_english,
+
+        stops=stops
 
     )
-
 
 # ==================================================
 # 設定
@@ -1340,87 +1482,131 @@ def classify_operation_status(
 ):
 
     text = normalize_yahoo_text(
-
         f"{status_text} {detail_text}"
-
     )
 
 
+    # ==================================================
+    # 運転再開後に遅れが発生している場合
+    # → 遅延として扱う
+    # ==================================================
+
     if (
+        (
+            "運転再開" in text
+            or "運転を再開" in text
+        )
+        and
+        (
+            "列車遅延" in text
+            or "遅延" in text
+            or "遅れ" in text
+        )
+    ):
 
+        return "遅延"
+
+
+    # ==================================================
+    # 一部運休
+    # ==================================================
+
+    if (
+        "一部運休" in text
+        or "一部列車に運休" in text
+        or "一部列車が運休" in text
+        or "一部列車は運休" in text
+        or "一部の列車に運休" in text
+        or "一部の列車が運休" in text
+    ):
+
+        return "一部運休"
+
+
+    # ==================================================
+    # 運転見合わせ
+    # ==================================================
+
+    if (
         "運転見合わせ" in text
-
         or "運転を見合わせ" in text
-
         or "運転を見合せ" in text
-
     ):
 
         return "運転見合わせ"
 
 
-    if "一部運休" in text:
+    # ==================================================
+    # 運休
+    # ==================================================
 
-        return "一部運休"
-
-
-    if (
-
-        "運休" in text
-
-        and "一部運休" not in text
-
-    ):
+    if "運休" in text:
 
         return "運休"
 
 
+    # ==================================================
+    # 平常運転
+    # ==================================================
+
     if (
-
         "平常運転" in text
-
         or "通常運転" in text
-
         or "事故・遅延情報はありません" in text
-
         or "事故･遅延情報はありません" in text
-
         or "事故・遅延に関する情報はありません" in text
-
         or "事故･遅延に関する情報はありません" in text
-
     ):
 
         return "平常運転"
 
+
+    # ==================================================
+    # 運転状況
+    # ==================================================
 
     if "運転状況" in text:
 
         return "運転状況"
 
 
+    # ==================================================
+    # 運転計画
+    # ==================================================
+
     if "運転計画" in text:
 
         return "運転計画"
 
 
-    if "運転再開" in text:
+    # ==================================================
+    # 運転再開
+    # ==================================================
+
+    if (
+        "運転再開" in text
+        or "運転を再開" in text
+    ):
 
         return "運転再開"
 
 
+    # ==================================================
+    # 遅延
+    # ==================================================
+
     if (
-
         "列車遅延" in text
-
         or "遅延" in text
-
         or "遅れ" in text
-
     ):
 
         return "遅延"
 
+
+    # ==================================================
+    # お知らせ
+    # ==================================================
 
     if "お知らせ" in text:
 
@@ -1445,155 +1631,150 @@ def extract_yahoo_detail(
 ):
 
     if not text:
-
         return ""
 
 
-    text = normalize_yahoo_text(
-        text
-    )
+    text = normalize_yahoo_text(text)
 
 
     if (
-
         "平常運転" in text
-
         and (
-
             "事故・遅延情報はありません" in text
-
             or "事故･遅延情報はありません" in text
-
             or "事故・遅延に関する情報はありません" in text
-
             or "事故･遅延に関する情報はありません" in text
-
         )
-
     ):
-
         return ""
 
 
+    # ステータス語が実際の詳細文の中に含まれている場合があります。
+    # そのため、文中の最初の「運休」などを直接切り出すのではなく、
+    # 更新時刻や路線名より後にあるステータス見出しを探します。
     status_patterns = [
-
         "運転見合わせ",
-
         "運転を見合わせ",
-
         "運転を見合せ",
-
         "一部運休",
-
-        "運休",
-
         "運転状況",
-
         "運転計画",
-
         "運転再開",
-
         "列車遅延",
-
+        "運休",
         "遅延",
-
         "遅れ",
-
         "お知らせ"
-
     ]
 
 
-    for status_word in status_patterns:
-
-        position = text.find(
-            status_word
-        )
+    start_positions = []
 
 
-        if position == -1:
+    updated = extract_yahoo_updated(text)
 
-            continue
-
-
-        after = text[
-            position + len(status_word):
-        ].strip()
-
-
-        after = re.sub(
-
-            r"^[:：\s]+",
-
-            "",
-
-            after
-
-        )
-
-
-        cut_words = [
-
-            "迂回ルート検索",
-
-            "路線を登録すると",
-
-            "路線を登録",
-
-            "運行情報トップへ戻る",
-
-            "路線情報トップへ戻る"
-
-        ]
-
-
-        cut_positions = []
-
-
-        for word in cut_words:
-
-            p = after.find(
-                word
+    if updated:
+        position = text.find(updated)
+        if position != -1:
+            start_positions.append(
+                position + len(updated)
             )
 
-            if p != -1:
 
-                cut_positions.append(
-                    p
-                )
-
-
-        if cut_positions:
-
-            after = after[
-                :min(cut_positions)
-            ]
+    if yahoo_name:
+        position = text.find(yahoo_name)
+        if position != -1:
+            start_positions.append(
+                position + len(yahoo_name)
+            )
 
 
-        after = normalize_yahoo_text(
-            after
+    start_position = (
+        max(start_positions)
+        if start_positions
+        else 0
+    )
+
+
+    candidates = []
+
+    for status_word in status_patterns:
+        position = text.find(
+            status_word,
+            start_position
         )
 
+        if position != -1:
+            candidates.append(
+                (position, status_word)
+            )
 
-        after = re.sub(
 
-            r"\s*（\s*\d{1,2}月\d{1,2}日.*?掲載\s*）",
+    if not candidates:
+        return ""
 
-            "",
 
-            after
-
+    status_position, status_word = min(
+        candidates,
+        key=lambda item: (
+            item[0],
+            -len(item[1])
         )
+    )
 
 
-        after = normalize_yahoo_text(
-            after
-        )
+    after = text[
+        status_position + len(status_word):
+    ].strip()
 
 
-        if after:
+    after = re.sub(
+        r"^[:：\s]+",
+        "",
+        after
+    )
 
-            return after[:1000]
+
+    cut_words = [
+        "迂回ルート検索",
+        "路線を登録すると",
+        "路線を登録",
+        "運行情報トップへ戻る",
+        "路線情報トップへ戻る",
+        "関東の運行情報へ戻る",
+        "Yahoo!乗換案内",
+        "推奨環境",
+        "Copyright ©"
+    ]
+
+
+    cut_positions = []
+
+    for word in cut_words:
+        position = after.find(word)
+        if position != -1:
+            cut_positions.append(position)
+
+
+    if cut_positions:
+        after = after[:min(cut_positions)]
+
+
+    after = normalize_yahoo_text(after)
+
+
+    after = re.sub(
+        r"\s*（\s*\d{1,2}月\d{1,2}日.*?掲載\s*）",
+        "",
+        after
+    )
+
+
+    after = normalize_yahoo_text(after)
+
+
+    if after:
+        return after[:1000]
 
 
     return ""

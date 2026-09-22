@@ -2416,9 +2416,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "421M",
+      "train_number": "421M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "桐生",
       "destination": "小山",
@@ -2475,9 +2475,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "423M",
+      "train_number": "423M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "桐生",
       "destination": "小山",
@@ -2534,9 +2534,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "425M",
+      "train_number": "425M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -2633,9 +2633,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "427M",
+      "train_number": "427M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "桐生",
       "destination": "小山",
@@ -2692,9 +2692,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "429M",
+      "train_number": "429M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -2791,9 +2791,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "431M",
+      "train_number": "431M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -2890,9 +2890,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "433M",
+      "train_number": "433M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -2989,9 +2989,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "437M",
+      "train_number": "437M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3088,9 +3088,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "439M",
+      "train_number": "439M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3187,9 +3187,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "441M",
+      "train_number": "441M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3286,9 +3286,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "443M",
+      "train_number": "443M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3385,9 +3385,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "445M",
+      "train_number": "445M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3484,9 +3484,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "447M",
+      "train_number": "447M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3583,9 +3583,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "449M",
+      "train_number": "449M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3682,9 +3682,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "451M",
+      "train_number": "451M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3781,9 +3781,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "453M",
+      "train_number": "453M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3880,9 +3880,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "455M",
+      "train_number": "455M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -3979,9 +3979,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "459M",
+      "train_number": "459M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4078,9 +4078,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "461M",
+      "train_number": "461M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4177,9 +4177,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "463M",
+      "train_number": "463M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4276,9 +4276,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "465M",
+      "train_number": "465M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4375,9 +4375,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "467M",
+      "train_number": "467M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4474,9 +4474,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "469M",
+      "train_number": "469M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4573,9 +4573,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "471M",
+      "train_number": "471M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4672,9 +4672,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "475M",
+      "train_number": "475M",
+      "type": "普通",
+      "cars": "4両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
@@ -4771,9 +4771,9 @@
       }
     },
     {
-      "train_number": "普通",
-      "type": "",
-      "cars": "479M",
+      "train_number": "479M",
+      "type": "普通",
+      "cars": "6両",
       "direction": "下り",
       "origin": "高崎",
       "destination": "小山",
