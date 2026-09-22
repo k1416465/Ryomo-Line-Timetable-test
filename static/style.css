@@ -512,32 +512,63 @@ body {
     その他の路線
 ================================== */
 
-/*
-    カード全体の背景は変更しない。
-    枠とタイトル部分だけ #808080 にする。
-*/
-
 #other-operation-info {
+    border: 3px solid #808080 !important;
     border-color: #808080 !important;
 }
 
-
-/* 「その他の路線」のタイトル部分 */
 #other-operation-info .operation-title {
     background: #808080 !important;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
-
-/* その他の路線の更新時刻 */
 #other-operation-info .operation-updated {
     color: #aaaaaa;
 }
 
 
-/* その他の路線の矢印 */
-#other-operation-info .other-operation-arrow {
-    color: inherit;
+/* ==================================
+    その他の路線 状態別
+================================== */
+
+body:not(.light-mode) #other-operation-info.other-normal {
+    border: 3px solid #808080 !important;
+    border-color: #808080 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-normal .operation-title {
+    background: #808080 !important;
+    color: #000000 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-delay {
+    border: 3px solid #ff9700 !important;
+    border-color: #ff9700 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-delay .operation-title {
+    background: #ff9700 !important;
+    color: #000000 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-info {
+    border: 3px solid #ff9700 !important;
+    border-color: #ff9700 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-info .operation-title {
+    background: #ff9700 !important;
+    color: #000000 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-suspended {
+    border: 3px solid #ff1744 !important;
+    border-color: #ff1744 !important;
+}
+
+body:not(.light-mode) #other-operation-info.other-suspended .operation-title {
+    background: #ff6b81 !important;
+    color: #000000 !important;
 }
 
 
@@ -683,6 +714,17 @@ body {
         width: 34px;
         height: 34px;
     }
+
+    #other-operation-info {
+        border-width: 2px !important;
+    }
+
+    body:not(.light-mode) #other-operation-info.other-normal,
+    body:not(.light-mode) #other-operation-info.other-delay,
+    body:not(.light-mode) #other-operation-info.other-info,
+    body:not(.light-mode) #other-operation-info.other-suspended {
+        border-width: 2px !important;
+    }
 }
 
 
@@ -692,158 +734,157 @@ body {
 
 @media (max-width: 600px) {
 
+    /* ホームだけ縦方向の余白を縮小 */
     body {
-        padding: 8px;
+        padding: 6px;
+    }
+
+    .home {
+        width: 100%;
     }
 
     .home-header {
-        padding-top: 48px;
-        margin-bottom: 18px;
+        padding-top: 38px;
+        margin-bottom: 12px;
     }
 
     .home-header h1 {
-        font-size: 34px;
+        font-size: 31px;
         letter-spacing: 1px;
     }
 
     .english-title {
-        margin-top: 8px;
-        font-size: 14px;
+        margin-top: 5px;
+        font-size: 12px;
         letter-spacing: 1px;
     }
 
     .settings-button {
-        width: 42px;
-        height: 42px;
-
-        right: 2px;
+        width: 36px;
+        height: 36px;
+        right: 1px;
     }
 
     .current-info {
-        gap: 10px;
-
-        margin-bottom: 18px;
-
-        font-size: 14px;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 12px;
     }
 
     .date-divider {
-        height: 16px;
+        height: 14px;
     }
 
     .select-title {
-        margin-bottom: 15px;
-
-        font-size: 19px;
+        margin-bottom: 10px;
+        font-size: 17px;
     }
 
     .station-grid {
-        gap: 10px;
+        gap: 7px;
     }
 
     .station-card {
-        min-height: 190px;
+        min-height: 165px;
 
-        padding: 14px 18px;
+        padding: 10px 12px;
 
-        border-width: 3px;
-        border-radius: 14px;
+        border-width: 2px;
+        border-radius: 12px;
     }
 
     .station-icon {
-        width: 80px;
-        height: 60px;
+        width: 68px;
+        height: 50px;
 
-        margin-bottom: 7px;
+        margin-bottom: 4px;
     }
 
     .station-name {
-        font-size: 22px;
+        font-size: 20px;
+        line-height: 1.05;
     }
 
     .station-en {
-        margin-top: 5px;
-
-        font-size: 10px;
+        margin-top: 3px;
+        font-size: 9px;
     }
 
     .arrow {
-        right: 7px;
-
-        font-size: 34px;
+        right: 5px;
+        font-size: 29px;
     }
 
     .operation-info {
-        gap: 8px;
+        gap: 7px;
 
-        margin-top: 15px;
+        margin-top: 10px;
 
-        padding: 10px;
+        padding: 8px;
 
-        min-height: 75px;
+        min-height: 65px;
 
         border-width: 2px;
-        border-radius: 13px;
+        border-radius: 11px;
     }
 
     .operation-icon {
-        width: 36px;
-        height: 36px;
+        width: 31px;
+        height: 31px;
 
-        border-radius: 8px;
+        border-radius: 7px;
 
-        transform: translateY(-5px);
+        transform: translateY(-4px);
     }
 
     .operation-title {
-        padding: 4px 8px;
-
-        font-size: 12px;
+        padding: 3px 7px;
+        font-size: 11px;
     }
 
     .operation-status {
-        margin-left: 5px;
-
-        font-size: 12px;
+        margin-left: 4px;
+        font-size: 11px;
     }
 
     .operation-text {
-        margin-top: 4px;
-
-        font-size: 10px;
+        margin-top: 3px;
+        font-size: 9px;
+        line-height: 1.35;
     }
 
     .operation-updated {
-        margin-top: 3px;
-
-        font-size: 8px;
+        margin-top: 2px;
+        font-size: 7px;
     }
 
     .operation-arrow {
-        font-size: 30px;
+        font-size: 27px;
     }
 
     .home-footer {
-        margin-top: 20px;
-
-        padding: 15px 5px;
+        margin-top: 13px;
+        padding: 10px 3px;
     }
 
     .footer-date,
     .footer-time {
-        font-size: 11px;
-
-        gap: 5px;
+        font-size: 9px;
+        gap: 4px;
     }
 
     .footer-date svg,
     .footer-time svg {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
     }
 
     .footer-divider {
-        height: 35px;
+        height: 30px;
+    }
+
+    #other-operation-info {
+        border-width: 2px !important;
     }
 }
 
@@ -854,56 +895,134 @@ body {
 
 @media (max-width: 390px) {
 
+    body {
+        padding: 4px;
+    }
+
+    .home-header {
+        padding-top: 30px;
+        margin-bottom: 9px;
+    }
+
     .home-header h1 {
-        font-size: 29px;
+        font-size: 27px;
+        letter-spacing: 0;
     }
 
     .english-title {
-        font-size: 12px;
-    }
-
-    .station-card {
-        min-height: 175px;
-
-        padding: 10px 12px;
-    }
-
-    .station-icon {
-        width: 68px;
-        height: 52px;
-    }
-
-    .station-name {
-        font-size: 19px;
-    }
-
-    .station-en {
-        font-size: 9px;
-    }
-
-    .arrow {
-        font-size: 30px;
-    }
-
-    .operation-icon {
-        transform: translateY(-5px);
-    }
-
-    .operation-status {
+        margin-top: 4px;
         font-size: 10px;
     }
 
-    .operation-text {
+    .settings-button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .current-info {
+        gap: 6px;
+        margin-bottom: 9px;
+        font-size: 10px;
+    }
+
+    .date-divider {
+        height: 12px;
+    }
+
+    .select-title {
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+
+    .station-grid {
+        gap: 5px;
+    }
+
+    .station-card {
+        min-height: 145px;
+        padding: 7px 8px;
+        border-width: 2px;
+        border-radius: 10px;
+    }
+
+    .station-icon {
+        width: 58px;
+        height: 43px;
+        margin-bottom: 3px;
+    }
+
+    .station-name {
+        font-size: 18px;
+    }
+
+    .station-en {
+        margin-top: 2px;
+        font-size: 8px;
+    }
+
+    .arrow {
+        right: 3px;
+        font-size: 25px;
+    }
+
+    .operation-info {
+        gap: 5px;
+        margin-top: 7px;
+        padding: 6px;
+        min-height: 56px;
+        border-width: 2px;
+        border-radius: 9px;
+    }
+
+    .operation-icon {
+        width: 27px;
+        height: 27px;
+        border-radius: 6px;
+        transform: translateY(-3px);
+    }
+
+    .operation-title {
+        padding: 2px 5px;
         font-size: 9px;
     }
 
+    .operation-text {
+        margin-top: 2px;
+        font-size: 8px;
+    }
+
     .operation-updated {
-        font-size: 7px;
+        margin-top: 1px;
+        font-size: 6px;
+    }
+
+    .operation-arrow {
+        font-size: 23px;
+    }
+
+    .home-footer {
+        margin-top: 9px;
+        padding: 7px 2px;
     }
 
     .footer-date,
     .footer-time {
-        font-size: 10px;
+        font-size: 8px;
+        gap: 3px;
+    }
+
+    .footer-date svg,
+    .footer-time svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .footer-divider {
+        height: 25px;
+    }
+
+    #other-operation-info {
+        border-width: 2px !important;
     }
 }
 
@@ -1580,43 +1699,34 @@ body {
 
     .station-header h1 {
         font-size: clamp(25px, 8vw, 38px);
-
         line-height: 1;
     }
 
     .station-en {
         font-size: clamp(11px, 3.5vw, 17px);
-
         letter-spacing: 1px;
-
         white-space: nowrap;
     }
 
     .platform {
         margin-bottom: 8px;
-
         padding: 7px 0 8px;
     }
 
     .platform-header {
         min-height: 55px;
-
         padding: 5px 0 7px;
     }
 
     .platform-number {
         width: 42px;
-
         font-size: 40px;
-
         padding-left: 4px;
     }
 
     .yellow-bar {
         width: 7px;
-
         height: 37px;
-
         margin: 0 12px 0 3px;
     }
 
@@ -1626,11 +1736,8 @@ body {
 
     .direction-jp {
         grid-template-columns: 70px 1fr;
-
         column-gap: 7px;
-
         font-size: clamp(17px, 5vw, 24px);
-
         line-height: 1.15;
     }
 
@@ -1640,11 +1747,8 @@ body {
 
     .direction-en {
         grid-template-columns: 70px 1fr;
-
         column-gap: 7px;
-
         margin-top: 3px;
-
         font-size: clamp(8px, 2.5vw, 13px);
     }
 
@@ -1660,7 +1764,6 @@ body {
 
     .table-head {
         height: 27px;
-
         font-size: clamp(10px, 3vw, 13px);
     }
 
@@ -1670,25 +1773,21 @@ body {
 
     .local-box {
         width: clamp(52px, 16vw, 64px);
-
         min-height: 36px;
     }
 
     .local-box strong {
         font-size: clamp(14px, 4vw, 17px);
-
         line-height: 16px;
     }
 
     .local-box span {
         font-size: clamp(8px, 2.5vw, 9px);
-
         line-height: 9px;
     }
 
     .departure-time {
         font-size: clamp(20px, 6.5vw, 29px);
-
         white-space: nowrap;
     }
 
@@ -1702,9 +1801,7 @@ body {
 
     .car-badge {
         min-width: clamp(42px, 13vw, 52px);
-
         width: clamp(42px, 13vw, 52px);
-
         height: clamp(34px, 10vw, 40px);
     }
 
@@ -1714,87 +1811,55 @@ body {
 
     .car-badge span {
         font-size: clamp(9px, 2.7vw, 11px);
-
         line-height: 1;
-
         position: relative;
-
         top: 6px;
-
         transform: none;
     }
 
     .remaining {
         display: flex;
-
         align-items: baseline;
-
         justify-content: center;
-
         width: 100%;
-
         min-width: 0;
-
         overflow: hidden;
-
         white-space: nowrap;
     }
 
     .remaining strong {
         font-size: clamp(22px, 6.5vw, 29px);
-
         white-space: nowrap;
-
         line-height: 1;
     }
 
     .remaining span {
         margin-left: 1px;
-
         font-size: clamp(8px, 2.5vw, 11px);
-
         line-height: 1;
-
         margin-bottom: 0;
-
         white-space: nowrap;
     }
-
-
-    /* ===== 発車済・停車中 ===== */
 
     .remaining.departed strong,
     .remaining.stopped strong {
         font-size: clamp(11px, 3.4vw, 16px);
-
         letter-spacing: -0.7px;
-
         white-space: nowrap;
-
         line-height: 1;
-
         flex-shrink: 1;
     }
-
 
     .note,
     .empty-note {
         font-size: 9px;
-
         padding-left: 5px;
         padding-right: 5px;
-
         white-space: nowrap;
-
         overflow: hidden;
-
         text-overflow: ellipsis;
-
         background: #080909;
     }
-
-
-    /* ===== 日時・更新 ===== */
 
     .footer {
         gap: 4px;
@@ -1803,11 +1868,8 @@ body {
     .footer > div,
     .footer button {
         height: 36px;
-
         min-height: 36px;
-
         font-size: clamp(10px, 3.2vw, 14px);
-
         padding: 0 2px;
     }
 
@@ -1815,29 +1877,19 @@ body {
         font-size: clamp(17px, 5vw, 20px);
     }
 
-
-    /* ===== 下部2ボタン ===== */
-
     .back-home-area {
         display: grid;
-
         grid-template-columns: 1fr 1fr;
-
         gap: 7px;
-
         margin-top: 13px;
-
         margin-bottom: 13px;
-
         width: 100%;
     }
 
     .back-home-button,
     .back-timetable-button {
         min-height: 44px;
-
         padding: 6px 7px;
-
         border-radius: 11px;
     }
 
@@ -1862,7 +1914,6 @@ body {
 
     .platform-number {
         width: 36px;
-
         font-size: 35px;
     }
 
@@ -1872,15 +1923,12 @@ body {
 
     .direction-jp {
         grid-template-columns: 62px 1fr;
-
         column-gap: 5px;
-
         line-height: 1.15;
     }
 
     .direction-en {
         grid-template-columns: 62px 1fr;
-
         column-gap: 5px;
     }
 
@@ -1904,15 +1952,10 @@ body {
         font-size: 19px;
     }
 
-
-    /* ===== 発車済・停車中 ===== */
-
     .remaining.departed strong,
     .remaining.stopped strong {
         font-size: 10px;
-
         letter-spacing: -0.8px;
-
         white-space: nowrap;
     }
 
@@ -1920,25 +1963,17 @@ body {
         font-size: 8px;
     }
 
-
-    /* ===== 下部2ボタン ===== */
-
     .back-home-area {
         grid-template-columns: 1fr 1fr;
-
         gap: 5px;
-
         margin-top: 10px;
-
         margin-bottom: 9px;
     }
 
     .back-home-button,
     .back-timetable-button {
         min-height: 40px;
-
         padding: 5px 4px;
-
         border-radius: 10px;
     }
 
@@ -1960,7 +1995,6 @@ body {
 .operation-info:hover,
 .operation-info:active {
     color: inherit;
-
     text-decoration: none;
 }
 
@@ -1969,10 +2003,8 @@ body {
 .operation-info .operation-text,
 .operation-info .operation-updated {
     color: inherit;
-
     text-decoration: none;
 }
-
 
 #current-date {
     white-space: nowrap;
@@ -1995,16 +2027,13 @@ body {
     height: 58px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
     background: transparent !important;
-
     border: none !important;
-
     box-shadow: none !important;
 }
 
@@ -2017,69 +2046,8 @@ body {
     display: block;
 
     background: transparent !important;
-
     border: none !important;
-
     box-shadow: none !important;
-}
-
-
-/* ==================================================
-    その他の路線 矢印
-================================================== */
-
-.other-operation-arrow {
-    margin-left: auto;
-
-    padding-left: 10px;
-
-    font-size: 24px;
-
-    color: inherit;
-
-    opacity: 0.65;
-}
-
-
-/* ==================================================
-    その他の路線 タイトル
-================================================== */
-
-/*
-    ここが今回の重要部分です。
-
-    ダークモード：
-    タイトル背景 #808080
-    タイトル文字 #ffffff
-
-    ライトモード：
-    タイトル背景 #808080
-    タイトル文字 #ffffff
-
-    !important を付けて、上にある
-    .operation-title や
-    .operation-info .operation-title
-    の指定に負けないようにしています。
-*/
-
-#other-operation-info .operation-title,
-body.light-mode #other-operation-info .operation-title {
-    background: #808080 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==================================================
-    その他の路線カード
-================================================== */
-
-/*
-    カード全体はタイトルと別。
-    カード全体の背景色はここでは変更しない。
-*/
-
-#other-operation-info {
-    border-color: #808080 !important;
 }
 
 
@@ -2093,119 +2061,76 @@ body.light-mode #other-operation-info .operation-title {
     color: #ffffff;
 }
 
-
 .settings-container {
     width: min(600px, 100%);
     margin: 0 auto;
     padding: 20px 0 40px;
 }
 
-
-/* ===== ヘッダー ===== */
-
 .settings-header {
     text-align: center;
-
     padding: 35px 10px 30px;
-
     border-bottom: 1px solid #555555;
-
     margin-bottom: 25px;
 }
-
 
 .settings-header-icon {
     font-size: 42px;
-
     line-height: 1;
-
     margin-bottom: 12px;
 }
 
-
 .settings-header h1 {
     margin: 0;
-
     font-size: 38px;
-
     font-weight: 900;
-
     line-height: 1;
 }
 
-
 .settings-header-en {
     margin-top: 8px;
-
     font-size: 15px;
-
     font-weight: 600;
-
     letter-spacing: 2px;
-
     color: #aaaaaa;
 }
 
-
-/* ===== 設定項目 ===== */
-
 .settings-section {
     margin-bottom: 25px;
-
     padding: 22px;
-
     border: 1px solid #555555;
-
     border-radius: 12px;
-
     background: #101010;
 }
 
-
 .settings-section-title {
     font-size: 22px;
-
     font-weight: 900;
 }
 
-
 .settings-section-en {
     margin-top: 4px;
-
     font-size: 12px;
-
     color: #999999;
-
     letter-spacing: 1px;
 }
 
-
-/* ===== 選択肢 ===== */
-
 .settings-options {
     display: flex;
-
     flex-direction: column;
-
     gap: 10px;
-
     margin-top: 18px;
 }
 
-
 .settings-option {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
 
     min-height: 65px;
-
     padding: 12px 15px;
 
     border: 1px solid #444444;
-
     border-radius: 9px;
 
     background: #080909;
@@ -2217,82 +2142,55 @@ body.light-mode #other-operation-info .operation-title {
         border-color 0.15s ease;
 }
 
-
 .settings-option:hover {
     background: #181818;
-
     border-color: #888888;
 }
 
-
 .settings-option input {
     width: 20px;
-
     height: 20px;
-
     margin: 0;
-
     flex-shrink: 0;
-
     accent-color: #ffffff;
-
     cursor: pointer;
 }
 
-
 .settings-option:has(input:checked) {
     border-color: #ffffff;
-
     background: #1c1c1c;
 }
 
-
 .settings-option-text {
     display: flex;
-
     flex-direction: column;
-
     line-height: 1.2;
 }
 
-
 .settings-option-text strong {
     font-size: 18px;
-
     font-weight: 800;
 }
 
-
 .settings-option-text small {
     margin-top: 5px;
-
     font-size: 11px;
-
     color: #999999;
 }
 
-
-/* ===== 保存ボタン ===== */
-
 .settings-save-button {
     display: block;
-
     width: 100%;
-
     min-height: 58px;
-
     padding: 10px 20px;
 
     border: 1px solid #ffffff;
-
     border-radius: 9px;
 
     background: #ffffff;
-
     color: #000000;
 
     font-size: 18px;
-
     font-weight: 900;
 
     cursor: pointer;
@@ -2302,47 +2200,33 @@ body.light-mode #other-operation-info .operation-title {
         transform 0.15s ease;
 }
 
-
 .settings-save-button:hover {
     background: #dddddd;
-
     transform: translateY(-2px);
 }
-
 
 .settings-save-button:active {
     transform: scale(0.98);
 }
 
-
-/* ===== ホームへ戻る ===== */
-
 .settings-back-area {
     margin-top: 15px;
 }
 
-
 .settings-back-button {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
     width: 100%;
-
     min-height: 58px;
-
     padding: 9px 20px;
 
     border: 1px solid #555555;
-
     border-radius: 9px;
 
     background: #101010;
-
     color: #ffffff;
 
     text-decoration: none;
@@ -2352,28 +2236,20 @@ body.light-mode #other-operation-info .operation-title {
         transform 0.15s ease;
 }
 
-
 .settings-back-button:hover {
     background: #202020;
-
     transform: translateY(-2px);
 }
 
-
 .settings-back-button span {
     font-size: 17px;
-
     font-weight: 900;
 }
 
-
 .settings-back-button small {
     margin-top: 4px;
-
     font-size: 9px;
-
     color: #999999;
-
     letter-spacing: 1px;
 }
 
@@ -2390,13 +2266,11 @@ body.light-mode #other-operation-info .operation-title {
 
     .settings-header {
         padding: 25px 5px 22px;
-
         margin-bottom: 18px;
     }
 
     .settings-header-icon {
         font-size: 35px;
-
         margin-bottom: 10px;
     }
 
@@ -2406,15 +2280,12 @@ body.light-mode #other-operation-info .operation-title {
 
     .settings-header-en {
         font-size: 12px;
-
         margin-top: 6px;
     }
 
     .settings-section {
         margin-bottom: 15px;
-
         padding: 17px;
-
         border-radius: 10px;
     }
 
@@ -2428,21 +2299,17 @@ body.light-mode #other-operation-info .operation-title {
 
     .settings-options {
         margin-top: 14px;
-
         gap: 8px;
     }
 
     .settings-option {
         min-height: 58px;
-
         padding: 10px 12px;
-
         gap: 12px;
     }
 
     .settings-option input {
         width: 18px;
-
         height: 18px;
     }
 
@@ -2452,13 +2319,11 @@ body.light-mode #other-operation-info .operation-title {
 
     .settings-option-text small {
         font-size: 9px;
-
         margin-top: 4px;
     }
 
     .settings-save-button {
         min-height: 52px;
-
         font-size: 16px;
     }
 
@@ -2483,7 +2348,6 @@ body.light-mode #other-operation-info .operation-title {
 
 .settings-page.light-mode {
     background: #f4f4f4;
-
     color: #111111;
 }
 
@@ -2497,7 +2361,6 @@ body.light-mode #other-operation-info .operation-title {
 
 .settings-page.light-mode .settings-section {
     background: #ffffff;
-
     border-color: #cccccc;
 }
 
@@ -2507,19 +2370,16 @@ body.light-mode #other-operation-info .operation-title {
 
 .settings-page.light-mode .settings-option {
     background: #f5f5f5;
-
     border-color: #cccccc;
 }
 
 .settings-page.light-mode .settings-option:hover {
     background: #e9e9e9;
-
     border-color: #999999;
 }
 
 .settings-page.light-mode .settings-option:has(input:checked) {
     background: #e2e2e2;
-
     border-color: #333333;
 }
 
@@ -2529,9 +2389,7 @@ body.light-mode #other-operation-info .operation-title {
 
 .settings-page.light-mode .settings-back-button {
     background: #ffffff;
-
     color: #111111;
-
     border-color: #cccccc;
 }
 
@@ -2549,9 +2407,6 @@ body.light-mode {
     color: #111111;
 }
 
-
-/* ★ ライトモードでページ全体を最後まで明るくする ★ */
-
 html:has(body.light-mode) {
     background: #f4f4f4;
 }
@@ -2562,9 +2417,6 @@ body.light-mode::after {
     background-color: #f4f4f4;
 }
 
-
-/* ===== ヘッダー ===== */
-
 body.light-mode .home-header h1 {
     color: #111111;
 }
@@ -2572,9 +2424,6 @@ body.light-mode .home-header h1 {
 body.light-mode .english-title {
     color: #333333;
 }
-
-
-/* ===== 現在日時 ===== */
 
 body.light-mode .current-info {
     color: #111111;
@@ -2584,30 +2433,18 @@ body.light-mode .date-divider {
     background: #999999;
 }
 
-
-/* ===== 駅選択タイトル ===== */
-
 body.light-mode .select-title {
     color: #111111;
 }
-
-
-/* ===== 駅カード ===== */
 
 body.light-mode .station-card {
     background: #ffffff;
     color: #111111;
 }
 
-
-/* ===== 駅カード hover ===== */
-
 body.light-mode .station-card:hover {
     background: #eeeeee;
 }
-
-
-/* ===== 運行情報 ===== */
 
 body.light-mode .operation-info.normal {
     background: #fffde8;
@@ -2625,9 +2462,6 @@ body.light-mode .operation-info.unknown {
     background: #eeeeee;
 }
 
-
-/* ===== 運行情報の文字 ===== */
-
 body.light-mode .operation-info .operation-text {
     color: #111111;
 }
@@ -2635,9 +2469,6 @@ body.light-mode .operation-info .operation-text {
 body.light-mode .operation-info .operation-updated {
     color: #666666;
 }
-
-
-/* ===== 運行情報アイコン ===== */
 
 body.light-mode .operation-icon {
     background: transparent !important;
@@ -2648,18 +2479,9 @@ body.light-mode .operation-icon {
     その他の路線 ライトモード
 ================================================== */
 
-/*
-    カード全体：
-    白背景
-    グレーの枠
-
-    タイトル部分：
-    グレー #808080
-    白文字
-*/
-
 body.light-mode #other-operation-info {
     background: #ffffff !important;
+    border: 3px solid #808080 !important;
     border-color: #808080 !important;
     color: #111111 !important;
 }
@@ -2677,13 +2499,45 @@ body.light-mode #other-operation-info .operation-updated {
     color: #666666 !important;
 }
 
-body.light-mode #other-operation-info .other-operation-arrow {
-    color: #111111 !important;
-}
-
 body.light-mode #other-operation-info .other-operation-icon,
 body.light-mode #other-operation-info .other-operation-icon img {
     background: transparent !important;
+}
+
+body.light-mode #other-operation-info.other-normal {
+    border-color: #808080 !important;
+}
+
+body.light-mode #other-operation-info.other-normal .operation-title {
+    background: #808080 !important;
+    color: #ffffff !important;
+}
+
+body.light-mode #other-operation-info.other-delay {
+    border-color: #ff9700 !important;
+}
+
+body.light-mode #other-operation-info.other-delay .operation-title {
+    background: #ff9700 !important;
+    color: #000000 !important;
+}
+
+body.light-mode #other-operation-info.other-info {
+    border-color: #ff9700 !important;
+}
+
+body.light-mode #other-operation-info.other-info .operation-title {
+    background: #ff9700 !important;
+    color: #000000 !important;
+}
+
+body.light-mode #other-operation-info.other-suspended {
+    border-color: #ff1744 !important;
+}
+
+body.light-mode #other-operation-info.other-suspended .operation-title {
+    background: #ff6b81 !important;
+    color: #000000 !important;
 }
 
 
@@ -2723,9 +2577,6 @@ body.light-mode .station-header .station-en {
     color: #111111;
 }
 
-
-/* ===== 番線 ===== */
-
 body.light-mode .platform {
     background: #ffffff !important;
     border-color: #999999;
@@ -2750,9 +2601,6 @@ body.light-mode .yellow-bar {
     background: #ffe600;
 }
 
-
-/* ===== 電光掲示板 ===== */
-
 body.light-mode .train-table {
     background: #ffffff !important;
     color: #111111 !important;
@@ -2768,9 +2616,6 @@ body.light-mode .train-table .train-row {
     color: #111111 !important;
 }
 
-
-/* ===== 列車文字 ===== */
-
 body.light-mode .train-table .departure-time,
 body.light-mode .train-table .destination,
 body.light-mode .train-table .destination strong,
@@ -2779,9 +2624,6 @@ body.light-mode .train-table .cars,
 body.light-mode .train-table .remaining {
     color: #111111 !important;
 }
-
-
-/* ===== 普通 Local ===== */
 
 body.light-mode .train-table .local-box {
     background: #000000 !important;
@@ -2794,9 +2636,6 @@ body.light-mode .train-table .local-box span {
     color: #ffffff !important;
 }
 
-
-/* ===== 両数 ===== */
-
 body.light-mode .train-table .car-badge {
     color: #000000 !important;
 }
@@ -2806,41 +2645,25 @@ body.light-mode .train-table .car-badge span {
     color: #000000 !important;
 }
 
-
-/* ===== 4両 ===== */
-
 body.light-mode .train-table .cars-green {
     background: #00b83f !important;
 }
-
-
-/* ===== 6両 ===== */
 
 body.light-mode .train-table .cars-orange {
     background: #f28c00 !important;
 }
 
-
-/* ===== 備考 ===== */
-
 body.light-mode .train-table .note,
 body.light-mode .train-table .empty-note {
     background: #ffffff !important;
     color: #111111 !important;
-
     border-bottom-color: #888888;
 }
-
-
-/* ===== 列車終了 ===== */
 
 body.light-mode .train-table .service-finished {
     background: #ffffff !important;
     color: #111111 !important;
 }
-
-
-/* ===== 時刻表ページ下部 ===== */
 
 body.light-mode .footer {
     background: #f4f4f4 !important;
@@ -2849,18 +2672,13 @@ body.light-mode .footer {
 body.light-mode .footer > div,
 body.light-mode .footer button {
     background: #ffffff !important;
-
     color: #111111 !important;
-
     border-color: #999999;
 }
 
 body.light-mode .refresh-icon {
     color: #111111;
 }
-
-
-/* ===== 下部2ボタン ===== */
 
 body.light-mode .back-home-area {
     background: #f4f4f4 !important;
@@ -2869,9 +2687,7 @@ body.light-mode .back-home-area {
 body.light-mode .back-home-button,
 body.light-mode .back-timetable-button {
     background: #ffffff !important;
-
     color: #111111 !important;
-
     border-color: #999999;
 }
 
@@ -2905,7 +2721,6 @@ body.light-mode .back-timetable-button:hover {
     body.light-mode .platform-header {
         background: #ffffff !important;
         color: #111111;
-
         border-color: #999999;
     }
 
@@ -2975,19 +2790,19 @@ body.light-mode .back-timetable-button:hover {
     body.light-mode .footer > div,
     body.light-mode .footer button {
         background: #ffffff !important;
-
         color: #111111 !important;
-
         border-color: #999999;
     }
 
     body.light-mode .back-home-button,
     body.light-mode .back-timetable-button {
         background: #ffffff !important;
-
         color: #111111 !important;
-
         border-color: #999999;
+    }
+
+    body.light-mode #other-operation-info {
+        border-width: 2px !important;
     }
 
 }
@@ -3065,12 +2880,13 @@ body.light-mode .back-timetable-button:hover {
     body.light-mode .back-home-button,
     body.light-mode .back-timetable-button {
         min-height: 40px;
-
         padding: 5px 4px;
-
         background: #ffffff !important;
-
         color: #111111 !important;
+    }
+
+    body.light-mode #other-operation-info {
+        border-width: 2px !important;
     }
 
 }
@@ -3138,10 +2954,8 @@ body.light-mode .back-timetable-button:hover {
 
 .bottom-button-jp {
     display: block;
-
     color: #111111 !important;
     text-decoration: none !important;
-
     white-space: nowrap;
 }
 
@@ -3154,24 +2968,17 @@ body.light-mode .back-timetable-button:hover {
 
     .bottom-buttons {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-
         gap: 6px;
-
         width: min(400px, 100%);
-
         margin-top: 12px;
         margin-bottom: 12px;
     }
 
     .bottom-button {
         min-height: 38px;
-
         padding: 5px 5px;
-
         border-radius: 9px;
-
         font-size: 13px;
-
         white-space: nowrap;
     }
 
@@ -3186,22 +2993,16 @@ body.light-mode .back-timetable-button:hover {
 
     .bottom-buttons {
         gap: 5px;
-
         width: 100%;
-
         margin-top: 10px;
         margin-bottom: 9px;
     }
 
     .bottom-button {
         min-height: 35px;
-
         padding: 4px 3px;
-
         border-radius: 8px;
-
         font-size: 12px;
-
         white-space: nowrap;
     }
 
@@ -3210,24 +3011,58 @@ body.light-mode .back-timetable-button:hover {
 
 /* ==================================================
    最終強制指定
-   「その他の路線」タイトル部分
+   「その他の路線」
 ================================================== */
 
-/*
-   CSSの他の指定より確実に優先させるため、
-   ファイルの一番最後に置いています。
-*/
+#other-operation-info.other-normal {
+    border: 3px solid #808080 !important;
+}
 
-#other-operation-info .operation-title {
+#other-operation-info.other-normal .operation-title {
+    background-color: #808080 !important;
+    color: #000000 !important;
+}
+
+#other-operation-info.other-delay {
+    border: 3px solid #ff9700 !important;
+}
+
+#other-operation-info.other-delay .operation-title {
+    background-color: #ff9700 !important;
+    color: #000000 !important;
+}
+
+#other-operation-info.other-info {
+    border: 3px solid #ff9700 !important;
+}
+
+#other-operation-info.other-info .operation-title {
+    background-color: #ff9700 !important;
+    color: #000000 !important;
+}
+
+#other-operation-info.other-suspended {
+    border: 3px solid #ff1744 !important;
+}
+
+#other-operation-info.other-suspended .operation-title {
+    background-color: #ff6b81 !important;
+    color: #000000 !important;
+}
+
+body.light-mode #other-operation-info.other-normal .operation-title {
     background-color: #808080 !important;
     color: #ffffff !important;
 }
 
-body.light-mode #other-operation-info .operation-title {
-    background-color: #808080 !important;
-    color: #ffffff !important;
-}
+@media (max-width: 800px) {
 
-#other-operation-info {
-    border-color: #808080 !important;
+    #other-operation-info,
+    #other-operation-info.other-normal,
+    #other-operation-info.other-delay,
+    #other-operation-info.other-info,
+    #other-operation-info.other-suspended {
+        border-width: 2px !important;
+    }
+
 }
