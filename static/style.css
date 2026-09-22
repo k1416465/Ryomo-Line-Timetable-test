@@ -3081,7 +3081,7 @@ body.light-mode #other-operation-info.other-normal .operation-title {
 
     /* その他の路線 */
     #other-operation-info {
-        margin-top: 3px;
+        margin-top: 0px;
     }
 
 }
