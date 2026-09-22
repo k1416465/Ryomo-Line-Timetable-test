@@ -2480,7 +2480,7 @@ body.light-mode .operation-icon {
 ================================================== */
 
 body.light-mode #other-operation-info {
-    background: #ffffff !important;
+    background: #f0f0f0 !important;
     border: 3px solid #808080 !important;
     border-color: #808080 !important;
     color: #111111 !important;
@@ -2513,7 +2513,16 @@ body.light-mode #other-operation-info.other-normal .operation-title {
     color: #ffffff !important;
 }
 
+
+/* ==================================
+    その他の路線 ライトモード
+    状態別背景色
+    「両毛線」と同じ色
+================================== */
+
+/* △ 遅延 */
 body.light-mode #other-operation-info.other-delay {
+    background: #fff4e8 !important;
     border-color: #ff9700 !important;
 }
 
@@ -2522,7 +2531,10 @@ body.light-mode #other-operation-info.other-delay .operation-title {
     color: #000000 !important;
 }
 
+
+/* ！ お知らせ */
 body.light-mode #other-operation-info.other-info {
+    background: #fff4e8 !important;
     border-color: #ff9700 !important;
 }
 
@@ -2531,7 +2543,10 @@ body.light-mode #other-operation-info.other-info .operation-title {
     color: #000000 !important;
 }
 
+
+/* × 運転見合わせ */
 body.light-mode #other-operation-info.other-suspended {
+    background: #ffecef !important;
     border-color: #ff1744 !important;
 }
 
@@ -3067,6 +3082,7 @@ body.light-mode #other-operation-info.other-normal .operation-title {
 
 }
 
+
 /* ==================================================
    スマホ版ホーム
    「両毛線」と「その他の路線」の間隔を縮小
@@ -3084,4 +3100,25 @@ body.light-mode #other-operation-info.other-normal .operation-title {
         margin-top: 0px;
     }
 
+}
+
+
+/* ==================================================
+   その他の路線
+   ライトモード状態別背景色 最終指定
+================================================== */
+
+/* △ 遅延 */
+body.light-mode #other-operation-info.other-delay {
+    background: #fff4e8 !important;
+}
+
+/* ！ お知らせ */
+body.light-mode #other-operation-info.other-info {
+    background: #fff4e8 !important;
+}
+
+/* × 運転見合わせ */
+body.light-mode #other-operation-info.other-suspended {
+    background: #ffecef !important;
 }
